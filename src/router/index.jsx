@@ -5,7 +5,9 @@ import LibraryPage from "../pages/LibraryPage";
 import PlaylistsPage from "../pages/PlaylistsPage";
 import ErrorPage from "../pages/ErrorPage";
 import AuthLayout from "../layouts/AuthLayout";
+import UploadLayout from "../layouts/UploadLayout";
 import LoginPage from "../pages/LoginPage";
+import UploadPage from "../pages/UploadPage";
 import RegisterPage from "../pages/RegisterPage";
 import ArtistePage from "../pages/ArtistePage";
 import ArtistesPage from "../pages/ArtistesPage";
@@ -13,6 +15,7 @@ import FavoritesPage from "../pages/FavoritesPage";
 import PlaylistPage from "../pages/PlaylistPage";
 import CreatePlaylistPage from "../pages/CreatePlaylistPage";
 import EditPlaylistPage from "../pages/EditPlaylistPage";
+
 
 export const router = createBrowserRouter([
 	{
@@ -71,6 +74,17 @@ export const router = createBrowserRouter([
 			{
 				path: "register",
 				element: <RegisterPage />,
+			},
+		],
+	},
+	{
+		path: "/",
+		element: <UploadLayout />,
+		errorElement: <ErrorPage />,
+		children: [
+			{
+				path: "upload",
+				element: <UploadPage />,
 			},
 		],
 	},

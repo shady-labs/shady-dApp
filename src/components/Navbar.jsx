@@ -97,6 +97,10 @@ const NavContent = () => {
 		dispatch(resetPlayer());
 		navigate("/auth/login");
 	};
+  const handleUpload = () => {
+		dispatch(resetPlayer());
+		navigate("/upload");
+	};
 	return (
     <Box>
       <Flex direction="column" gap={2} mt={3}>
@@ -229,6 +233,23 @@ const NavContent = () => {
             Login
           </Button>
         )}
+      </Box>
+      <Box>
+        
+          <Button
+            onClick={handleUpload}
+            variant="unstyled"
+            rounded="base"
+            w="full"
+            border="1px"
+            borderColor="zinc.600"
+            fontSize="sm"
+            py={2}
+            px={5}
+          >
+            upload
+          </Button>
+
       </Box>
     </Box>
   );
