@@ -19,6 +19,14 @@ import { logoutUser } from "../redux/slices/userSlice";
 import { resetPlayer } from "../redux/slices/playerSlice";
 import { useEffect, useState } from "react";
 
+// rainbowkit and wagmi imports
+import '@rainbow-me/rainbowkit/styles.css';
+import { getDefaultWallets, RainbowKitProvider, midnightTheme } from '@rainbow-me/rainbowkit';
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { mainnet, polygon, optimism, arbitrum, base, zora } from 'wagmi/chains';
+import { publicProvider } from 'wagmi/providers/public';
+import WalletButton from "./ConnectWallet";
+
 const MobileNav = () => {
 	const [navIsOpen, setNavIsOpen] = useState(false);
 	const { pathname } = useLocation();
@@ -82,7 +90,7 @@ const DesktopNav = () => {
 	);
 };
 
-const NavContent = () => {
+export const NavContent = () => {
 	const { user } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -97,10 +105,29 @@ const NavContent = () => {
 		dispatch(resetPlayer());
 		navigate("/auth/login");
 	};
+  
   const handleUpload = () => {
 		dispatch(resetPlayer());
 		navigate("/upload");
 	};
+
+  const { chains, publicClient } = configureChains(
+    [mainnet, polygon, optimism, arbitrum, base, zora],
+    [publicProvider()]
+  );
+
+  const { connectors } = getDefaultWallets({
+    appName: 'RainbowKit demo',
+    projectId: 'b0b616a37e00ebb046979c68c3dfce87',
+    chains,
+  });
+
+  const wagmiConfig = createConfig({
+    autoConnect: true,
+    connectors,
+    publicClient,
+  });
+
 	return (
     <Box>
       <Flex direction="column" gap={2} mt={3}>
@@ -250,6 +277,19 @@ const NavContent = () => {
             upload
           </Button>
 
+      </Box>
+      <Box>
+      <WagmiConfig config={wagmiConfig}>
+        <RainbowKitProvider 
+          theme={midnightTheme({
+            overlayBlur: 'large',
+            accentColor: '#c147e9',
+          })}   
+          /* modalSize="compact" */
+          chains={chains}>
+          <WalletButton />
+        </RainbowKitProvider>
+      </WagmiConfig>
       </Box>
     </Box>
   );

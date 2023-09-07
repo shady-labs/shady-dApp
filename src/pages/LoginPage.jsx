@@ -155,3 +155,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+import { ConnectButton } from '@rainbow-me/rainbowkit';
