@@ -17,6 +17,14 @@ import { Link } from "react-router-dom";
 import { resetPlayer } from "../redux/slices/playerSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { StoreContent } from "../utils/StoreContent";
+import { useDispatch, useSelector } from "react-redux";
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { mainnet, polygon, optimism, arbitrum, base, zora } from 'wagmi/chains';
+import { getDefaultWallets, RainbowKitProvider, midnightTheme } from '@rainbow-me/rainbowkit';
+import { publicProvider } from 'wagmi/providers/public';
+import WalletButton from "../components/ConnectWallet";
+import ConnectWallet from "../components/ConnectWallet";
+
 
 
 const UploadPage = () => {
@@ -26,6 +34,7 @@ const UploadPage = () => {
     const [audio, setAudio] = useState([]);
     const [artistName, setArtistName] = useState([]);
     const [banner, setBanner] = useState([]);
+	const { user, token } = useSelector((state) => state.user);
 
 	/* const validateFields = () => {
 		if (audio == "" || songName == "" || artistName == "" || banner == "") {
@@ -40,23 +49,38 @@ const UploadPage = () => {
     const notify = (message) => toast(`${message}`);
 
 	/// uploads the audio to the ipfs
-  const uploadAudio = async () => {
-    try {
-      const cid = await StoreContent(audio);
-      /* const audioCID = `https://w3s.link/ipfs/${cid}/`;
-      console.log(audioCID); */
-      console.log("track name: ",audio.name);
-      /* notify("Music file uploaded to IPFS"); */
-      /* setMusicCID(audioCID);
-      await uploadMetadata(banner, name, audioCID, description).then(
-        () => {
-          uploadToFireStore();
-      }); */
-    } catch (err) {
-      console.log(err);
-      /* notify(err); */
-    }
-  };
+	const uploadAudio = async () => {
+		try {
+		const cid = await StoreContent(audio);
+		/* const audioCID = `https://w3s.link/ipfs/${cid}/`;
+		console.log(audioCID); */
+		console.log("track name: ",audio.name);
+		/* notify("Music file uploaded to IPFS"); */
+		/* setMusicCID(audioCID);
+		await uploadMetadata(banner, name, audioCID, description).then(
+			() => {
+			uploadToFireStore();
+		}); */
+		} catch (err) {
+		console.log(err);
+		/* notify(err); */
+		}
+	};
+
+	///restrict access logic (WIP)
+
+	/* if (!user) {
+		return (
+			<Flex align="center" justify="center" h="100vh">
+				<Flex direction="column" align="center" gap={4}>
+					<Text textAlign="center" color="zinc.500">
+						please connect your wallet to upload tracks :)
+					</Text>
+					<ConnectWallet />
+				</Flex>
+			</Flex>
+		);
+	} */
 
     const handleSubmit = async () => {
     try {
