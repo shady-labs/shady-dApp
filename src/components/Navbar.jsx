@@ -19,6 +19,9 @@ import { logoutUser } from "../redux/slices/userSlice";
 import { resetPlayer } from "../redux/slices/playerSlice";
 import { useEffect, useState } from "react";
 
+// rainbowkit and wagmi imports
+import ConnectWallet from "./ConnectWallet";
+
 const MobileNav = () => {
 	const [navIsOpen, setNavIsOpen] = useState(false);
 	const { pathname } = useLocation();
@@ -82,7 +85,7 @@ const DesktopNav = () => {
 	);
 };
 
-const NavContent = () => {
+export const NavContent = () => {
 	const { user } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -97,10 +100,12 @@ const NavContent = () => {
 		dispatch(resetPlayer());
 		navigate("/auth/login");
 	};
+  
   const handleUpload = () => {
 		dispatch(resetPlayer());
 		navigate("/upload");
 	};
+
 	return (
     <Box>
       <Flex direction="column" gap={2} mt={3}>
@@ -250,6 +255,9 @@ const NavContent = () => {
             upload
           </Button>
 
+      </Box>
+      <Box>
+      <ConnectWallet />
       </Box>
     </Box>
   );
