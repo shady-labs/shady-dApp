@@ -186,14 +186,12 @@ const MusicPlayer = () => {
       >
         <TrackDetails track={currentTrack} />
         <Flex direction="column" gap={2}>
-          <Hide below="md">
             <PlayingBar
               onSeek={seekPoint}
               time={songDetails?.time}
               track={currentTrack}
               trackRef={audioRef.current}
             />
-          </Hide>
           <PlayControls
             isPlaying={isPlaying}
             onNext={handleNextSong}

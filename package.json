@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.6.1",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/manrope": "^5.0.12",
     "@rainbow-me/rainbowkit": "^1.0.10",
     "@reduxjs/toolkit": "^1.9.5",
     "@thirdweb-dev/react": "^3.14.40",
