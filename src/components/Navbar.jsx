@@ -1,5 +1,11 @@
 import { BiMenuAltRight, BiMusic } from "react-icons/bi";
-import { AiFillHeart, AiFillHome, AiOutlineLogout } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiFillHome,
+  AiOutlineLogout,
+  AiFillUpCircle,
+} from "react-icons/ai";
+import { GrUpgrade } from "react-icons/gr";
 import { BsHeadphones } from "react-icons/bs";
 import { TiTimes } from "react-icons/ti";
 import { HiOutlineUserCircle, HiViewGrid } from "react-icons/hi";
@@ -49,7 +55,7 @@ const MobileNav = () => {
 						<BiMusic color="inherit" size={30} />
 
 						<Heading as="h1" fontWeight="semibold" fontSize="2xl">
-							BeatBox
+              Stream Shady
 						</Heading>
 					</Flex>
 				</Link>
@@ -193,6 +199,27 @@ export const NavContent = () => {
             </Button>
           )}
         </NavLink>
+        <NavLink to="/upload">
+          {({ isActive }) => (
+            <Button
+              bg={isActive ? "accent.main" : "transparent"}
+              _hover={
+                isActive ? { opacity: 0.8 } : { bg: "accent.transparent" }
+              }
+              rounded="base"
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="flex-start"
+              gap={6}
+              w="full"
+              py={6}
+              px={4}
+            >
+              <AiFillUpCircle size={20} color="#fff" />
+              <span>Upload Track</span>
+            </Button>
+          )}
+        </NavLink>
       </Flex>
       <Divider
         bg="zinc.500"
@@ -201,7 +228,7 @@ export const NavContent = () => {
         h="1px"
         mb={4}
       />
-      <Box>
+      {/* <Box>
         {user ? (
           <Box p={3}>
             <Flex align="center" gap={4} color="accent.light">
@@ -238,26 +265,24 @@ export const NavContent = () => {
             Login
           </Button>
         )}
-      </Box>
+      </Box> */}
+      {/* <Box>
+        <Button
+          onClick={handleUpload}
+          variant="unstyled"
+          rounded="base"
+          w="full"
+          border="1px"
+          borderColor="zinc.600"
+          fontSize="sm"
+          py={2}
+          px={5}
+        >
+          upload
+        </Button>
+      </Box> */}
       <Box>
-        
-          <Button
-            onClick={handleUpload}
-            variant="unstyled"
-            rounded="base"
-            w="full"
-            border="1px"
-            borderColor="zinc.600"
-            fontSize="sm"
-            py={2}
-            px={5}
-          >
-            upload
-          </Button>
-
-      </Box>
-      <Box>
-      <ConnectWallet />
+        <ConnectWallet />
       </Box>
     </Box>
   );

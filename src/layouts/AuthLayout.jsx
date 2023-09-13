@@ -23,12 +23,11 @@ const AuthLayout = () => {
 				pl={6}
 				h={{ base: "full", md: "5rem" }}>
 				<Flex align="center" color="accent.main" justify="flex-start" gap={2}>
-					<BiMusic size={30} />
 					<Heading
 						fontWeight="semibold"
 						color="gray.200"
 						fontSize={{ base: "lg", md: "2xl" }}>
-						BeatBox
+							Stream Shady
 					</Heading>
 				</Flex>
 			</Flex>

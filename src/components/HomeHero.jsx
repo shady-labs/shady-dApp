@@ -41,7 +41,7 @@ const HomeHero = () => {
           <Text fontSize={{ base: "sm", md: "md" }} w="80%">
             Music Reimagined and Decentralised.
           </Text>
-          <Link to="/playlists">
+          <Link to="/library">
             <Button
               bg="zinc.100"
               color="zinc.800"
