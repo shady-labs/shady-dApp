@@ -157,7 +157,7 @@ export const NavContent = () => {
             </Button>
           )}
         </NavLink>
-        <NavLink to="/playlists">
+        {/* <NavLink to="/playlists">
           {({ isActive }) => (
             <Button
               bg={isActive ? "accent.main" : "transparent"}
@@ -177,7 +177,7 @@ export const NavContent = () => {
               <span>Playlists</span>
             </Button>
           )}
-        </NavLink>
+        </NavLink> */}
         <NavLink to="/favorites">
           {({ isActive }) => (
             <Button
