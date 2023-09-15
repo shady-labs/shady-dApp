@@ -1,6 +1,4 @@
 import { ThirdwebStorage } from "@thirdweb-dev/storage";
-import { ApolloClient, ApolloProvider, InMemoryCache, gql, useQuery, useMutation } from "@apollo/client";
-
 
 const storage = new ThirdwebStorage({
     clientId:import.meta.env.VITE_THIRDWEB_CLIENT_ID,

@@ -18,7 +18,7 @@ const HomeLayout = () => {
       <Grid
         position="relative"
         templateColumns={{ base: "1fr", md: "repeat(10, 1fr)" }}
-        bg="#040D12"
+        bg="#000"
         color="#e3e3e3"
       >
         <GridItem colSpan={2}>
@@ -29,6 +29,7 @@ const HomeLayout = () => {
           <Outlet />
         </GridItem>
         {currentTrack && <MusicPlayer />}
+        {/* <MusicPlayer/> */}
       </Grid>
     </>
   );

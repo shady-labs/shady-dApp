@@ -25,7 +25,7 @@ import { getDefaultWallets, RainbowKitProvider, midnightTheme } from '@rainbow-m
 import { publicProvider } from 'wagmi/providers/public';
 import WalletButton from "../components/ConnectWallet";
 import ConnectWallet from "../components/ConnectWallet";
-import { getMutation } from "../utils/mutation/uploadTrack";
+import { getMutation } from "../graphql/mutation/uploadTrack";
 
 
 
