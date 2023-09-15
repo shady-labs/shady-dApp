@@ -15,7 +15,7 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: "https://asia-south2-shady-labs.cloudfunctions.net/function-5",
   cache: new InMemoryCache(),
 });

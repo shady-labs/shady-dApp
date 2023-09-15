@@ -25,6 +25,7 @@ import { getDefaultWallets, RainbowKitProvider, midnightTheme } from '@rainbow-m
 import { publicProvider } from 'wagmi/providers/public';
 import WalletButton from "../components/ConnectWallet";
 import ConnectWallet from "../components/ConnectWallet";
+import { getMutation } from "../utils/mutation/uploadTrack";
 
 
 
@@ -36,6 +37,7 @@ const UploadPage = () => {
     const [artistName, setArtistName] = useState([]);
     const [banner, setBanner] = useState([]);
 	const { user, token } = useSelector((state) => state.user);
+  var bannerUrl = "";
 
 	/* const validateFields = () => {
 		if (audio == "" || songName == "" || artistName == "" || banner == "") {
@@ -62,6 +64,26 @@ const UploadPage = () => {
 			() => {
 			uploadToFireStore();
 		}); */
+    return cid;
+		} catch (err) {
+		console.log(err);
+		/* notify(err); */
+		}
+	};
+
+  const uploadBanner = async () => {
+		try {
+      console.log("banner: ",banner);
+		const cid = await StoreContent(banner);
+		/* const audioCID = `https://w3s.link/ipfs/${cid}/`;
+		console.log(audioCID); */
+		/* notify("Music file uploaded to IPFS"); */
+		/* setMusicCID(audioCID);
+		await uploadMetadata(banner, name, audioCID, description).then(
+			() => {
+			uploadToFireStore();
+		}); */
+    bannerUrl = cid;
 		} catch (err) {
 		console.log(err);
 		/* notify(err); */
@@ -86,7 +108,12 @@ const UploadPage = () => {
     const handleSubmit = async () => {
     try {
       setLoading(true);
-      await uploadAudio();
+      await uploadAudio().then(async (cid) => {
+        console.log("entered then block")
+        await uploadBanner().then((banner) => {
+          getMutation(cid, "abcd", 100, "pop", songName, bannerUrl);
+        });
+      });
       // await setTimeout(uploadMetadata(), 5000);
       // await mintNFT();
       setLoading(false);
@@ -147,7 +174,7 @@ const UploadPage = () => {
                     color="zinc.300"
                     fontSize="md"
                     // value={banner}
-                    onChange={(e) => setBanner(e.target.value)}
+                    onChange={(e) => setBanner(e.target.files[0])}
                     placeholder="Upload Track Cover Image"
                   />
                 </InputGroup>
@@ -179,7 +206,9 @@ const UploadPage = () => {
             )}
             <Box mt={6}>
               <Button
-                onClick={handleSubmit}
+                onClick={
+                  handleSubmit
+                }
                 bg="accent.main"
                 py={5}
                 w="full"
