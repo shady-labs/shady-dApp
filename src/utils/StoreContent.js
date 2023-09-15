@@ -1,9 +1,12 @@
 import { ThirdwebStorage } from "@thirdweb-dev/storage";
+import { ApolloClient, ApolloProvider, InMemoryCache, gql, useQuery, useMutation } from "@apollo/client";
+
 
 const storage = new ThirdwebStorage({
     clientId:import.meta.env.VITE_THIRDWEB_CLIENT_ID,
     secretKey:import.meta.env.VITE_THIRDWEB_SECRET_KEY,
 });
+
 
 export const StoreContent = async (files) => {
   console.log("Uploading Audio to IPFS with thirdweb....");
@@ -26,7 +29,6 @@ export const StoreContent = async (files) => {
 
   return cid;
 };
-
 
 
 
