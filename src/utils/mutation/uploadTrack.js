@@ -23,7 +23,7 @@ export const getMutation = async (cid, artistId, duration, genre, name, trackIma
         mutation: TRACK_INPUT,
         variables: {
             "trackInput": {
-              "artistsId": artistId ? "65042d3d2ad56917e5fea179" : artistId,
+              "artistsId": artistId ? artistId:"65042d3d2ad56917e5fea179",
               "duration":duration? duration : 100,
               "genre": genre ? genre : "Pop",
               "name": name ? name : "temp name",
