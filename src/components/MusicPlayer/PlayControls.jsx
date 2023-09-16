@@ -53,7 +53,7 @@ const PlayControls = ({
       <Button
         onClick={onPlay}
         variant="unstyled"
-        color="accent.main"
+        color="#8E05C2"
         p={0}
         fontSize={{ base: 36, md: 48 }}
         display="inline-flex"

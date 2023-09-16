@@ -30,19 +30,20 @@ import ConnectWallet from "./ConnectWallet";
 
 const DesktopNav = () => {
 	return (
-		<Box
-			position="fixed"
-			top={0}
-			left={0}
-			zIndex={30}
-			minW={{ base: "20", md: "12rem", lg: "16rem", "xl": "15rem" }}
-			minH={{ base: "5rem", md: "100vh" }}
-			bg="black">
-			<Flex direction="column" minH="100vh" p={4}>
-				<NavContent />
-			</Flex>
-		</Box>
-	);
+    <Box
+      position="fixed"
+      top={0}
+      left={0}
+      zIndex={30}
+      minW={{ base: "20", md: "12rem", lg: "16rem", xl: "15rem" }}
+      minH={{ base: "5rem", md: "100vh" }}
+      bg="#000"
+    >
+      <Flex direction="column" minH="100vh" p={4}>
+        <NavContent />
+      </Flex>
+    </Box>
+  );
 };
 
 export const NavContent = () => {
@@ -157,13 +158,13 @@ export const NavContent = () => {
         </Flex>
       </Box>
 
-      <Divider
-        bg="#C147E9"
+      {/* <Divider
+        bg="#fff"
         border="0"
         mt={{ base: 1, md: 2, lg: 3 }}
         h="1px"
         mb={4}
-      />
+      /> */}
       {/* <Divider
         bg="#000"
         border="0"
@@ -173,7 +174,7 @@ export const NavContent = () => {
       /> */}
       <Box>
         <Flex direction="column" gap={2} mt={3}>
-          {({ isActive }) => (
+          {/* {({ isActive }) => (
             <Button
               bg={isActive ? "accent.main" : "transparent"}
               _hover={
@@ -190,9 +191,9 @@ export const NavContent = () => {
             >
               <ConnectWallet />
             </Button>
-          )}
+          )} */}
 
-          <NavLink to="/settings">
+          {/* <NavLink to="/settings">
             {({ isActive }) => (
               <Button
                 bg={isActive ? "accent.main" : "transparent"}
@@ -212,7 +213,7 @@ export const NavContent = () => {
                 <span>Settings</span>
               </Button>
             )}
-          </NavLink>
+          </NavLink> */}
 
           {/* User Profile (Topic to Discuss) */}
 
@@ -236,7 +237,7 @@ export const NavContent = () => {
                 <span>User Profile</span>
               </Button>
             )}
-          </NavLink> */}
+          </NavLink> */}     
         </Flex>
       </Box>
     </Flex>
