@@ -25,8 +25,9 @@ import { getDefaultWallets, RainbowKitProvider, midnightTheme } from '@rainbow-m
 import { publicProvider } from 'wagmi/providers/public';
 import WalletButton from "../components/ConnectWallet";
 import ConnectWallet from "../components/ConnectWallet";
-import { getMutation } from "../utils/mutation/uploadTrack";
+import { uploadTrack } from "../utils/mutation/uploadTrack";
 import { getArtistsByName } from "../utils/query/getArtistsByName";
+import {searchBarAutoComplete} from "../utils/query/searchBarAutoComplete";
 
 
 
@@ -41,6 +42,8 @@ const UploadPage = () => {
   const [bannerUrl, setBannerUrl] = useState([]);
   const [artist, setArtist] = useState([]);
   const [audioDuration, setAudioDuration] = useState(0);
+  // search query test
+  const [temp, setTemp] = useState([]);
 
 	/* const validateFields = () => {
 		if (audio == "" || songName == "" || artistName == "" || banner == "") {
@@ -125,9 +128,6 @@ const UploadPage = () => {
       );
     });
   }
-  function getValue(value) {
-    console.log("entered get value function")
-  }
 
     const handleSubmit = async () => {
     try {
@@ -137,13 +137,18 @@ const UploadPage = () => {
         await uploadAudio().then(async (cid) => {
           console.log("entered then block")
           await uploadBanner().then((banner) => {
-            getMutation(cid, artist["_id"], audioDuration, "pop", songName, bannerUrl);
+            uploadTrack(cid, artist["_id"], audioDuration, "pop", songName, bannerUrl);
           });
         });
       }
       else{
-        console.log("please fill all the fields");
-        alert("please fill all the fields");
+        console.log(temp);
+        searchBarAutoComplete("front").then(
+          (res) => {
+            temp.push(res);
+            console.log("search result: ",temp);
+          }
+        );
       }
       // await setTimeout(uploadMetadata(), 5000);
       // await mintNFT();
