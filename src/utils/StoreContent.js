@@ -5,6 +5,7 @@ const storage = new ThirdwebStorage({
     secretKey:import.meta.env.VITE_THIRDWEB_SECRET_KEY,
 });
 
+
 export const StoreContent = async (files) => {
   console.log("Uploading Audio to IPFS with thirdweb....");
   const upload = await storage.upload(files);
@@ -26,7 +27,6 @@ export const StoreContent = async (files) => {
 
   return cid;
 };
-
 
 
 
