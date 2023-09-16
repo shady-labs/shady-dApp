@@ -15,7 +15,7 @@ const HomeHero = () => {
       // h={96}
       rounded="lg"
       pos="relative"
-      bgImage="url('/src/assets/backgroundShadyBanner.jpeg')"
+      bgImage="url('../../public/assets/backgroundShadyBanner.jpeg')"
       bgSize="cover"
     >
       <Flex
