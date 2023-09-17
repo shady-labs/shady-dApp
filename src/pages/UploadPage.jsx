@@ -161,7 +161,7 @@ const UploadPage = () => {
     return (
       <Box minH="calc(100vh - 5rem)" maxW="2xl" mx="auto" p={6}>
         <Box
-          bg={{ base: "#000", md: "#040d11" }}
+          bg={{ base: "#000", md: "#000" }}
           rounded="base"
           p={{ base: 2, md: 10 }}
         >

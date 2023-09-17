@@ -15,6 +15,7 @@ import FavoritesPage from "../pages/FavoritesPage";
 import PlaylistPage from "../pages/PlaylistPage";
 import CreatePlaylistPage from "../pages/CreatePlaylistPage";
 import EditPlaylistPage from "../pages/EditPlaylistPage";
+import SettingsPage from "../pages/SettingsPage";
 
 
 export const router = createBrowserRouter([
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
         path: "upload",
         element: <UploadPage />,
       },
+      {
+        path:"settings",
+        element:<SettingsPage/>
+      }
     ],
   },
   {
