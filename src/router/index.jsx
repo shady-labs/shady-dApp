@@ -1,7 +1,6 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import HomeLayout from "../layouts/HomeLayout";
-import LibraryPage from "../pages/LibraryPage";
 import PlaylistsPage from "../pages/PlaylistsPage";
 import ErrorPage from "../pages/ErrorPage";
 import AuthLayout from "../layouts/AuthLayout";
@@ -17,6 +16,7 @@ import EditPlaylistPage from "../pages/EditPlaylistPage";
 import SettingsPage from "../pages/SettingsPage";
 import UserPage from "../pages/UserPage";
 import SearchPage from "../pages/SearchPage";
+import BrowsePage from "../pages/BrowsePage";
 
 
 export const router = createBrowserRouter([
@@ -31,8 +31,8 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "library",
-        element: <LibraryPage />,
+        path: "browse",
+        element: <BrowsePage />,
       },
       {
         path: "playlists",

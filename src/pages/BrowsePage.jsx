@@ -3,9 +3,8 @@ import SongCard from "../components/SongCard";
 import { AiOutlineLoading } from "react-icons/ai";
 import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/react";
 import { client } from "../api";
-import Search from "../components/Search";
 
-const LibraryPage = () => {
+const BrowsePage = () => {
 	const [songs, setSongs] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
@@ -36,13 +35,12 @@ const LibraryPage = () => {
 			pt={{ base: 20, md: 6 }}
 			pl={{ base: 4, md: 14, xl: 0 }}
 			minH="100vh">
-				<Search/>
 			<Box mb={6}>
 				<Heading
 					fontSize={{ base: "lg", md: "2xl" }}
 					fontWeight="semibold"
 					mb={{ base: 1, md: 3 }}>
-					Library
+						Welcome to a Shady World
 				</Heading>
 				<Text fontSize="sm" color="zinc.400">
 					Discover interesting songs
@@ -74,4 +72,4 @@ const LibraryPage = () => {
 	);
 };
 
-export default LibraryPage;
+export default BrowsePage;
