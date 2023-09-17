@@ -25,7 +25,9 @@ import { getDefaultWallets, RainbowKitProvider, midnightTheme } from '@rainbow-m
 import { publicProvider } from 'wagmi/providers/public';
 import WalletButton from "../components/ConnectWallet";
 import ConnectWallet from "../components/ConnectWallet";
-import { getMutation } from "../graphql/mutation/uploadTrack";
+import { uploadTrack } from "../utils/mutation/uploadTrack";
+import { getArtistsByName } from "../utils/query/getArtistsByName";
+import {searchBarAutoComplete} from "../utils/query/searchBarAutoComplete";
 
 
 
@@ -37,7 +39,11 @@ const UploadPage = () => {
     const [artistName, setArtistName] = useState([]);
     const [banner, setBanner] = useState([]);
 	const { user, token } = useSelector((state) => state.user);
-  var bannerUrl = "";
+  const [bannerUrl, setBannerUrl] = useState([]);
+  const [artist, setArtist] = useState([]);
+  const [audioDuration, setAudioDuration] = useState(0);
+  // search query test
+  const [temp, setTemp] = useState([]);
 
 	/* const validateFields = () => {
 		if (audio == "" || songName == "" || artistName == "" || banner == "") {
@@ -83,7 +89,7 @@ const UploadPage = () => {
 			() => {
 			uploadToFireStore();
 		}); */
-    bannerUrl = cid;
+    setBannerUrl(cid);
 		} catch (err) {
 		console.log(err);
 		/* notify(err); */
@@ -104,16 +110,46 @@ const UploadPage = () => {
 			</Flex>
 		);
 	} */
+  function computeLength(file) {
+    console.log("entered compute length function")
+    return new Promise((resolve) => {
+      var objectURL = URL.createObjectURL(file);
+      var mySound = new Audio([objectURL]);
+      mySound.addEventListener(
+        "canplaythrough",
+        () => {
+          URL.revokeObjectURL(objectURL);
+          resolve({
+            file,
+            duration: mySound.duration
+          });
+        },
+        false,
+      );
+    });
+  }
 
     const handleSubmit = async () => {
     try {
       setLoading(true);
-      await uploadAudio().then(async (cid) => {
-        console.log("entered then block")
-        await uploadBanner().then((banner) => {
-          getMutation(cid, "abcd", 100, "pop", songName, bannerUrl);
+      console.log("duration: ",audioDuration)
+      if(artist["_id"] != "" && audioDuration != "" && songName != "" && artistName != ""){
+        await uploadAudio().then(async (cid) => {
+          console.log("entered then block")
+          await uploadBanner().then((banner) => {
+            uploadTrack(cid, artist["_id"], audioDuration, "pop", songName, bannerUrl);
+          });
         });
-      });
+      }
+      else{
+        console.log(temp);
+        searchBarAutoComplete("front").then(
+          (res) => {
+            temp.push(res);
+            console.log("search result: ",temp);
+          }
+        );
+      }
       // await setTimeout(uploadMetadata(), 5000);
       // await mintNFT();
       setLoading(false);
@@ -155,7 +191,14 @@ const UploadPage = () => {
                   color="zinc.300"
                   fontSize="sm"
                   value={artistName}
-                  onChange={(e) => setArtistName(e.target.value)}
+                  onChange={(e) => {
+                    setArtistName(e.target.value)
+                    console.log("artist name: ",artistName);
+                    getArtistsByName(e.target.value).then((data) => {
+                      setArtist(data);
+                      console.log("artist: ",artist);
+                    });
+                  }}
                   placeholder="Enter the Artist and Feature Name"
                 />
               </InputGroup>
@@ -174,7 +217,11 @@ const UploadPage = () => {
                     color="zinc.300"
                     fontSize="md"
                     // value={banner}
-                    onChange={(e) => setBanner(e.target.files[0])}
+                    onChange={
+                      (e) => {
+                        setBanner(e.target.files[0]);
+                      }
+                    }
                     placeholder="Upload Track Cover Image"
                   />
                 </InputGroup>
@@ -189,7 +236,14 @@ const UploadPage = () => {
                   type="file"
                   style={{ display: "none" }}
                   accept=".mp3,audio/*"
-                  onChange={(e) => setAudio(e.target.files[0])}
+                  onChange={
+                    (e) => {
+                      setAudio(e.target.files[0])
+                      computeLength(e.target.files[0]).then((res) => {
+                        setAudioDuration(Math.round(res.duration));
+                      });
+                    }
+                  }
                   placeholder="Upload Track File"
                   color="#fff"
                   fontSize="md"
@@ -206,8 +260,11 @@ const UploadPage = () => {
             )}
             <Box mt={6}>
               <Button
-                onClick={
-                  handleSubmit
+                onClick={()=>{
+                  if(loading == false){
+                    handleSubmit();
+                  }
+                }
                 }
                 bg="accent.main"
                 py={5}
