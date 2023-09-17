@@ -7,7 +7,7 @@ import {
 	SliderTrack,
 	Text,
 } from "@chakra-ui/react";
-import { PiWaveformBold } from "react-icons/pi";
+import { MdGraphicEq } from "react-icons/md";
 
 import { convertToMins } from "../../utils";
 
@@ -30,7 +30,7 @@ const PlayingBar = ({ time, track, onSeek, trackRef }) => {
           <SliderFilledTrack bg="#810CA8" />
         </SliderTrack>
         <SliderThumb boxSize={3} outline={0}>
-          <Box color="#810CA8" as={PiWaveformBold} />
+          <Box color="#810CA8" as={MdGraphicEq} />
         </SliderThumb>
       </Slider>
       <Text fontSize="xs" color="zinc.500">

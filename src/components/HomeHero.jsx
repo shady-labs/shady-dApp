@@ -17,6 +17,8 @@ const HomeHero = () => {
       pos="relative"
       bgImage="url('./backgroundShadyBanner.jpeg')"
       bgSize="cover"
+      backdropBlur="8px"
+      backdropFilter="auto"
     >
       <Flex
         align="flex-end"
