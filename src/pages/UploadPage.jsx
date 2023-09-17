@@ -29,7 +29,6 @@ import {
 import { publicProvider } from "wagmi/providers/public";
 import WalletButton from "../components/ConnectWallet";
 import ConnectWallet from "../components/ConnectWallet";
-
 import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 // import { searchBarAutoComplete } from "";
@@ -114,7 +113,6 @@ const UploadPage = () => {
 		);
 	} */
   function computeLength(file) {
-    console.log("entered compute length function");
     return new Promise((resolve) => {
       var objectURL = URL.createObjectURL(file);
       var mySound = new Audio([objectURL]);
