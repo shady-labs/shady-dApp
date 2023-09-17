@@ -111,7 +111,7 @@ const MidNav = (
         </Button>
       )}
     </NavLink>
-    <NavLink to="/library">
+    <NavLink to="/browse">
       {({ isActive }) => (
         <Button
           bg={isActive ? "#2B2730" : "transparent"}
