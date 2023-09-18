@@ -17,7 +17,7 @@ mutation Mutation($artistInput: ArtistInput) {
 }
 `;
 
-export const uploadTrack = async (description, genre, name, artistImage) => {
+export const addArtist = async (description, genre, name, artistImage) => {
     try {
         console.log("function called")
         const { gqlloading, gqlerror, data } = await client.mutate({
