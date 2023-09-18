@@ -19,7 +19,6 @@ mutation Mutation($artistInput: ArtistInput) {
 
 export const addArtist = async (description, genre, name, artistImage) => {
     try {
-        console.log("function called")
         const { gqlloading, gqlerror, data } = await client.mutate({
         mutation: ARTIST_INPUT,
         variables: {

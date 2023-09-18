@@ -18,7 +18,6 @@ query GetAllTracks {
 
 export const getAllTracks = async (name) => {
   try {
-    console.log("function called");
     if (name != "" && name != null) {
       const { gqlloading, gqlerror, data } = await client.query({
         query: GET_ALL_TRACKS,

@@ -8,32 +8,27 @@ export const searchBarAutoComplete = async (search) => {
     console.log("entered searchBarAutoComplete function")
     //const [data, setData] = useState([]);
     var data = [];
-    console.log("search: ",search)
+    console.log("Input search Query: ",search)
     try {
-        console.log("function called")
         if(search != "" && search != null && search!=" "){
 
             //track name search
             await searchTrackByName(search).then((res) => {
-                console.log("track name search: ",res);
                 data.push(res);
             });
 
             // artist name serach
             await searchArtistByName(search).then((res) => {
-                console.log("artist name search: ",res);
                 data.push(res);
             });
 
             // artist of track name search
             await searchArtistByTrackName(search).then((res) => {
-                console.log("artist of track name search: ",res);
                 data.push(res);
             });
 
             // track of artist name search
             await searchTrackByArtistName(search).then((res) => {
-                console.log("track of artist name search: ",res);
                 data.push(res);
             });
             console.log("data: ",data);
@@ -61,7 +56,6 @@ const searchTrackByName = async (search) => {
     }
     }`;
     try {
-        console.log("function called")
         if(search != "" && search != null && search!=" "){
                 const { gqlloading, gqlerror, data } = await client.query({
                 query: GET_TRACKS_BY_NAME,
@@ -92,7 +86,6 @@ const searchArtistByName = async (search) => {
     }
     }`;
     try {
-        console.log("function called")
         if(search != "" && search != null && search!=" "){
                 const { gqlloading, gqlerror, data } = await client.query({
                 query: GET_ARTIST_BY_NAME,
@@ -123,7 +116,6 @@ const searchArtistByTrackName = async (search) => {
   }
     }`;
     try {
-        console.log("function called")
         if(search != "" && search != null && search!=" "){
                 const { gqlloading, gqlerror, data } = await client.query({
                 query: GET_ARTIST_BY_TRACK_NAME,
@@ -155,7 +147,6 @@ const searchTrackByArtistName = async (search) => {
     }
     }`;
     try {
-        console.log("function called")
         if(search != "" && search != null && search!=" "){
                 const { gqlloading, gqlerror, data } = await client.query({
                 query: GET_TRACK_BY_ARTIST_NAME,

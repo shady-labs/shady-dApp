@@ -18,7 +18,6 @@ const TRACK_INPUT = gql`
 
 export const uploadTrack = async (cid, artistId, duration, genre, name, trackImage) => {
     try {
-        console.log("function called")
         const { gqlloading, gqlerror, data } = await client.mutate({
         mutation: TRACK_INPUT,
         variables: {
