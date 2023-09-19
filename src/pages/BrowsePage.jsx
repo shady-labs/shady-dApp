@@ -16,6 +16,10 @@ const BrowsePage = () => {
 			.get("/songs")
 			.then((res) => {
 				setSongs(res.data);
+				console.log("res.data: "+res.data)
+				songs.map((song) => {
+					console.log("songs: "+song);
+				});
 				setLoading(false);
 			})
 			.catch(() => {
@@ -39,7 +43,7 @@ const BrowsePage = () => {
 				<Heading
 					fontSize={{ base: "lg", md: "2xl" }}
 					fontWeight="semibold"
-					mb={{ base: 1, md: 3 }}>
+					mb={{ base: 1, md: 3 }}>	
 						Welcome to a Shady World
 				</Heading>
 				<Text fontSize="sm" color="zinc.400">

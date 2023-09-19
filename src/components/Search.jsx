@@ -1,26 +1,29 @@
-import { Box, Input, InputGroup, InputLeftAddon, InputRightElement } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  InputRightElement,
+} from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
-import { useState, useEffect } from "react";
 import { searchBarAutoComplete } from "../graphql/query/searchBarAutoComplete";
 
-const Search = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const handleSearch = (query) => {
-    searchBarAutoComplete(query).then((res) => {
-      console.log("search results: ",res);
-    }
-    );
-  };
+const Search = ({handleQuery}) => {
+  const [searchQuery, setSearchQuery] = useState([]);
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      handleSearch(searchQuery);
+      // handleSearch(searchQuery);
+      handleQuery(searchQuery);
+      //console.log("Searchbar Query: ", searchQuery);
     }, 400)
 
     return () => clearTimeout(delayDebounceFn)
   }, [searchQuery])
-
-
-	return (
+  
+  return (
+    
     <Box mb={6} pb={4} borderBottom="1px" borderBottomColor="zinc.600">
       <InputGroup>
         <InputLeftAddon color="#E5B8F4">
@@ -34,11 +37,9 @@ const Search = () => {
           w="full"
           outline={0}
           bg="transparent"
-          onChange={
-            async (e) => {
-              setSearchQuery(e.target.value);
-            }
-          }
+          onChange={async (e) => {
+            setSearchQuery(e.target.value);
+          }}
           p={2}
         />
       </InputGroup>

@@ -16,18 +16,15 @@ query GetAllTracks {
 }
 `;
 
-export const getAllTracks = async (name) => {
+export const getAllTracks = async () => {
   try {
-    if (name != "" && name != null) {
       const { gqlloading, gqlerror, data } = await client.query({
         query: GET_ALL_TRACKS,
         variables: {
-          name: name,
         },
       });
-      console.log(data["getAllTracks"][0]);
-      return data["getAllTracks"][0];
-    }
+      // console.log("[top tracks]: "+data["getAllTracks"][0]);
+      return data["getAllTracks"];
   } catch (err) {
     console.log(err);
   }
