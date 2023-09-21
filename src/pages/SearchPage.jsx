@@ -152,22 +152,22 @@ const SearchPage = () => {
                 <Text color="zinc.300">Top Charts</Text>
                 <Text color="zinc.300">TOP Artists: {topArtists.length} :</Text>
                 {
-                  <Grid
-                    templateColumns={{
-                      base: "repeat(2, 1fr)",
-                      md: "repeat(3, 1fr)",
-                      lg: "repeat(4, 1fr)",
-                      xl: "repeat(5, 1fr)",
-                    }}
-                    gap={{ base: 3, md: 6 }}>
-                    {topArtists.map((artist) => (
-                      <>
-                        <Text color="zinc.300">{artist.name}</Text>
-                        <Image src={artist.image} alt="artist image" />
-                        <Text color="zinc.300">{artist.genre}</Text>
-                      </>
-                    ))}
-                  </Grid> 
+                  // <Grid
+                  //   templateColumns={{
+                  //     base: "repeat(2, 1fr)",
+                  //     md: "repeat(3, 1fr)",
+                  //     lg: "repeat(4, 1fr)",
+                  //     xl: "repeat(5, 1fr)",
+                  //   }}
+                  //   gap={{ base: 3, md: 6 }}>
+                  //   {topArtists.map((artist) => (
+                  //     <>
+                  //       <Text color="zinc.300">{artist.name}</Text>
+                  //       <Image src={artist.image} alt="artist image" />
+                  //       <Text color="zinc.300">{artist.genre}</Text>
+                  //     </>
+                  //   ))}
+                  // </Grid> 
                 }
                 <Text color="zinc.300">TOP Tracks: {topTracks.length} : </Text>
                 {
@@ -243,23 +243,7 @@ const SearchPage = () => {
                   }
                   <Text color="zinc.300">Artist Search Results: {artistSearchResults.length} : </Text>
                   {
-                    <>
-                      <Grid
-                        templateColumns={{
-                          base: "repeat(2, 1fr)",
-                          md: "repeat(3, 1fr)",
-                          lg: "repeat(4, 1fr)",
-                          xl: "repeat(5, 1fr)",
-                        }}
-                        gap={{ base: 3, md: 6 }}>
-                        {artistSearchResults.map((artist) => (
-                          <>
-                          <Text color="zinc.300">{artist.name}</Text>
-                          <Image src={artist.image} alt="artist image" />
-                          </>
-                        ))}
-                      </Grid>
-                    </>
+                    
                   }
                   <Text color="zinc.300">Track of Artist: {setTrackofArtistResult.length} : </Text>
                   {
@@ -294,21 +278,7 @@ const SearchPage = () => {
                   }
                   <Text color="zinc.300">Artist of Track Results: {setArtistofTrackResult.length} : </Text>
                   {
-                    <Grid
-                      templateColumns={{
-                        base: "repeat(2, 1fr)",
-                        md: "repeat(3, 1fr)",
-                        lg: "repeat(4, 1fr)",
-                        xl: "repeat(5, 1fr)",
-                      }}
-                      gap={{ base: 3, md: 6 }}>
-                      {setArtistofTrackResult.map((artist) => (
-                        <>
-                          <Text color="zinc.300">{artist.name}</Text>
-                          <Image src={artist.image} alt="artist image" />
-                          </>
-                      ))}
-                    </Grid>
+                    
                   }
                 </>
               )
