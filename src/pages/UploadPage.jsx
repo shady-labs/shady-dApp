@@ -92,6 +92,7 @@ const UploadPage = () => {
 			uploadToFireStore();
 		}); */
       setBannerUrl(cid);
+      return cid;
     } catch (err) {
       console.log(err);
       /* notify(err); */
@@ -143,13 +144,14 @@ const UploadPage = () => {
         await uploadAudio().then(async (cid) => {
           console.log("entered then block");
           await uploadBanner().then((banner) => {
+            console.log("banner: ", banner);
             uploadTrack(
               cid,
               artist["_id"],
               audioDuration,
               "pop",
               songName,
-              bannerUrl
+              banner
             );
           });
         });
