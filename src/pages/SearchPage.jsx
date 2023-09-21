@@ -6,6 +6,7 @@ import { set } from "react-hook-form";
 import { getAllTracks } from "../graphql/query/getAllTracks";
 import { getAllArtists } from "../graphql/query/getAllArtists";
 import LoadingSkeleton from "../components/LoadingSkeleton";
+import SongCard from "../components/SongCard";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState([]);
@@ -50,12 +51,13 @@ const SearchPage = () => {
   const [topTracks, setTopTracks] = useState([
     {
       _id: "",
-      name: "loading...",
-      image: "loading...",
-      description: "loading...",
-      genre: "loading...",
-      tracksName: [],
-      tracksID: [],
+    name: "",
+    artistsID: [],
+    artistsName: [],
+    trackImage: "",
+    trackUrl: "",
+    genre: [],
+    duration: 1,
     },
   ]);
 
@@ -67,6 +69,25 @@ const SearchPage = () => {
         (res) => {
           setTopTracks(res);
           console.log("Top Tracks: ", res)
+          topTracks.map((track) => {
+            console.log("top track details: "+JSON.stringify(
+              {
+                "_id": track._id,
+                "title": "",
+                "artistes": [track.artistsName[0]],
+                "coverImage": track.trackImage,
+                "songUrl": track.trackUrl,
+                "duration": track.duration,
+                "likes": {
+                  "64b27271cbbc5494326b3f5d":true,
+                  "64be80fb0e97b62cf659af8c":true,
+                  "64e63265d233402a9f2edee9":true
+                },
+                "type": "Song",
+                "__v": 0,
+              }
+            ));
+          });
           getAllArtists().then(
             (res) => {
               setTopArtists(res);
@@ -142,9 +163,7 @@ const SearchPage = () => {
                     {topArtists.map((artist) => (
                       <>
                         <Text color="zinc.300">{artist.name}</Text>
-                        <Text color="zinc.300">{artist.url}</Text>
                         <Image src={artist.image} alt="artist image" />
-                        <Text color="zinc.300">{artist._id}</Text>
                         <Text color="zinc.300">{artist.genre}</Text>
                       </>
                     ))}
@@ -160,10 +179,25 @@ const SearchPage = () => {
                       xl: "repeat(5, 1fr)",
                     }}
                     gap={{ base: 3, md: 6 }}>
-                    {topTracks.map((artist) => (
+                    {topTracks.map((track) => (
                       <>
-                          <Text color="zinc.300">{artist.name}</Text>
-                          <Image src={artist.image} alt="artist image" />
+                          < SongCard key={track._id} song={
+                            {
+                              "_id": track._id,
+                              "title": track.name,
+                              "artistes": track.artistsName,
+                              "coverImage": track.trackImage,
+                              "songUrl": track.trackUrl,
+                              "duration": track.duration,
+                              "likes": {
+                                "64b27271cbbc5494326b3f5d":true,
+                                "64be80fb0e97b62cf659af8c":true,
+                                "64e63265d233402a9f2edee9":true
+                              },
+                              "type": "Song",
+                              "__v": 0,
+                            }
+                          } />
                           </>
                     ))}
                   </Grid> 
@@ -184,10 +218,25 @@ const SearchPage = () => {
                         xl: "repeat(5, 1fr)",
                       }}
                       gap={{ base: 3, md: 6 }}>
-                      {trackSearchResults.map((artist) => (
+                      {trackSearchResults.map((track) => (
                         <>
-                          <Text color="zinc.300">{artist.name}</Text>
-                          <Image src={artist.image} alt="artist image" />
+                          < SongCard key={track._id} song={
+                            {
+                              "_id": track._id,
+                              "title": track.name,
+                              "artistes": track.artistsName,
+                              "coverImage": track.trackImage,
+                              "songUrl": track.trackUrl,
+                              "duration": track.duration,
+                              "likes": {
+                                "64b27271cbbc5494326b3f5d":true,
+                                "64be80fb0e97b62cf659af8c":true,
+                                "64e63265d233402a9f2edee9":true
+                              },
+                              "type": "Song",
+                              "__v": 0,
+                            }
+                          } />
                           </>
                       ))}
                     </Grid>
@@ -222,11 +271,24 @@ const SearchPage = () => {
                         xl: "repeat(5, 1fr)",
                       }}
                       gap={{ base: 3, md: 6 }}>
-                      {setTrackofArtistResult.map((artist) => (
-                        <>
-                          <Text color="zinc.300">{artist.name}</Text>
-                          <Image src={artist.image} alt="artist image" />
-                          </>
+                      {setTrackofArtistResult.map((track) => (
+                        < SongCard key={track._id} song={
+                          {
+                            "_id": track._id,
+                            "title": track.name,
+                            "artistes": track.artistsName,
+                            "coverImage": track.trackImage,
+                            "songUrl": track.trackUrl,
+                            "duration": track.duration,
+                            "likes": {
+                              "64b27271cbbc5494326b3f5d":true,
+                              "64be80fb0e97b62cf659af8c":true,
+                              "64e63265d233402a9f2edee9":true
+                            },
+                            "type": "Song",
+                            "__v": 0,
+                          }
+                        } />
                       ))}
                     </Grid>
                   }
