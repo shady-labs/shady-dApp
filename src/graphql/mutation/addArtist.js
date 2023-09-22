@@ -30,7 +30,8 @@ export const addArtist = async (description, genre, name, artistImage) => {
                 }
         },
       });
-      console.log(data["addArtist"]);
+      console.log();
+      return data;
     } 
     catch(err) {
       console.log(err);

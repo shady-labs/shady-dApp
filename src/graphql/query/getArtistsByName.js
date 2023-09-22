@@ -24,7 +24,7 @@ export const getArtistsByName = async (name) => {
           name: name,
         },
       });
-      console.log(data["getArtistsByName"][0]);
+      console.log("getArtistByName returning: "+data["getArtistsByName"][0]);
       return data["getArtistsByName"][0];
     }
   } catch (err) {
