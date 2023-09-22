@@ -12,7 +12,7 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdError } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { resetPlayer } from "../redux/slices/playerSlice";
@@ -31,6 +31,7 @@ import WalletButton from "../components/ConnectWallet";
 import ConnectWallet from "../components/ConnectWallet";
 import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
+import { addArtist } from "../graphql/mutation/addArtist";
 // import { searchBarAutoComplete } from "";
 
 const UploadPage = () => {
@@ -46,6 +47,7 @@ const UploadPage = () => {
   const [audioDuration, setAudioDuration] = useState(0);
   // search query test
   const [temp, setTemp] = useState([]);
+  const [artistNotFound, setArtistNotFound] = useState(false);
 
   /* const validateFields = () => {
 		if (audio == "" || songName == "" || artistName == "" || banner == "") {
@@ -65,7 +67,6 @@ const UploadPage = () => {
       const cid = await StoreContent(audio);
       /* const audioCID = `https://w3s.link/ipfs/${cid}/`;
 		console.log(audioCID); */
-      console.log("track name: ", audio.name);
       /* notify("Music file uploaded to IPFS"); */
       /* setMusicCID(audioCID);
 		await uploadMetadata(banner, name, audioCID, description).then(
@@ -78,6 +79,33 @@ const UploadPage = () => {
       /* notify(err); */
     }
   };
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      console.log("delay function running")
+      handleQuery(artistName)
+      handleQuery();
+    }, 400)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [artistName])
+
+  const handleQuery = async (query) => {
+    try {
+      getArtistsByName(query).then((data) => {
+        if(data == null || data == undefined || data == ""){
+          setArtistNotFound(true);
+        }
+        else{
+          setArtist(data);
+          setArtistNotFound(false);
+        }
+      });
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
   const uploadBanner = async () => {
     try {
@@ -92,6 +120,7 @@ const UploadPage = () => {
 			uploadToFireStore();
 		}); */
       setBannerUrl(cid);
+      return cid;
     } catch (err) {
       console.log(err);
       /* notify(err); */
@@ -133,7 +162,6 @@ const UploadPage = () => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      console.log("duration: ", audioDuration);
       if (
         artist["_id"] != "" &&
         audioDuration != "" &&
@@ -141,23 +169,41 @@ const UploadPage = () => {
         artistName != ""
       ) {
         await uploadAudio().then(async (cid) => {
-          console.log("entered then block");
           await uploadBanner().then((banner) => {
-            uploadTrack(
-              cid,
-              artist["_id"],
-              audioDuration,
-              "pop",
-              songName,
-              bannerUrl
-            );
+            if(artistNotFound){
+              //
+              addArtist(
+                "temp description",
+                "temp genre",
+                artistName,
+                banner,
+              ).then((res) => {
+                uploadTrack(
+                  cid,
+                  res["addArtist"]["_id"],
+                  audioDuration,
+                  "pop",
+                  songName,
+                  banner
+                ).then((res) => {
+                });
+              });
+            }
+            else{
+              uploadTrack(
+                cid,
+                artist["_id"],
+                audioDuration,
+                "pop",
+                songName,
+                banner
+              );
+            }
           });
         });
       } else {
-        console.log(temp);
         searchBarAutoComplete("front").then((res) => {
           temp.push(res);
-          console.log("search result: ", temp);
         });
       }
       // await setTimeout(uploadMetadata(), 5000);
@@ -203,11 +249,6 @@ const UploadPage = () => {
                 value={artistName}
                 onChange={(e) => {
                   setArtistName(e.target.value);
-                  console.log("artist name: ", artistName);
-                  getArtistsByName(e.target.value).then((data) => {
-                    setArtist(data);
-                    console.log("artist: ", artist);
-                  });
                 }}
                 placeholder="Enter the Artist and Feature Name"
               />

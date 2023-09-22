@@ -17,7 +17,6 @@ const GET_ARTIST_BY_NAME_QUERY = gql`
 
 export const getArtistsByName = async (name) => {
   try {
-    console.log("function called");
     if (name != "" && name != null) {
       const { gqlloading, gqlerror, data } = await client.query({
         query: GET_ARTIST_BY_NAME_QUERY,
@@ -25,7 +24,7 @@ export const getArtistsByName = async (name) => {
           name: name,
         },
       });
-      console.log(data["getArtistsByName"][0]);
+      console.log("getArtistByName returning: "+data["getArtistsByName"][0]);
       return data["getArtistsByName"][0];
     }
   } catch (err) {
