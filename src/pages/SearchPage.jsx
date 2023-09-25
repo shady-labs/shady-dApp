@@ -169,7 +169,7 @@ const SearchPage = () => {
                   //   ))}
                   // </Grid> 
                 }
-                <Text color="zinc.300">TOP Tracks: {topTracks.length} : </Text>
+                {/* <Text color="zinc.300">TOP Tracks: {topTracks.length} : </Text> */}
                 {
                   <Grid
                     templateColumns={{
