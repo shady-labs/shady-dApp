@@ -4,19 +4,10 @@ import SongCard from "./SongCard";
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { getAllTracks } from "../graphql/query/getAllTracks";
-import { getAllArtists } from "../graphql/query/getAllArtists";
 
 const TrackSection = ({ title }) => {
   const [fetched, setFetched] = useState(false);
   const [isLoading, setIsLoading] = useState(false); 
-  const [topArtists, setTopArtists] = useState([
-    {
-      _id: "",
-      name: "loading...",
-      image: "loading...",
-      url: "loading...",
-    },
-  ]);
   const [allTracks, setAllTracks] = useState([
     {
       _id: "",
@@ -28,7 +19,7 @@ const TrackSection = ({ title }) => {
       genre: [],
       duration: 1,
     },
-  ]);
+  ]); 
 
 
   useEffect(() => {
@@ -36,12 +27,8 @@ const TrackSection = ({ title }) => {
     setIsLoading(true);
     getAllTracks().then((res) => {
     setAllTracks(res);
-    
-    getAllArtists().then((res) => {
-        setTopArtists(res);
-        setFetched(true);
-        setIsLoading(false);
-      });
+    setFetched(true);
+    setIsLoading(false);
     });
   }
 }, []);
@@ -57,7 +44,7 @@ const TrackSection = ({ title }) => {
             <AiFillPlayCircle size={20} color="inherit" />
           </Box>
         </Flex>
-        <Link to="/library">
+        <Link to="/browse">
           <Button
             variant="unstyled"
             fontSize={{ base: "sm", md: "md" }}
@@ -76,7 +63,7 @@ const TrackSection = ({ title }) => {
         pb={4}
         className="scrollbar_style"
       >
-        {allTracks.map((track) => (
+        {allTracks.slice(0, 7).map((track) => (
           <>
             <SongCard
               key={track._id}
