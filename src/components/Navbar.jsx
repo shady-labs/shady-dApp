@@ -1,256 +1,204 @@
-import { BiMenuAltRight, BiMusic } from "react-icons/bi";
-import {
-  AiFillHeart,
-  AiFillHome,
-  AiFillUpCircle,
-} from "react-icons/ai";
-import { TiTimes } from "react-icons/ti";
-import { HiViewGrid } from "react-icons/hi";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { MdSettings } from "react-icons/md";
-import { FaUser } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import {
 	Box,
 	Button,
-	Divider,
 	Flex,
-	Heading,
-	Hide,
-	Show,
-	Text,
-  Spacer
+  Image,
+  Avatar,
+  Divider,
+  
 } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../redux/slices/userSlice";
-import { resetPlayer } from "../redux/slices/playerSlice";
-import { useEffect, useState } from "react";
 
-// rainbowkit and wagmi imports
-import ConnectWallet from "./ConnectWallet";
+import {
+  FiHome,
+  FiGrid,
+  FiSearch,
+  FiBarChart2,
+  FiUpload,
+  FiSettings
+} from "react-icons/fi";
 
-const DesktopNav = () => {
+
+const Navbar = () => {
 	return (
-		<Box
-			position="fixed"
-			top={0}
-			left={0}
-			zIndex={30}
-			minW={{ base: "20", md: "12rem", lg: "16rem", "xl": "15rem" }}
-			minH={{ base: "5rem", md: "100vh" }}
-			bg="black">
-			<Flex direction="column" minH="100vh" p={4}>
-				<NavContent />
-			</Flex>
-		</Box>
-	);
+    <Box
+      position="fixed"
+      top={0}
+      left={0}
+      zIndex={30}
+      minW={{ base: "20", md: "12rem", lg: "16rem", xl: "15rem" }}
+      minH={{ base: "5rem", md: "88vh" }}
+      bg="#18181b"
+      bgImage="linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5))"
+    >
+      <Flex direction="column" p={4}>
+          <NavContent />
+      </Flex>
+    </Box>
+  );
 };
 
 export const NavContent = () => {
-	const { user } = useSelector((state) => state.user);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
-	// const handleLogout = () => {
-	// 	dispatch(resetPlayer());
-	// 	dispatch(logoutUser());
-	// 	navigate("/auth/login");
-	// };
-
-	// const gotoLogin = () => {
-	// 	dispatch(resetPlayer());
-	// 	navigate("/auth/login");
-	// };
-  
-  // const handleUpload = () => {
-	// 	dispatch(resetPlayer());
-	// 	navigate("/upload");
-	// };
-
-	return (
+  return (
     <Flex direction="column">
-      <Box>
-        <Flex direction="column" gap={2} mt={3}>
-          <NavLink to="/home">
-            {({ isActive }) => (
-              <Button
-                bg={isActive ? "accent.main" : "transparent"}
-                _hover={
-                  isActive ? { opacity: 0.8 } : { bg: "accent.transparent" }
-                }
-                rounded="base"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="flex-start"
-                gap={6}
-                py={6}
-                px={4}
-                w="full"
-              >
-                <AiFillHome size={20} color="white" />
-                <span>Home</span>
-              </Button>
-            )}
-          </NavLink>
-          <NavLink to="/library">
-            {({ isActive }) => (
-              <Button
-                bg={isActive ? "accent.main" : "transparent"}
-                _hover={
-                  isActive ? { opacity: 0.8 } : { bg: "accent.transparent" }
-                }
-                rounded="base"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="flex-start"
-                gap={6}
-                w="full"
-                py={6}
-                px={4}
-              >
-                <HiViewGrid size={20} color="white" />
-                <span>Explore</span>
-              </Button>
-            )}
-          </NavLink>
-          <NavLink to="/favorites">
-            {({ isActive }) => (
-              <Button
-                bg={isActive ? "accent.main" : "transparent"}
-                _hover={
-                  isActive ? { opacity: 0.8 } : { bg: "accent.transparent" }
-                }
-                rounded="base"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="flex-start"
-                gap={6}
-                w="full"
-                py={6}
-                px={4}
-              >
-                <AiFillHeart size={20} color="white" />
-                <span>Favorites</span>
-              </Button>
-            )}
-          </NavLink>
-          <NavLink to="/upload">
-            {({ isActive }) => (
-              <Button
-                bg={isActive ? "accent.main" : "transparent"}
-                _hover={
-                  isActive ? { opacity: 0.8 } : { bg: "accent.transparent" }
-                }
-                rounded="base"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="flex-start"
-                gap={6}
-                w="full"
-                py={6}
-                px={4}
-              >
-                <AiFillUpCircle size={20} color="#fff" />
-                <span>Upload Track</span>
-              </Button>
-            )}
-          </NavLink>
-        </Flex>
-      </Box>
-
-      <Divider
-        bg="#C147E9"
-        border="0"
-        mt={{ base: 1, md: 2, lg: 3 }}
-        h="1px"
-        mb={4}
-      />
-      {/* <Divider
-        bg="#000"
-        border="0"
-        mt="150%"
-        h="1px"
-        mb={4}
-      /> */}
-      <Box>
-        <Flex direction="column" gap={2} mt={3}>
-          {({ isActive }) => (
-            <Button
-              bg={isActive ? "accent.main" : "transparent"}
-              _hover={
-                isActive ? { opacity: 0.8 } : { bg: "accent.transparent" }
-              }
-              rounded="base"
-              display="inline-flex"
-              alignItems="center"
-              justifyContent="flex-start"
-              gap={6}
-              w="full"
-              py={6}
-              px={4}
-            >
-              <ConnectWallet />
-            </Button>
-          )}
-
-          <NavLink to="/settings">
-            {({ isActive }) => (
-              <Button
-                bg={isActive ? "accent.main" : "transparent"}
-                _hover={
-                  isActive ? { opacity: 0.8 } : { bg: "accent.transparent" }
-                }
-                rounded="base"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="flex-start"
-                gap={6}
-                w="full"
-                py={6}
-                px={4}
-              >
-                <MdSettings size={20} color="white" />
-                <span>Settings</span>
-              </Button>
-            )}
-          </NavLink>
-
-          {/* User Profile (Topic to Discuss) */}
-
-          {/* <NavLink to="/settings">
-            {({ isActive }) => (
-              <Button
-                bg={isActive ? "accent.main" : "transparent"}
-                _hover={
-                  isActive ? { opacity: 0.8 } : { bg: "accent.transparent" }
-                }
-                rounded="base"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="flex-start"
-                gap={6}
-                w="full"
-                py={6}
-                px={4}
-              >
-                <FaUser size={20} color="white" />
-                <span>User Profile</span>
-              </Button>
-            )}
-          </NavLink> */}
-        </Flex>
-      </Box>
+      {TopNav}
+      {MidNav}
+      <Divider size="xl" />
+      {BottomNav}
     </Flex>
   );
 };
 
-const Navbar = () => {
-	return (
-		<>
-			<Show above="md">
-				<DesktopNav />
-			</Show>
-		</>
-	);
-};
+
+const TopNav = (
+  <Flex direction="row" justifyContent={"space-between"}>
+    <Box>
+      <NavLink to="/home">
+        <Image h="60px" borderRadius="full" src="logo.svg" />
+      </NavLink>
+    </Box>
+    <Box mt={3.5}>
+      <NavLink to="/user">
+        <Avatar
+          size="sm"
+          name="Dharampal"
+          src="https://img.freepik.com/premium-photo/gorilla-wearing-pair-headphones-with-purple-background_962508-4153.jpg"
+        />
+      </NavLink>
+    </Box>
+  </Flex>
+);
+
+const MidNav = (
+  <Flex direction="column" gap={2} mt={3} mb={3}>
+    <NavLink to="/home">
+      {({ isActive }) => (
+        <Button
+          bg={isActive ? "#2B2730" : "transparent"}
+          _hover={isActive ? { opacity: 1 } : { opacity: 1 }}
+          opacity={isActive ? 1 : 0.6}
+          rounded="base"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          gap={6}
+          py={6}
+          px={4}
+          w="full"
+        >
+          <FiHome size={20} color="white" />
+          <span>Home</span>
+        </Button>
+      )}
+    </NavLink>
+    <NavLink to="/search">
+      {({ isActive }) => (
+        <Button
+          bg={isActive ? "#2B2730" : "transparent"}
+          _hover={isActive ? { opacity: 1 } : { opacity: 1 }}
+          opacity={isActive ? 1 : 0.6}
+          rounded="base"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          gap={6}
+          py={6}
+          px={4}
+          w="full"
+        >
+          <FiSearch size={20} color="white" />
+          <span>Search</span>
+        </Button>
+      )}
+    </NavLink>
+    <NavLink to="/browse">
+      {({ isActive }) => (
+        <Button
+          bg={isActive ? "#2B2730" : "transparent"}
+          _hover={isActive ? { opacity: 1 } : { opacity: 1 }}
+          opacity={isActive ? 1 : 0.6}
+          rounded="base"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          gap={6}
+          py={6}
+          px={4}
+          w="full"
+        >
+          <FiGrid size={20} color="white" />
+          <span>Browse</span>
+        </Button>
+      )}
+    </NavLink>
+    <NavLink to="/favorites">
+      {({ isActive }) => (
+        <Button
+          bg={isActive ? "#2B2730" : "transparent"}
+          _hover={isActive ? { opacity: 1 } : { opacity: 1 }}
+          opacity={isActive ? 1 : 0.6}
+          rounded="base"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          gap={6}
+          py={6}
+          px={4}
+          w="full"
+        >
+          <FiBarChart2 size={20} color="white" />
+          <span>Library</span>
+        </Button>
+      )}
+    </NavLink>
+  </Flex>
+);
+
+
+const BottomNav = (
+  <Flex direction="column" gap={2} mt={3}>
+    <NavLink to="/upload">
+      {({ isActive }) => (
+        <Button
+          bg={isActive ? "#2B2730" : "transparent"}
+          _hover={isActive ? { opacity: 1 } : { opacity: 1 }}
+          opacity={isActive ? 1 : 0.6}
+          rounded="base"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          gap={6}
+          py={6}
+          px={4}
+          w="full"
+        >
+          <FiUpload size={20} color="#fff" />
+          <span>Upload Track</span>
+        </Button>
+      )}
+    </NavLink>
+    <NavLink to="/settings">
+      {({ isActive }) => (
+        <Button
+          bg={isActive ? "#2B2730" : "transparent"}
+          color={isActive ? "000" : "#fff"}
+          _hover={isActive ? { opacity: 1 } : { opacity: 1 }}
+          opacity={isActive ? 1 : 0.6}
+          rounded="base"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          gap={6}
+          py={6}
+          px={4}
+          w="full"
+        >
+          <FiSettings size={20} color="white" />
+          <span>Settings</span>
+        </Button>
+      )}
+    </NavLink>
+  </Flex>
+);
 
 export default Navbar;
