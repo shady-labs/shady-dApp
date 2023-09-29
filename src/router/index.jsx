@@ -17,6 +17,7 @@ import SettingsPage from "../pages/SettingsPage";
 import UserPage from "../pages/UserPage";
 import SearchPage from "../pages/SearchPage";
 import BrowsePage from "../pages/BrowsePage";
+import LandingLayout from "../layouts/LandingLayout";
 
 
 export const router = createBrowserRouter([
@@ -95,6 +96,11 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/landing",
+    element: <LandingLayout />,
+    errorElement: <ErrorPage />,
+  }
   // {
   //   path: "/",
   //   element: <UploadLayout />,
