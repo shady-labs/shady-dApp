@@ -3,8 +3,9 @@
 body,
 html {
 	font-family: "Inter", sans-serif;
-	color: #e3e3e3;
+	color: #000;
 	position: relative;
+	background-color: #000;
 }
 
 h1,

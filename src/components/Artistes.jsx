@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { AiOutlineLoading } from "react-icons/ai";
-import ArtisteCard from "./ArtisteCard";
+import ArtisteCard from "./ArtistCard";
 import { client } from "../api";
 import { Link } from "react-router-dom";
 
