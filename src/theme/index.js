@@ -21,8 +21,8 @@ const colors = {
 };
 
 const fonts = {
-	heading: `'Inter', sans-serif`,
-	body: `'Inter', sans-serif`,
+  heading: `'Manrope Variable', sans-serif`,
+  body: `'Manrope Variable', sans-serif`,
 };
 
 const theme = extendTheme({ colors, fonts });

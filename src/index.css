@@ -1,8 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"); */
 
+@import '@fontsource-variable/manrope';
 body,
 html {
-	font-family: "Inter", sans-serif;
+	font-family: 'Manrope Variable', sans-serif;
 	color: #000;
 	position: relative;
 	background-color: #000;
