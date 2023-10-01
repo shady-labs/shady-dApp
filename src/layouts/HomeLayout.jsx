@@ -19,17 +19,15 @@ const HomeLayout = () => {
         position="relative"
         templateColumns={{ base: "1fr", md: "repeat(10, 1fr)" }}
         bg="#000"
-        color="#e3e3e3"
+        color="#fff"
       >
         <GridItem colSpan={2}>
           <Navbar />
         </GridItem>
-
         <GridItem colSpan={8} minH={{ base: "97vh", md: "100vh" }}>
           <Outlet />
         </GridItem>
         {currentTrack && <MusicPlayer />}
-        {/* <MusicPlayer/> */}
       </Grid>
     </>
   );
