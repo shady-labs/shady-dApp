@@ -139,152 +139,100 @@ const SearchPage = () => {
 
   return (
     <Box bg="#000" minH="100vh" p={4}>
-      <Search handleQuery={handleQuery}/>
+      <Search handleQuery={handleQuery} />
       <Flex direction="column" minH="25rem" align="center" justify="center">
-        <Heading>Search Page</Heading>
-        <Text color="zinc.300">Some Shady Task Underway!</Text>
-        {
-          (isLoading) ? (
-            <LoadingSkeleton/>
-          ) : (
-            (isTopCharts) ? (
-              <>
-                <Text color="zinc.300">Top Charts</Text>
-                <Text color="zinc.300">TOP Artists: {topArtists.length} :</Text>
-                {
-                  // <Grid
-                  //   templateColumns={{
-                  //     base: "repeat(2, 1fr)",
-                  //     md: "repeat(3, 1fr)",
-                  //     lg: "repeat(4, 1fr)",
-                  //     xl: "repeat(5, 1fr)",
-                  //   }}
-                  //   gap={{ base: 3, md: 6 }}>
-                  //   {topArtists.map((artist) => (
-                  //     <>
-                  //       <Text color="zinc.300">{artist.name}</Text>
-                  //       <Image src={artist.image} alt="artist image" />
-                  //       <Text color="zinc.300">{artist.genre}</Text>
-                  //     </>
-                  //   ))}
-                  // </Grid> 
-                }
-                {/* <Text color="zinc.300">TOP Tracks: {topTracks.length} : </Text> */}
-                {
-                  <Grid
-                    templateColumns={{
-                      base: "repeat(2, 1fr)",
-                      md: "repeat(3, 1fr)",
-                      lg: "repeat(4, 1fr)",
-                      xl: "repeat(5, 1fr)",
+        <Heading>Search Your Jam!</Heading>
+        {isLoading ? (
+          <LoadingSkeleton />
+        ) : isTopCharts ? (
+          <>
+          </>
+        ) : isNoResults ? (
+          <Text color="zinc.300">No Results</Text>
+        ) : (
+          <>
+            <Text color="zinc.300">
+              Track Search Results: {trackSearchResults.length} :
+            </Text>
+            {
+              <Grid
+                templateColumns={{
+                  base: "repeat(2, 1fr)",
+                  md: "repeat(3, 1fr)",
+                  lg: "repeat(4, 1fr)",
+                  xl: "repeat(5, 1fr)",
+                }}
+                gap={{ base: 3, md: 6 }}
+              >
+                {trackSearchResults.map((track) => (
+                  <>
+                    <SongCard
+                      key={track._id}
+                      song={{
+                        _id: track._id,
+                        title: track.name,
+                        artistes: track.artistsName,
+                        coverImage: track.trackImage,
+                        songUrl: track.trackUrl,
+                        duration: track.duration,
+                        likes: {
+                          "64b27271cbbc5494326b3f5d": true,
+                          "64be80fb0e97b62cf659af8c": true,
+                          "64e63265d233402a9f2edee9": true,
+                        },
+                        type: "Song",
+                        __v: 0,
+                      }}
+                    />
+                  </>
+                ))}
+              </Grid>
+            }
+            <Text color="zinc.300">
+              Artist Search Results: {artistSearchResults.length} :{" "}
+            </Text>
+            {}
+            <Text color="zinc.300">
+              Track of Artist: {setTrackofArtistResult.length} :{" "}
+            </Text>
+            {
+              <Grid
+                templateColumns={{
+                  base: "repeat(2, 1fr)",
+                  md: "repeat(3, 1fr)",
+                  lg: "repeat(4, 1fr)",
+                  xl: "repeat(5, 1fr)",
+                }}
+                gap={{ base: 3, md: 6 }}
+              >
+                {setTrackofArtistResult.map((track) => (
+                  <SongCard
+                    key={track._id}
+                    song={{
+                      _id: track._id,
+                      title: track.name,
+                      artistes: track.artistsName,
+                      coverImage: track.trackImage,
+                      songUrl: track.trackUrl,
+                      duration: track.duration,
+                      likes: {
+                        "64b27271cbbc5494326b3f5d": true,
+                        "64be80fb0e97b62cf659af8c": true,
+                        "64e63265d233402a9f2edee9": true,
+                      },
+                      type: "Song",
+                      __v: 0,
                     }}
-                    gap={{ base: 3, md: 6 }}>
-                    {topTracks.map((track) => (
-                      <>
-                          < SongCard key={track._id} song={
-                            {
-                              "_id": track._id,
-                              "title": track.name,
-                              "artistes": track.artistsName,
-                              "coverImage": track.trackImage,
-                              "songUrl": track.trackUrl,
-                              "duration": track.duration,
-                              "likes": {
-                                "64b27271cbbc5494326b3f5d":true,
-                                "64be80fb0e97b62cf659af8c":true,
-                                "64e63265d233402a9f2edee9":true
-                              },
-                              "type": "Song",
-                              "__v": 0,
-                            }
-                          } />
-                          </>
-                    ))}
-                  </Grid> 
-                }
-              </>
-            ) : (
-              (isNoResults) ? (
-                <Text color="zinc.300">No Results</Text>
-              ) : (
-                <>
-                <Text color="zinc.300">Track Search Results: {trackSearchResults.length} :</Text>
-                  {
-                    <Grid
-                      templateColumns={{
-                        base: "repeat(2, 1fr)",
-                        md: "repeat(3, 1fr)",
-                        lg: "repeat(4, 1fr)",
-                        xl: "repeat(5, 1fr)",
-                      }}
-                      gap={{ base: 3, md: 6 }}>
-                      {trackSearchResults.map((track) => (
-                        <>
-                          < SongCard key={track._id} song={
-                            {
-                              "_id": track._id,
-                              "title": track.name,
-                              "artistes": track.artistsName,
-                              "coverImage": track.trackImage,
-                              "songUrl": track.trackUrl,
-                              "duration": track.duration,
-                              "likes": {
-                                "64b27271cbbc5494326b3f5d":true,
-                                "64be80fb0e97b62cf659af8c":true,
-                                "64e63265d233402a9f2edee9":true
-                              },
-                              "type": "Song",
-                              "__v": 0,
-                            }
-                          } />
-                          </>
-                      ))}
-                    </Grid>
-                  }
-                  <Text color="zinc.300">Artist Search Results: {artistSearchResults.length} : </Text>
-                  {
-                    
-                  }
-                  <Text color="zinc.300">Track of Artist: {setTrackofArtistResult.length} : </Text>
-                  {
-                    <Grid
-                      templateColumns={{
-                        base: "repeat(2, 1fr)",
-                        md: "repeat(3, 1fr)",
-                        lg: "repeat(4, 1fr)",
-                        xl: "repeat(5, 1fr)",
-                      }}
-                      gap={{ base: 3, md: 6 }}>
-                      {setTrackofArtistResult.map((track) => (
-                        < SongCard key={track._id} song={
-                          {
-                            "_id": track._id,
-                            "title": track.name,
-                            "artistes": track.artistsName,
-                            "coverImage": track.trackImage,
-                            "songUrl": track.trackUrl,
-                            "duration": track.duration,
-                            "likes": {
-                              "64b27271cbbc5494326b3f5d":true,
-                              "64be80fb0e97b62cf659af8c":true,
-                              "64e63265d233402a9f2edee9":true
-                            },
-                            "type": "Song",
-                            "__v": 0,
-                          }
-                        } />
-                      ))}
-                    </Grid>
-                  }
-                  <Text color="zinc.300">Artist of Track Results: {setArtistofTrackResult.length} : </Text>
-                  {
-                    
-                  }
-                </>
-              )
-            )
-          )
-        }
+                  />
+                ))}
+              </Grid>
+            }
+            <Text color="zinc.300">
+              Artist of Track Results: {setArtistofTrackResult.length} :{" "}
+            </Text>
+            {}
+          </>
+        )}
       </Flex>
     </Box>
   );
