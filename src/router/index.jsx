@@ -3,10 +3,7 @@ import HomePage from "../pages/HomePage";
 import HomeLayout from "../layouts/HomeLayout";
 import PlaylistsPage from "../pages/PlaylistsPage";
 import ErrorPage from "../pages/ErrorPage";
-import AuthLayout from "../layouts/AuthLayout";
-import LoginPage from "../pages/LoginPage";
 import UploadPage from "../pages/UploadPage";
-import RegisterPage from "../pages/RegisterPage";
 import ArtistePage from "../pages/ArtistePage";
 import ArtistesPage from "../pages/ArtistesPage";
 import FavoritesPage from "../pages/FavoritesPage";
@@ -17,6 +14,7 @@ import SettingsPage from "../pages/SettingsPage";
 import UserPage from "../pages/UserPage";
 import SearchPage from "../pages/SearchPage";
 import BrowsePage from "../pages/BrowsePage";
+import LandingLayout from "../layouts/LandingLayout";
 
 
 export const router = createBrowserRouter([
@@ -81,20 +79,10 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/auth",
-    element: <AuthLayout />,
+    path: "/landing",
+    element: <LandingLayout />,
     errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "login",
-        element: <LoginPage />,
-      },
-      {
-        path: "register",
-        element: <RegisterPage />,
-      },
-    ],
-  },
+  }
   // {
   //   path: "/",
   //   element: <UploadLayout />,

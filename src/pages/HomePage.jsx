@@ -1,11 +1,7 @@
 import HomeHero from "../components/HomeHero";
-import SmallSection from "../components/SmallSection";
-import TopCharts from "../components/TopCharts";
-import Categories from "../components/Categories";
-import Search from "../components/Search";
-import { Grid, GridItem, Hide } from "@chakra-ui/react";
-import Artistes from "../components/Artistes";
+import { Grid, GridItem } from "@chakra-ui/react";
 import TrackSection from "../components/TrackSection";
+import ArtistSection from "../components/ArtistSection";
 
 const HomePage = () => {
 	return (
@@ -16,20 +12,10 @@ const HomePage = () => {
 			pb={24}
 			pt={{ base: 14, md: 4 }}>
 			<GridItem colSpan={8} pl={1} pt={3}>
-				{/* <Search /> */}
 				<HomeHero />
 				<TrackSection title="New Releases" />
-				{/* <SmallSection title="New Releases" endpoint="/songs/releases" /> */}
-				{/* <Artistes />
-				
-				<SmallSection title="Popular Around You" endpoint="/songs/top" /> */}
+				<ArtistSection/>
 			</GridItem>
-			{/* <GridItem colSpan={3} p={4}>
-				<TopCharts />
-				<Hide below="md">
-					<Categories />
-				</Hide>
-			</GridItem> */}
 		</Grid>
 	);
 };
