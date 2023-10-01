@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ArtisteCard from "../components/ArtisteCard";
+import ArtisteCard from "../components/ArtistCard";
 import { AiOutlineLoading } from "react-icons/ai";
 import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/react";
 import { client } from "../api";

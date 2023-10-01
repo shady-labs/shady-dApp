@@ -6,6 +6,7 @@ import Search from "../components/Search";
 import { Grid, GridItem, Hide } from "@chakra-ui/react";
 import Artistes from "../components/Artistes";
 import TrackSection from "../components/TrackSection";
+import ArtistSection from "../components/ArtistSection";
 
 const HomePage = () => {
 	return (
@@ -19,6 +20,7 @@ const HomePage = () => {
 				{/* <Search /> */}
 				<HomeHero />
 				<TrackSection title="New Releases" />
+				<ArtistSection/>
 				{/* <SmallSection title="New Releases" endpoint="/songs/releases" /> */}
 				{/* <Artistes />
 				
