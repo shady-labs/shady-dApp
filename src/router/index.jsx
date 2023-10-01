@@ -3,10 +3,7 @@ import HomePage from "../pages/HomePage";
 import HomeLayout from "../layouts/HomeLayout";
 import PlaylistsPage from "../pages/PlaylistsPage";
 import ErrorPage from "../pages/ErrorPage";
-import AuthLayout from "../layouts/AuthLayout";
-import LoginPage from "../pages/LoginPage";
 import UploadPage from "../pages/UploadPage";
-import RegisterPage from "../pages/RegisterPage";
 import ArtistePage from "../pages/ArtistePage";
 import ArtistesPage from "../pages/ArtistesPage";
 import FavoritesPage from "../pages/FavoritesPage";
@@ -79,21 +76,6 @@ export const router = createBrowserRouter([
         path: "search",
         element: <SearchPage />
       }
-    ],
-  },
-  {
-    path: "/auth",
-    element: <AuthLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "login",
-        element: <LoginPage />,
-      },
-      {
-        path: "register",
-        element: <RegisterPage />,
-      },
     ],
   },
   {

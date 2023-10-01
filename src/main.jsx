@@ -14,6 +14,9 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
+// Supports weights 200-800
+import '@fontsource-variable/manrope';
+
 
 export const client = new ApolloClient({
   uri: "https://asia-south2-shady-labs.cloudfunctions.net/function-5",
