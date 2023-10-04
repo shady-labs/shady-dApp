@@ -248,11 +248,21 @@ const UploadPage = () => {
   };
 
   return (
-    <Box minH="calc(100vh - 5rem)" maxW="2xl" mx="auto" p={6}>
+    <Box
+      minH="calc(100vh - 5rem)"
+      maxW="2xl"
+      mx="auto"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      p={6}
+      backgroundColor="purple"
+    >
       <Box
         bg={{ base: "#000", md: "#040d11" }}
         rounded="base"
         p={{ base: 2, md: 10 }}
+        width="full"
       >
         <Box mb={8}>
           <Heading fontSize="2xl" color="#8E05C2">
@@ -262,20 +272,25 @@ const UploadPage = () => {
         </Box>
         <Flex direction="column" gap={4}>
           <FormControl>
-            <FormLabel fontSize="xs" color="zinc.400"></FormLabel>
-            <InputGroup border="1px" borderColor="zinc.600" rounded="base">
+            <FormLabel fontSize="xs" color="zinc.400" fontWeight="bold">
+              Track Name
+            </FormLabel>
+            <InputGroup borderColor="zinc.600" rounded="base">
               <Input
                 type="text"
                 color="zinc.300"
                 fontSize="sm"
                 value={songName}
                 onChange={(e) => setSongName(e.target.value)}
-                placeholder="Enter the Track Name"
+                placeholder="Track Name"
               />
             </InputGroup>
           </FormControl>
           <FormControl>
-            <InputGroup border="1px" borderColor="zinc.600" rounded="base">
+            <FormLabel fontSize="xs" color="zinc.400" fontWeight="bold">
+              Artist and Feature Name
+            </FormLabel>
+            <InputGroup borderColor="zinc.600" rounded="base">
               <Input
                 color="zinc.300"
                 fontSize="sm"
@@ -283,22 +298,26 @@ const UploadPage = () => {
                 onChange={(e) => {
                   setArtistName(e.target.value);
                 }}
-                placeholder="Enter the Artist and Feature Name"
+                placeholder="Artist and Feature Name"
               />
             </InputGroup>
           </FormControl>
           <FormControl>
-            <FormLabel fontSize="md" color="#fff">
+            <FormLabel fontSize="xs" color="zinc.400" fontWeight="bold">
               Upload Track Cover
             </FormLabel>
             <InputGroup border="1px" borderColor="#040d11" rounded="base">
               <div
                 {...getCoverRootProps({ className: "dropzone" })}
                 style={{
-                  background: "white",
                   height: "80px",
+                  width: "100%",
                   padding: "10px",
+                  border: "1px dashed gray",
                   borderRadius: "4px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
                 <input
@@ -307,24 +326,30 @@ const UploadPage = () => {
                   onChange={(e) => onUploadBanner(e.target.files[0])}
                   {...getCoverInputProps()}
                 />
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p style={{ color: "gray", fontSize: "12px" }}>
+                  Drag 'n' drop some files here, or click to select files
+                </p>
               </div>
               <aside>{thumbs}</aside>
             </InputGroup>
           </FormControl>
 
           <FormControl>
-            <FormLabel fontSize="md" color="#fff">
-              Select the Song File
+            <FormLabel fontSize="xs" color="zinc.400" fontWeight="bold">
+              Select Song File
             </FormLabel>
             <InputGroup border="1px" borderColor="#040d11" rounded="base">
               <div
                 {...getTrackRootProps({ className: "dropzone" })}
                 style={{
-                  background: "white",
                   height: "80px",
+                  width: "100%",
                   padding: "10px",
+                  border: "1px dashed gray",
                   borderRadius: "4px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
                 <input
@@ -338,7 +363,9 @@ const UploadPage = () => {
                   }}
                   {...getTrackInputProps()}
                 />
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p style={{ color: "gray", fontSize: "12px" }}>
+                  Drag 'n' drop some files here, or click to select files
+                </p>
               </div>
             </InputGroup>
           </FormControl>
