@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import WalletButton from "./WalletButton";
+
 import {
 	Box,
 	Button,
@@ -198,6 +200,7 @@ const BottomNav = (
         </Button>
       )}
     </NavLink>
+    <WalletButton />
   </Flex>
 );
 

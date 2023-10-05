@@ -19,16 +19,7 @@ import { resetPlayer } from "../redux/slices/playerSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { StoreContent } from "../utils/StoreContent";
 import { useDispatch, useSelector } from "react-redux";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, base, zora } from "wagmi/chains";
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-  midnightTheme,
-} from "@rainbow-me/rainbowkit";
-import { publicProvider } from "wagmi/providers/public";
-import WalletButton from "../components/ConnectWallet";
-import ConnectWallet from "../components/ConnectWallet";
+import WalletButton from "../components/WalletButton";
 import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
