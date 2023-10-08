@@ -8,6 +8,7 @@ const HomePage = () => {
 		<Grid
 			templateColumns={{ base: "1fr", lg: "repeat(8, 1fr)" }}
 			minH="100vh"
+			maxW={{ base: "100vw", lg: "100vw" }}
 			pl={{ base: 2, md: 14, lg: 12, xl: 0 }}
 			pb={24}
 			pt={{ base: 14, md: 4 }}>

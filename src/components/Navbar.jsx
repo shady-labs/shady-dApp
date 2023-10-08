@@ -6,6 +6,8 @@ import {
   Image,
   Avatar,
   Divider,
+  IconButton,
+  Spacer
   
 } from "@chakra-ui/react";
 
@@ -15,61 +17,124 @@ import {
   FiSearch,
   FiBarChart2,
   FiUpload,
-  FiSettings
+  FiSettings,
+  FiMenu,
+  FiArrowRightCircle,
+  FiArrowLeft
 } from "react-icons/fi";
 
+import {useState } from "react";
 
-const Navbar = () => {
+var size  = "large"
+const Navbar = ({changeHomelayoutSize}) => {
+  const [navSize, changeNavSize] = useState("large")
+
+  const handleSizeChange = (size) => {
+    changeNavSize(size)
+    changeHomelayoutSize(size)
+    console.log("navSize: ", navSize)
+  }
 	return (
     <Box
       position="fixed"
       top={0}
       left={0}
       zIndex={30}
-      minW={{ base: "20", md: "12rem", lg: "16rem", xl: "15rem" }}
+      minW={
+        navSize == "large" ? 
+        { base: "20", md: "12rem", lg: "16rem", xl: "15rem" } : 
+        { base: "0", md: "0rem", lg: "0rem", xl: "0rem" }
+      }
       minH={{ base: "5rem", md: "88vh" }}
       bg="#18181b"
       bgImage="linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5))"
     >
       <Flex direction="column" p={4}>
-          <NavContent />
+          <NavContent changeNavSize = {handleSizeChange} navSize={navSize}/>
       </Flex>
     </Box>
   );
 };
 
-export const NavContent = () => {
+export const NavContent = ({changeNavSize, navSize}) => {
   return (
-    <Flex direction="column">
-      {TopNav}
-      {MidNav}
-      <Divider size="xl" />
-      {BottomNav}
+    <Flex direction="column"
+      justifyItems={navSize == "large" ? "flex-start" : "flex-end"}
+    >
+      {TopNav({changeNavSize, navSize}) }
+      {MidNav ({navSize})}
+      <Spacer/>
+      { 
+        navSize == "large" ?
+        null :
+        <IconButton
+          background="none"
+          _hover={{ background: "none" }}
+          onClick={() => {
+            console.log("clicked");
+            if(size == "large"){
+              // change navbar size to small
+              // changeNavSize("small")
+              size = "small"
+              changeNavSize("small")
+              console.log("large changed to: ")
+            }
+            else{
+              size = "large"
+              console.log("small changed to")
+              changeNavSize("large")
+              // changeNavSize("large")
+            }
+          }}
+          icon={<FiArrowRightCircle size="25" color="white" />}
+      />
+      }
+      <Spacer/>
+      {BottomNav({navSize})}
     </Flex>
   );
 };
 
 
-const TopNav = (
+const TopNav = ({changeNavSize, navSize}) => (
   <Flex direction="row" justifyContent={"space-between"}>
-    <Box>
-      <NavLink to="/home">
-        <Image h="60px" borderRadius="full" src="logo.svg" />
-      </NavLink>
-    </Box>
-    <Box mt={3.5}>
-      <NavLink to="/user">
-        <Avatar
-          size="sm"
-          name="Dharampal"
-          src="https://img.freepik.com/premium-photo/gorilla-wearing-pair-headphones-with-purple-background_962508-4153.jpg"
-        />
-      </NavLink>
-    </Box>
+    {
+
+      <Box>
+        <NavLink to="/home">
+          <Image h="50px" borderRadius="full" src="logo.svg" />
+        </NavLink>
+      </Box>
+    }
+    { 
+      navSize == "large" ?
+      
+      <IconButton
+        background="none"
+        _hover={{ background: "none" }}
+        onClick={() => {
+          console.log("clicked");
+          if(size == "large"){
+            // change navbar size to small
+            // changeNavSize("small")
+            size = "small"
+            changeNavSize("small")
+            console.log("large changed to: ") 
+          }
+          else{
+            size = "large"
+            console.log("small changed to")
+            changeNavSize("large")
+            // changeNavSize("large")
+          }
+        }}
+        icon={<FiArrowLeft size="25" color="white" />}
+    />: null
+    }
   </Flex>
 );
 
-const MidNav = (
+const MidNav =({navSize}) => (
   <Flex direction="column" gap={2} mt={3} mb={3}>
     <NavLink to="/home">
       {({ isActive }) => (
@@ -86,8 +151,11 @@ const MidNav = (
           px={4}
           w="full"
         >
-          <FiHome size={20} color="white" />
-          <span>Home</span>
+          {
+            navSize == "large" ?
+            <><FiHome size={20} color="white" /><span>Home</span></> :
+            <FiHome size={20} color="white" />
+          }
         </Button>
       )}
     </NavLink>
@@ -107,7 +175,9 @@ const MidNav = (
           w="full"
         >
           <FiSearch size={20} color="white" />
-          <span>Search</span>
+          {
+            navSize == "large" ? <span>Search</span> : null
+          }
         </Button>
       )}
     </NavLink>
@@ -127,7 +197,9 @@ const MidNav = (
           w="full"
         >
           <FiGrid size={20} color="white" />
-          <span>Browse</span>
+          {
+            navSize == "large" ? <span>Browse</span> : null
+          }
         </Button>
       )}
     </NavLink>
@@ -147,7 +219,9 @@ const MidNav = (
           w="full"
         >
           <FiBarChart2 size={20} color="white" />
-          <span>Library</span>
+          {
+            navSize == "large" ? <span>Favorites</span> : null
+          }
         </Button>
       )}
     </NavLink>
@@ -155,7 +229,7 @@ const MidNav = (
 );
 
 
-const BottomNav = (
+const BottomNav = ({navSize}) => (
   <Flex direction="column" gap={2} mt={3}>
     <NavLink to="/upload">
       {({ isActive }) => (
@@ -173,7 +247,9 @@ const BottomNav = (
           w="full"
         >
           <FiUpload size={20} color="#fff" />
-          <span>Upload Track</span>
+          {
+            navSize == "large" ? <span>Upload Track</span> : null
+          }
         </Button>
       )}
     </NavLink>
@@ -194,7 +270,9 @@ const BottomNav = (
           w="full"
         >
           <FiSettings size={20} color="white" />
-          <span>Settings</span>
+          {
+            navSize == "large" ? <span>Settings</span> : null
+          }
         </Button>
       )}
     </NavLink>
