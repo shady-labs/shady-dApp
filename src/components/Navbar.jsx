@@ -255,7 +255,7 @@ const BottomNav = ({navSize}) => (
         </Button>
       )}
     </NavLink>
-    <WalletButton />
+    {/* <WalletButton /> */}
   </Flex>
 );
 

@@ -247,7 +247,7 @@ const UploadPage = () => {
       justifyContent="center"
       alignItems="center"
       p={6}
-      backgroundColor="purple"
+      backgroundColor="#000"
     >
       <Box
         bg={{ base: "#000", md: "#040d11" }}
