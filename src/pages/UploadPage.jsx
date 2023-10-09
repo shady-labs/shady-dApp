@@ -24,6 +24,7 @@ import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
 // import { searchBarAutoComplete } from "";
+import { useDropzone } from "react-dropzone";
 
 const UploadPage = () => {
   const [error, setError] = useState(null);
@@ -39,6 +40,36 @@ const UploadPage = () => {
   // search query test
   const [temp, setTemp] = useState([]);
   const [artistNotFound, setArtistNotFound] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState(false);
+  const [covers, setCovers] = useState([]);
+  const [track, setTrack] = useState([]);
+
+  const { getRootProps: getCoverRootProps, getInputProps: getCoverInputProps } =
+    useDropzone({
+      onDrop: (acceptedFiles) => {
+        setCovers(acceptedFiles.map((file) => URL.createObjectURL(file)));
+      },
+    });
+
+  const { getRootProps: getTrackRootProps, getInputProps: getTrackInputProps } =
+    useDropzone({
+      onDrop: (acceptedFiles) => {
+        setTrack(acceptedFiles.map((file) => URL.createObjectURL(file)));
+      },
+    });
+
+  const thumbs = covers.map((cover, i) => (
+    <div key={i}>
+      <div>
+        <img src={cover} style={{ height: "80px", width: "80px" }} />
+      </div>
+    </div>
+  ));
+
+  useEffect(() => {
+    // Make sure to revoke the data uris to avoid memory leaks
+    covers.forEach((cover) => URL.revokeObjectURL(cover));
+  }, []);
 
   /* const validateFields = () => {
 		if (audio == "" || songName == "" || artistName == "" || banner == "") {
@@ -73,30 +104,28 @@ const UploadPage = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log("delay function running")
-      handleQuery(artistName)
+      console.log("delay function running");
+      handleQuery(artistName);
       handleQuery();
-    }, 400)
+    }, 400);
 
-    return () => clearTimeout(delayDebounceFn)
-  }, [artistName])
+    return () => clearTimeout(delayDebounceFn);
+  }, [artistName]);
 
   const handleQuery = async (query) => {
     try {
       getArtistsByName(query).then((data) => {
-        if(data == null || data == undefined || data == ""){
+        if (data == null || data == undefined || data == "") {
           setArtistNotFound(true);
-        }
-        else{
+        } else {
           setArtist(data);
           setArtistNotFound(false);
         }
       });
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const uploadBanner = async () => {
     try {
@@ -116,6 +145,12 @@ const UploadPage = () => {
       console.log(err);
       /* notify(err); */
     }
+  };
+
+  const onUploadBanner = (file) => {
+    setUploadLoading(true);
+    setBanner(file);
+    setUploadLoading(false);
   };
 
   ///restrict access logic (WIP)
@@ -161,13 +196,13 @@ const UploadPage = () => {
       ) {
         await uploadAudio().then(async (cid) => {
           await uploadBanner().then((banner) => {
-            if(artistNotFound){
+            if (artistNotFound) {
               //
               addArtist(
                 "temp description",
                 "temp genre",
                 artistName,
-                banner,
+                banner
               ).then((res) => {
                 uploadTrack(
                   cid,
@@ -176,11 +211,9 @@ const UploadPage = () => {
                   "pop",
                   songName,
                   banner
-                ).then((res) => {
-                });
+                ).then((res) => {});
               });
-            }
-            else{
+            } else {
               uploadTrack(
                 cid,
                 artist["_id"],
@@ -206,11 +239,21 @@ const UploadPage = () => {
   };
 
   return (
-    <Box minH="calc(100vh - 5rem)" maxW="2xl" mx="auto" p={6}>
+    <Box
+      minH="calc(100vh - 5rem)"
+      maxW="2xl"
+      mx="auto"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      p={6}
+      backgroundColor="purple"
+    >
       <Box
         bg={{ base: "#000", md: "#040d11" }}
         rounded="base"
         p={{ base: 2, md: 10 }}
+        width="full"
       >
         <Box mb={8}>
           <Heading fontSize="2xl" color="#8E05C2">
@@ -220,20 +263,25 @@ const UploadPage = () => {
         </Box>
         <Flex direction="column" gap={4}>
           <FormControl>
-            <FormLabel fontSize="xs" color="zinc.400"></FormLabel>
-            <InputGroup border="1px" borderColor="zinc.600" rounded="base">
+            <FormLabel fontSize="xs" color="zinc.400" fontWeight="bold">
+              Track Name
+            </FormLabel>
+            <InputGroup borderColor="zinc.600" rounded="base">
               <Input
                 type="text"
                 color="zinc.300"
                 fontSize="sm"
                 value={songName}
                 onChange={(e) => setSongName(e.target.value)}
-                placeholder="Enter the Track Name"
+                placeholder="Track Name"
               />
             </InputGroup>
           </FormControl>
           <FormControl>
-            <InputGroup border="1px" borderColor="zinc.600" rounded="base">
+            <FormLabel fontSize="xs" color="zinc.400" fontWeight="bold">
+              Artist and Feature Name
+            </FormLabel>
+            <InputGroup borderColor="zinc.600" rounded="base">
               <Input
                 color="zinc.300"
                 fontSize="sm"
@@ -241,51 +289,75 @@ const UploadPage = () => {
                 onChange={(e) => {
                   setArtistName(e.target.value);
                 }}
-                placeholder="Enter the Artist and Feature Name"
+                placeholder="Artist and Feature Name"
               />
             </InputGroup>
           </FormControl>
           <FormControl>
-            <FormLabel fontSize="md" color="#fff">
-              Upoad Track Cover
+            <FormLabel fontSize="xs" color="zinc.400" fontWeight="bold">
+              Upload Track Cover
             </FormLabel>
             <InputGroup border="1px" borderColor="#040d11" rounded="base">
-              <Input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                /* onChange={(e) => setAudio(e.target.files[0])} */
-                width="1.5rem"
-                color="zinc.300"
-                fontSize="md"
-                // value={banner}
-                onChange={(e) => {
-                  setBanner(e.target.files[0]);
+              <div
+                {...getCoverRootProps({ className: "dropzone" })}
+                style={{
+                  height: "80px",
+                  width: "100%",
+                  padding: "10px",
+                  border: "1px dashed gray",
+                  borderRadius: "4px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-                placeholder="Upload Track Cover Image"
-              />
+              >
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => onUploadBanner(e.target.files[0])}
+                  {...getCoverInputProps()}
+                />
+                <p style={{ color: "gray", fontSize: "12px" }}>
+                  Drag 'n' drop some files here, or click to select files
+                </p>
+              </div>
+              <aside>{thumbs}</aside>
             </InputGroup>
           </FormControl>
 
           <FormControl>
-            <FormLabel fontSize="md" color="#fff">
-              Select the Song File
+            <FormLabel fontSize="xs" color="zinc.400" fontWeight="bold">
+              Select Song File
             </FormLabel>
             <InputGroup border="1px" borderColor="#040d11" rounded="base">
-              <Input
-                type="file"
-                style={{ display: "none" }}
-                accept=".mp3,audio/*"
-                onChange={(e) => {
-                  setAudio(e.target.files[0]);
-                  computeLength(e.target.files[0]).then((res) => {
-                    setAudioDuration(Math.round(res.duration));
-                  });
+              <div
+                {...getTrackRootProps({ className: "dropzone" })}
+                style={{
+                  height: "80px",
+                  width: "100%",
+                  padding: "10px",
+                  border: "1px dashed gray",
+                  borderRadius: "4px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-                placeholder="Upload Track File"
-                color="#fff"
-                fontSize="md"
-              />
+              >
+                <input
+                  type="file"
+                  accept=".mp3,audio/*"
+                  onChange={(e) => {
+                    setAudio(e.target.files[0]);
+                    computeLength(e.target.files[0]).then((res) => {
+                      setAudioDuration(Math.round(res.duration));
+                    });
+                  }}
+                  {...getTrackInputProps()}
+                />
+                <p style={{ color: "gray", fontSize: "12px" }}>
+                  Drag 'n' drop some files here, or click to select files
+                </p>
+              </div>
             </InputGroup>
           </FormControl>
           {error && (
