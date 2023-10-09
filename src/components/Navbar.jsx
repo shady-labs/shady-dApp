@@ -25,6 +25,8 @@ import {
 
 import {useState } from "react";
 
+import {motion} from "framer-motion";
+
 var size  = "large"
 const Navbar = ({changeHomelayoutSize}) => {
   const [navSize, changeNavSize] = useState("large")
@@ -64,31 +66,6 @@ export const NavContent = ({changeNavSize, navSize}) => {
       {TopNav({changeNavSize, navSize}) }
       {MidNav ({navSize})}
       <Spacer/>
-      { 
-        navSize == "large" ?
-        null :
-        <IconButton
-          background="none"
-          _hover={{ background: "none" }}
-          onClick={() => {
-            console.log("clicked");
-            if(size == "large"){
-              // change navbar size to small
-              // changeNavSize("small")
-              size = "small"
-              changeNavSize("small")
-              console.log("large changed to: ")
-            }
-            else{
-              size = "large"
-              console.log("small changed to")
-              changeNavSize("large")
-              // changeNavSize("large")
-            }
-          }}
-          icon={<FiArrowRightCircle size="25" color="white" />}
-      />
-      }
       <Spacer/>
       {BottomNav({navSize})}
     </Flex>

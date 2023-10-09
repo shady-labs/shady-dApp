@@ -9,8 +9,8 @@ const HomeHero = () => {
       as={motion.div}
       initial="initial"
       animate="animate"
-      height="400px"
-      width="77.5vw"
+      height="56vh"
+      width="97%"
       bg="#810CA8"
       // h={96}
       rounded="lg"
