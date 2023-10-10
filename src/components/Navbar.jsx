@@ -52,6 +52,15 @@ const Navbar = ({changeHomelayoutSize}) => {
       minH={{ base: "5rem", md: "88vh" }}
       bg="#18181b"
       bgImage="linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5))"
+      onClick={() => {
+        if(navSize == "small"){
+          // change navbar size to small
+          // changeNavSize("small")
+          size = "large"
+          handleSizeChange("large")
+        }
+      }
+      }
     >
       <Flex direction="column" p={4}>
           <NavContent changeNavSize = {handleSizeChange} navSize={navSize}/>
@@ -92,7 +101,6 @@ const TopNav = ({changeNavSize, navSize}) => (
         background="none"
         _hover={{ background: "none" }}
         onClick={() => {
-          console.log("clicked");
           if(size == "large"){
             // change navbar size to small
             // changeNavSize("small")
