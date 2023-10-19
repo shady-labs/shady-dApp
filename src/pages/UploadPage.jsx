@@ -32,7 +32,6 @@ import ConnectWallet from "../components/ConnectWallet";
 import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
-// import { searchBarAutoComplete } from "";
 
 const UploadPage = () => {
   const [error, setError] = useState(null);
@@ -186,6 +185,18 @@ const UploadPage = () => {
                   songName,
                   banner
                 ).then((res) => {
+
+                  console.log(res);
+                  const uploadJson = {
+                    "image": banner,
+                    "name": songName,
+                    "animation_url": cid,
+                  }
+                  console.log(uploadJson);
+                  StoreContent(uploadJson).then((res) => {
+                    console.log(res);
+                  }
+                  );
                 });
               });
             }
@@ -197,14 +208,19 @@ const UploadPage = () => {
                 "pop",
                 songName,
                 banner
+              ).then((res) => {
+                console.log(res);
+                StoreContent(res).then((res) => {
+                  console.log(res);
+                }
+                );
+              }
               );
             }
           });
         });
       } else {
-        searchBarAutoComplete("front").then((res) => {
-          temp.push(res);
-        });
+        //
       }
       // await setTimeout(uploadMetadata(), 5000);
       // await mintNFT();
@@ -256,7 +272,7 @@ const UploadPage = () => {
           </FormControl>
           <FormControl>
             <FormLabel fontSize="md" color="#fff">
-              Upoad Track Cover
+              Upload Track Cover
             </FormLabel>
             <InputGroup border="1px" borderColor="#040d11" rounded="base">
               <Input
