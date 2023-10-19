@@ -13,6 +13,7 @@ const ArtistSection = () => {
       url: "loading...",
     },
   ]);
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [fetched, setFetched] = useState(false);
