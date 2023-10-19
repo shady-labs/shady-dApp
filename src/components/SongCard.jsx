@@ -128,7 +128,7 @@ const SongCard = ({ song }) => {
 						fontWeight={500}>
 						{song?.title}
 					</Heading>
-					<Link to={`/artiste/${song?.artistes[0]}`}>
+					<Link to={`/artist/${song?.artistes[0]}`}>
 						<Text
 							fontSize={{ base: "xs", md: "sm" }}
 							color="zinc.400"

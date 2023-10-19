@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
         element: <ArtistesPage />,
       },
       {
-        path: "artiste/:id",
+        path: "artist/:artistname",
         element: <ArtistePage />,
       },
       {
@@ -74,15 +74,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "search",
-        element: <SearchPage />
-      }
+        element: <SearchPage />,
+      },
     ],
   },
   {
     path: "/landing",
     element: <LandingLayout />,
     errorElement: <ErrorPage />,
-  }
+  },
   // {
   //   path: "/",
   //   element: <UploadLayout />,
