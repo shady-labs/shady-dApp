@@ -11,11 +11,12 @@ const HomePage = () => {
 			maxW={{ base: "100vw", lg: "100vw" }}
 			pl={{ base: 2, md: 14, lg: 12, xl: 0 }}
 			pb={24}
-			pt={{ base: 14, md: 4 }}>
+			pt={{ base: 10, md: 1 }}>
 			<GridItem colSpan={8} pl={1} pt={3}>
 				<HomeHero />
 				<TrackSection title="New Releases" />
 				<ArtistSection/>
+				
 			</GridItem>
 		</Grid>
 	);

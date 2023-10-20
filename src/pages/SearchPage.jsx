@@ -8,7 +8,7 @@ import { getAllArtists } from "../graphql/query/getAllArtists";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import SongCard from "../components/SongCard";
 
-const SearchPage = () => {
+const SearchPage = ({inputQuery}) => {
   const [searchQuery, setSearchQuery] = useState([]);
   const [artistSearchResults, setArtistSearchResults] = useState([]);
   const [trackSearchResults, setTrackSearchResults] = useState([]);
@@ -65,39 +65,45 @@ const SearchPage = () => {
   useEffect(() => {
     if (!fetched) {
       setIsLoading(true);
-      getAllTracks().then(
-        (res) => {
-          setTopTracks(res);
-          console.log("Top Tracks: ", res)
-          topTracks.map((track) => {
-            console.log("top track details: "+JSON.stringify(
-              {
-                "_id": track._id,
-                "title": "",
-                "artistes": [track.artistsName[0]],
-                "coverImage": track.trackImage,
-                "songUrl": track.trackUrl,
-                "duration": track.duration,
-                "likes": {
-                  "64b27271cbbc5494326b3f5d":true,
-                  "64be80fb0e97b62cf659af8c":true,
-                  "64e63265d233402a9f2edee9":true
-                },
-                "type": "Song",
-                "__v": 0,
-              }
-            ));
-          });
-          getAllArtists().then(
-            (res) => {
-              setTopArtists(res);
-              console.log("Top Artists: ", res)
-              setFetched(true);
-              setIsLoading(false);
-            },
-          );
-        },
-      );
+      if(inputQuery != "" && inputQuery != null && inputQuery!=" "){
+        handleQuery(inputQuery);
+      }
+      else{
+
+        getAllTracks().then(
+          (res) => {
+            setTopTracks(res);
+            console.log("Top Tracks: ", res)
+            topTracks.map((track) => {
+              console.log("top track details: "+JSON.stringify(
+                {
+                  "_id": track._id,
+                  "title": "",
+                  "artistes": [track.artistsName[0]],
+                  "coverImage": track.trackImage,
+                  "songUrl": track.trackUrl,
+                  "duration": track.duration,
+                  "likes": {
+                    "64b27271cbbc5494326b3f5d":true,
+                    "64be80fb0e97b62cf659af8c":true,
+                    "64e63265d233402a9f2edee9":true
+                  },
+                  "type": "Song",
+                  "__v": 0,
+                }
+              ));
+            });
+            getAllArtists().then(
+              (res) => {
+                setTopArtists(res);
+                console.log("Top Artists: ", res)
+                setFetched(true);
+                setIsLoading(false);
+              },
+            );
+          },
+        );
+      }
     }
   }, []);
 
@@ -139,7 +145,9 @@ const SearchPage = () => {
 
   return (
     <Box bg="#000" minH="100vh" p={4}>
-      <Search handleQuery={handleQuery} />
+      <Search handleQuery={handleQuery}
+        isSearchPage={true}
+      />
       <Flex direction="column" minH="25rem" align="center" justify="center">
         <Heading>Search Your Jam!</Heading>
         {isLoading ? (
