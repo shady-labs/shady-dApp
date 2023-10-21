@@ -4,9 +4,6 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { MusicPlayer } from "../components/MusicPlayer/index.jsx";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import Search from "../components/Search";
-import SearchPage from "../pages/SearchPage";
-import Header from "../components/Header";
 
 const HomeLayout = () => {
 	const { currentTrack } = useSelector((state) => state.player);
@@ -33,11 +30,8 @@ const HomeLayout = () => {
         <GridItem colSpan={
           navSize == "large" ? 8 : 9
         } minH={{ base: "97vh", md: "100vh" }}>
-          <Header />
           <Outlet />
-
         </GridItem>
-
         {currentTrack && <MusicPlayer />}
       </Grid>
     </>

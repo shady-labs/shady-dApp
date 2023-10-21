@@ -59,9 +59,9 @@ const Header = () => {
   };
   return (
     <Box 
-    maxW={"74.5rem"}
+    maxW={"97%"}
     >
-      <Flex direction="row" justifyContent={"space-between"} pt={4}>
+      <Flex direction="row" justifyContent={"space-between"} pt={2}>
         <Heading
           as="h1"
           fontSize={{ base: "lg", md: "lg" }}
@@ -71,7 +71,7 @@ const Header = () => {
         >
           Search... Tracks, Artists or Albums
         </Heading>
-        <Box dir="Row">
+        <Box dir="Row" pb={4}>
           <Flex>
             <Avatar
               size="md"
