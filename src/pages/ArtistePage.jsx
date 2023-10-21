@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 import {
-	Box,
-	Button,
-	Divider,
-	Flex,
-	Heading,
-	Image,
-	Text,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Heading,
+  Image,
+  Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -17,57 +17,53 @@ import { useDispatch } from "react-redux";
 import { playTrack, setTrackList } from "../redux/slices/playerSlice";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import { gql, useQuery } from "@apollo/client";
-import { getTracksByArtistId } from "../graphql/query/getTracksByArtistId";
-import { getArtistsByName } from "../graphql/query/getArtistsByName";
-import { slice } from "viem";
-import { searchBarAutoComplete, searchTrackByArtistName } from "../graphql/query/searchBarAutoComplete";
+import { searchTrackByArtistName } from "../graphql/query/searchBarAutoComplete";
 
 const ArtistePage = () => {
   const { artistName } = useParams();
   const dispatch = useDispatch();
-	
-	const Artist = gql`
+
+  const Artist = gql`
     query GetArtistsByName($name: String) {
-  getArtistsByName(name: $name) {
-    _id
-    name
-    image
-    description
-    genre
-    tracksId
-    tracksName
-  }
-}
+      getArtistsByName(name: $name) {
+        _id
+        name
+        image
+        description
+        genre
+        tracksId
+        tracksName
+      }
+    }
   `;
   const [songs, setSongs] = useState([]);
 
   const { loading, error, data } = useQuery(Artist, {
     variables: {
-      "name": artistName,
-      },
+      name: artistName,
+    },
   });
 
   if (loading) return console.log("loading");
   if (error) return `Error! ${error}`;
   if (data) {
-    console.log("data", data)
-  // if (trackError) return `Track Error! ${error}`;
-  // if (trackData) {
-  //   data.artist.songs = trackData.getTracksByArtistId;
-  // }
-  searchTrackByArtistName(artistName).then((res) => {
-    // data.artist.songs = res;
-    setSongs(res);
-    console.log("res", res)
-  });
-  console.log(data.getTracksByArtistId);
-  };
+    console.log("data", data);
+    // if (trackError) return `Track Error! ${error}`;
+    // if (trackData) {
+    //   data.artist.songs = trackData.getTracksByArtistId;
+    // }
+    searchTrackByArtistName(artistName).then((res) => {
+      // data.artist.songs = res;
+      setSongs(res);
+      console.log("res", res);
+    });
+    console.log(data.getTracksByArtistId);
+  }
 
   const handlePlay = () => {
     dispatch(setTrackList({ list: data.artist?.tracksName }));
     dispatch(playTrack(data.artist?.songs[0]));
   };
-
 
   const onSongPlay = (song) => {
     const index = data.artist?.songs.findIndex((s) => s._id == song._id);
@@ -103,7 +99,7 @@ const ArtistePage = () => {
           justify="flex-start"
           gap={5}
         >
-          <Box minWidth="14rem" h="14rem" >
+          <Box minWidth="14rem" h="14rem">
             <Image
               src={data.getArtistsByName[0].image}
               alt={data.getArtistsByName[0].name}
@@ -167,14 +163,13 @@ const ArtistePage = () => {
           <Divider w="full" h="1px" border="0" bg="zinc.600" mb={3} />
 
           <Flex direction="column" gap={4}>
-            {songs?.map((song) => 
-              (<ArtisteSong
-                // key={song._id}
+            {songs?.map((song) => (
+              <ArtisteSong
+                key={song._id}
                 song={song}
                 handlePlay={onSongPlay}
               />
-            )
-            )}
+            ))}
           </Flex>
         </Box>
       </Box>

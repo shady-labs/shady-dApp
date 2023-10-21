@@ -2,6 +2,7 @@ import { Box, Button, Flex, Hide, Image, Text } from "@chakra-ui/react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { BsSoundwave } from "react-icons/bs";
+import { convertToMins } from "../utils";
 
 const ArtisteSong = ({ song, handlePlay }) => {
   const { currentTrack, isPlaying } = useSelector((state) => state.player);
@@ -32,7 +33,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
           />
           <Box>
             <Flex align="center" gap={2}>
-              <Text fontSize={{ base: "sm", md: "lg" }}>{song?.title}</Text>
+              <Text fontSize={{ base: "sm", md: "lg" }}>{song?.name}</Text>
               {isCurrentTrack && (
                 <Flex align="center" color="accent.main">
                   <BsSoundwave size={20} />
@@ -69,7 +70,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
           )}
           <Hide below="md">
             <Text fontSize="sm" color="zinc.400">
-              {song?.duration}
+              {convertToMins(song?.duration)}
             </Text>
           </Hide>
         </Flex>
