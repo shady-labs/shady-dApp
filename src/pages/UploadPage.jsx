@@ -23,7 +23,6 @@ import WalletButton from "../components/WalletButton";
 import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
-// import { searchBarAutoComplete } from "";
 import { useDropzone } from "react-dropzone";
 
 const UploadPage = () => {
@@ -211,7 +210,13 @@ const UploadPage = () => {
                   "pop",
                   songName,
                   banner
-                ).then((res) => {});
+                ).then((res) => {
+                  console.log(res);
+                  StoreContent(res).then((res) => {
+                    console.log(res);
+                  }
+                  );
+                });
               });
             } else {
               uploadTrack(
@@ -221,14 +226,19 @@ const UploadPage = () => {
                 "pop",
                 songName,
                 banner
+              ).then((res) => {
+                console.log(res);
+                StoreContent(res).then((res) => {
+                  console.log(res);
+                }
+                );
+              }
               );
             }
           });
         });
       } else {
-        searchBarAutoComplete("front").then((res) => {
-          temp.push(res);
-        });
+        //
       }
       // await setTimeout(uploadMetadata(), 5000);
       // await mintNFT();
