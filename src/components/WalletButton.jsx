@@ -8,6 +8,7 @@ import {
   magicLink,
   rainbowWallet,
   phantomWallet,
+  embeddedWallet,
   darkTheme,
 } from "@thirdweb-dev/react";
 
@@ -18,42 +19,27 @@ function WalletButton() {
       clientId="efbbe4578d777c8bd2cc4dfbc9195faf"
       supportedWallets={[
         metamaskWallet({ recommended: true }),
-        walletConnect(),
-        safeWallet({
-          personalWallets: [
-            metamaskWallet(),
-            walletConnect(),
-          ],
-        }),
-        localWallet(),
-        magicLink({
-          apiKey: import.meta.env.VITE_MAGIC_LINK_KEY,
-          oauthOptions: {
-            providers: [
-              "google",
-              "facebook",
-              "twitter",
-              "apple",
-            ],
-          },
-        }),
-        rainbowWallet(),
-        phantomWallet(),
+        embeddedWallet(),
+        // phantomWallet(),
       ]}
     >
       <ConnectWallet
-        theme={darkTheme({
-          accentText: "#8e05c2",
-          modalBg: "#131418",
-          dropdownBg: "#131418",
-          borderColor: "#22232b",
-          separatorLine: "#22232b",
-          accentButtonBg: "#8e05c2",
-        })}
+        theme={darkTheme(
+          {colors:{
+          borderColor: "#000000",
+            modalBg: "#000000",
+            dropdownBg: "#000000",
+            accentText: "#8E05C2",
+            accentButtonBg: "#8E05C2",
+            primaryButtonText: "#FFFFFF",
+          primaryButtonBg : "#8E05C2 ",}}
+
+          )}
+        accentButtonBg={"#8E05C2"}
         btnTitle={"Sign In"}
         modalTitle={"Shady Labs"}
         switchToActiveChain={true}
-        modalSize={"wide"}
+        modalSize={"compact"}
         welcomeScreen={{
           title:
             "Sign in to explore the shady labs",
@@ -66,6 +52,7 @@ function WalletButton() {
         modalTitleIconUrl={
           "https://shadylabs.xyz/logo.svg"
         }
+        
       />
     </ThirdwebProvider>
   );
