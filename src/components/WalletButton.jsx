@@ -2,12 +2,6 @@ import {
   ThirdwebProvider,
   ConnectWallet,
   metamaskWallet,
-  walletConnect,
-  safeWallet,
-  localWallet,
-  magicLink,
-  rainbowWallet,
-  phantomWallet,
   embeddedWallet,
   darkTheme,
 } from "@thirdweb-dev/react";
@@ -20,7 +14,6 @@ function WalletButton() {
       supportedWallets={[
         metamaskWallet({ recommended: true }),
         embeddedWallet(),
-        // phantomWallet(),
       ]}
     >
       <ConnectWallet

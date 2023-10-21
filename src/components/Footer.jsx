@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Box,
   chakra,
@@ -12,7 +10,6 @@ import {
   IconButton,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { ReactNode } from 'react'
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { BiMailSend } from 'react-icons/bi'
 
