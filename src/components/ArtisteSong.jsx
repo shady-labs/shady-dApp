@@ -56,7 +56,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
         <Flex align="center" gap={3} pr={3}>
           {isCurrentTrack && isPlaying ? null : (
             <Button
-              onClick={playSong}
+              // onClick={playSong}
               variant="unstyled"
               color="accent.light"
               fontSize={{ base: 24, md: 36 }}
