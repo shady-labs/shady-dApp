@@ -33,8 +33,9 @@ const PlayingBar = ({ time, track, onSeek, trackRef }) => {
           <Box color="#810CA8" as={MdGraphicEq} />
         </SliderThumb>
       </Slider>
+      {/* added minutes fix */}
       <Text fontSize="xs" color="zinc.500">
-        {track?.duration}
+        {convertToMins(track?.duration)}
       </Text>
     </Flex>
   );

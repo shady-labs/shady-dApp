@@ -1,15 +1,11 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import HomeLayout from "../layouts/HomeLayout";
-import PlaylistsPage from "../pages/PlaylistsPage";
 import ErrorPage from "../pages/ErrorPage";
 import UploadPage from "../pages/UploadPage";
 import ArtistePage from "../pages/ArtistePage";
 import ArtistesPage from "../pages/ArtistesPage";
 import FavoritesPage from "../pages/FavoritesPage";
-import PlaylistPage from "../pages/PlaylistPage";
-import CreatePlaylistPage from "../pages/CreatePlaylistPage";
-import EditPlaylistPage from "../pages/EditPlaylistPage";
 import SettingsPage from "../pages/SettingsPage";
 import UserPage from "../pages/UserPage";
 import SearchPage from "../pages/SearchPage";
@@ -33,27 +29,11 @@ export const router = createBrowserRouter([
         element: <BrowsePage />,
       },
       {
-        path: "playlists",
-        element: <PlaylistsPage />,
-      },
-      {
-        path: "playlists/:id",
-        element: <PlaylistPage />,
-      },
-      {
-        path: "playlists/create",
-        element: <CreatePlaylistPage />,
-      },
-      {
-        path: "playlists/edit/:id",
-        element: <EditPlaylistPage />,
-      },
-      {
         path: "artistes",
         element: <ArtistesPage />,
       },
       {
-        path: "artiste/:id",
+        path: "artist/:artistname",
         element: <ArtistePage />,
       },
       {
@@ -74,15 +54,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "search",
-        element: <SearchPage />
-      }
+        element: <SearchPage />,
+      },
     ],
   },
   {
     path: "/landing",
     element: <LandingLayout />,
     errorElement: <ErrorPage />,
-  }
+  },
   // {
   //   path: "/",
   //   element: <UploadLayout />,

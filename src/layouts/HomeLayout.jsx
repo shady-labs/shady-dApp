@@ -3,11 +3,12 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { MusicPlayer } from "../components/MusicPlayer/index.jsx";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const HomeLayout = () => {
 	const { currentTrack } = useSelector((state) => state.player);
 	const { pathname } = useLocation();
+  const [navSize, changeNavSize] = useState("large")
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -21,10 +22,14 @@ const HomeLayout = () => {
         bg="#000"
         color="#fff"
       >
-        <GridItem colSpan={2}>
-          <Navbar />
+        <GridItem colSpan={
+          navSize == "large" ? 2 : 1
+        }>
+          <Navbar changeHomelayoutSize = {changeNavSize}/>
         </GridItem>
-        <GridItem colSpan={8} minH={{ base: "97vh", md: "100vh" }}>
+        <GridItem colSpan={
+          navSize == "large" ? 8 : 9
+        } minH={{ base: "97vh", md: "100vh" }}>
           <Outlet />
         </GridItem>
         {currentTrack && <MusicPlayer />}

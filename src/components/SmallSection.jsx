@@ -2,32 +2,12 @@ import { useEffect, useState } from "react";
 import { AiFillPlayCircle, AiOutlineLoading } from "react-icons/ai";
 import SongCard from "./SongCard";
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { client } from "../api";
 import { Link } from "react-router-dom";
 
 const SmallSection = ({ title, endpoint }) => {
 	const [loading, setLoading] = useState(false);
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(false);
-
-	const fetchData = async () => {
-		setError(false);
-		setLoading(true);
-		await client
-			.get(`${endpoint}`)
-			.then((res) => {
-				setData(res.data);
-				setLoading(false);
-			})
-			.catch(() => {
-				setError(true);
-				setLoading(false);
-			});
-	};
-
-	useEffect(() => {
-		fetchData();
-	}, []);
 
 	return (
 		<Box mt={8}>
