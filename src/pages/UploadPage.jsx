@@ -212,7 +212,13 @@ const UploadPage = () => {
                   banner
                 ).then((res) => {
                   console.log(res);
-                  StoreContent(res).then((res) => {
+                  const uploadJson = {
+                    "image": banner,
+                    "name": songName,
+                    "animation_url": cid,
+                  }
+                  console.log(uploadJson);
+                  StoreContent(uploadJson).then((res) => {
                     console.log(res);
                   }
                   );
