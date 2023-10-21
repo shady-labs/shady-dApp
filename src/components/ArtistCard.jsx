@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ArtistCard = ({ artist }) => {
 	return (
-    <Link to={`/artist/${artist?._id}`}>
+    <Link to={`/artist/${artist?.name}`}>
       <Flex
         direction="column"
         align="center"

@@ -34,7 +34,7 @@ const TrackSection = ({ title }) => {
 }, []);
 
   return (
-    <Box mt={8}>
+    <Box mt={8} width="97%">
       <Flex align="center" justify="space-between">
         <Flex align="center" gap={3}>
           <Heading as="h3" fontSize={{ base: "lg", md: "xl" }} fontWeight={500}>

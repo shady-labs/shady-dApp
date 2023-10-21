@@ -5,7 +5,6 @@ import {
 	Heading,
 	Image,
 	Text,
-	useToast,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
@@ -16,21 +15,14 @@ import {
 	setTrackList,
 } from "../redux/slices/playerSlice";
 import {
-	AiFillHeart,
 	AiFillPauseCircle,
 	AiFillPlayCircle,
-	AiOutlineHeart,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { client } from "../api";
-import { setUser } from "../redux/slices/userSlice";
 
 const SongCard = ({ song }) => {
 	const dispatch = useDispatch();
 	const { currentTrack, isPlaying } = useSelector((state) => state.player);
-	const { user, token } = useSelector((state) => state.user);
-
-	const toast = useToast();
 
 	const playSong = () => {
 		dispatch(setCurrentTrack(song));
@@ -38,30 +30,7 @@ const SongCard = ({ song }) => {
 		dispatch(setPlaying(true));
 	};
 
-	const handleLike = async () => {
-		await client
-			.patch(`/songs/like/${song?._id}`, null, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			})
-			.then((res) => {
-				dispatch(setUser(res.data));
-				toast({
-					description: "Your favorites have been updated",
-					status: "success",
-				});
-			})
-			.catch(() => {
-				toast({
-					description: "An error occured",
-					status: "error",
-				});
-			});
-	};
-
 	const isCurrentTrack = currentTrack?._id === song?._id;
-	const isFavorite = user?.favorites.includes(song._id);
 
 	return (
 		<Box
@@ -128,7 +97,7 @@ const SongCard = ({ song }) => {
 						fontWeight={500}>
 						{song?.title}
 					</Heading>
-					<Link to={`/artiste/${song?.artistes[0]}`}>
+					<Link to={`/artist/${song?.artistes[0]}`}>
 						<Text
 							fontSize={{ base: "xs", md: "sm" }}
 							color="zinc.400"
@@ -138,20 +107,6 @@ const SongCard = ({ song }) => {
 						</Text>
 					</Link>
 				</Box>
-				{user && (
-					<Button
-						variant="unstyled"
-						_hover={{ color: "accent.transparent" }}
-						color={isFavorite ? "accent.main" : "#b1b1b1"}
-						minW={6}
-						onClick={handleLike}>
-						{isFavorite ? (
-							<AiFillHeart color="inherit" />
-						) : (
-							<AiOutlineHeart color="inherit" />
-						)}
-					</Button>
-				)}
 			</Flex>
 		</Box>
 	);

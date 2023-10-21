@@ -13,6 +13,7 @@ const ArtistSection = () => {
       url: "loading...",
     },
   ]);
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [fetched, setFetched] = useState(false);
@@ -30,7 +31,7 @@ const ArtistSection = () => {
   }, []);
 
   return (
-    <Box mt={8}>
+    <Box mt={8} width="97%">
       <Flex align="center" justify="space-between" mb={3}>
         <Heading as="h3" fontSize={{ base: "lg", md: "xl" }} fontWeight={500}>
           Top Artists Today
