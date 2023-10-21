@@ -20,11 +20,12 @@ const GET_TRACKS_BY_ARTIST_ID = gql`
 
 export const getTracksByArtistId = async (id) => {
     try {
+        console.log("getTracksByArtistId called")
         if(id != "" && id != null){
                 const { gqlloading, gqlerror, data } = await client.query({
                 query: GET_TRACKS_BY_ARTIST_ID,
                 variables: {
-                    "_id": id,
+                    id: id,
                 },
             });
             console.log(data["getTracksByArtistId"].length);

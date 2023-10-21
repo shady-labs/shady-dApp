@@ -23,7 +23,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
       >
         <Flex gap={{ base: 2, md: 4 }} align="center">
           <Image
-            src={song?.coverImage}
+            src={song?.trackImage}
             alt={song?.title}
             w={{ base: "3rem", md: "5rem" }}
             h={{ base: "3rem", md: "5rem" }}
@@ -48,7 +48,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
               )}
             </Flex>
             <Text color="zinc.400" fontSize={{ base: "xs", md: "sm" }}>
-              {song?.artistes.join(", ")}
+              {song?.artistsName.join(", ")}
             </Text>
           </Box>
         </Flex>
@@ -69,7 +69,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
           )}
           <Hide below="md">
             <Text fontSize="sm" color="zinc.400">
-              {song?.duration?.split(".")?.join(":")}
+              {song?.duration}
             </Text>
           </Hide>
         </Flex>

@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         element: <ArtistesPage />,
       },
       {
-        path: "artist/:artistname",
+        path: "artist/:artistId",
         element: <ArtistePage />,
       },
       {
