@@ -20,14 +20,15 @@ import { gql, useQuery } from "@apollo/client";
 import { getTracksByArtistId } from "../graphql/query/getTracksByArtistId";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { slice } from "viem";
+import { searchBarAutoComplete, searchTrackByArtistName } from "../graphql/query/searchBarAutoComplete";
 
 const ArtistePage = () => {
-  const { artistId } = useParams();
+  const { artistName } = useParams();
   const dispatch = useDispatch();
 	
 	const Artist = gql`
-    query Artist($id: ID!) {
-  artist(ID: $id) {
+    query GetArtistsByName($name: String) {
+  getArtistsByName(name: $name) {
     _id
     name
     image
@@ -38,36 +39,23 @@ const ArtistePage = () => {
   }
 }
   `;
-      const tracks = gql`
-      query GetTracksByArtistId($id: ID!) {
-        getTracksByArtistId(ID: $id) {
-          _id
-          name
-          artistsID
-          artistsName
-          trackImage
-          trackUrl
-          genre
-          duration
-        }
-      }
-  `;
   const [songs, setSongs] = useState([]);
 
   const { loading, error, data } = useQuery(Artist, {
     variables: {
-      "id": artistId,
+      "name": artistName,
       },
   });
 
   if (loading) return console.log("loading");
   if (error) return `Error! ${error}`;
   if (data) {
+    console.log("data", data)
   // if (trackError) return `Track Error! ${error}`;
   // if (trackData) {
   //   data.artist.songs = trackData.getTracksByArtistId;
   // }
-  getTracksByArtistId(artistId).then((res) => {
+  searchTrackByArtistName(artistName).then((res) => {
     // data.artist.songs = res;
     setSongs(res);
     console.log("res", res)
@@ -117,8 +105,8 @@ const ArtistePage = () => {
         >
           <Box minWidth="14rem" h="14rem" >
             <Image
-              src={data.artist?.image}
-              alt={data.artist?.name}
+              src={data.getArtistsByName[0].image}
+              alt={data.getArtistsByName[0].name}
               w="full"
               h="full"
               objectFit="cover"
@@ -140,7 +128,7 @@ const ArtistePage = () => {
               mb={4}
               fontWeight={600}
             >
-              {data.artist?.name}
+              {data.getArtistsByName[0].name}
             </Heading>
             <Text
               fontSize={{ base: "sm", md: "md" }}
