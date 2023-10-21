@@ -14,7 +14,6 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
-// Supports weights 200-800
 import '@fontsource-variable/manrope';
 
 

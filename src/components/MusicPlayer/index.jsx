@@ -9,7 +9,6 @@ import {
 import VolumeControl from './VolumeControl'
 import TrackDetails from './TrackDetails'
 import PlayControls from './PlayControls'
-import LoginModal from '../LoginModal'
 import PlayingBar from './PlayingBar'
 
 const MusicPlayer = () => {
@@ -155,7 +154,6 @@ const MusicPlayer = () => {
 
   return (
     <>
-      <LoginModal ref={modalRef} onClose={onClose} isOpen={isOpen} />
       <SimpleGrid
         templateColumns='repeat(3, 1fr)'
         align='center'

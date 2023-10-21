@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
 	Box,
@@ -9,6 +8,7 @@ import {
 	Image,
 	Text,
 } from "@chakra-ui/react";
+
 import ArtisteSong from "../components/ArtisteSong";
 import { BsFillPlayFill } from "react-icons/bs";
 import { MdErrorOutline } from "react-icons/md";
@@ -17,20 +17,6 @@ import { playTrack, setTrackList } from "../redux/slices/playerSlice";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import { gql, useQuery } from "@apollo/client";
 
-const Artist = gql`
-    query Artist($name: String) {
-      getArtistsByName(name: $name) {
-        _id
-        name
-        image
-        description
-        genre
-        tracksId
-        tracksName
-      }
-    }
-`;
-	
 const ArtistePage = () => {
   const { name } = useParams();
   const dispatch = useDispatch();
