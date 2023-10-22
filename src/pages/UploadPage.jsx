@@ -18,6 +18,8 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
+import { deployContract } from "../contract/deploy";
+import { mint } from "../contract/mint";
 
 const UploadPage = () => {
   const [error, setError] = useState(null);
@@ -60,6 +62,25 @@ const UploadPage = () => {
     } catch (err) {
       console.log(err);
       /* notify(err); */
+    }
+  };
+
+  const deployy = async () => {
+    try {
+      const tx = await deployContract();
+
+      return tx;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const mintNFT = async () => {
+    try {
+      const txx = await mint();
+      return txx;
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -207,6 +228,29 @@ const UploadPage = () => {
     }
   };
 
+
+
+
+
+
+  const handleDeploy = async () => {
+    try {
+      setLoading(true);
+      {
+        await mintNFT()/* .then(async (res) => {
+          mintNFT();
+        }); */
+      setLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
+  
+
   return (
     <Box minH="calc(100vh - 5rem)" maxW="2xl" mx="auto" p={6}>
       <Box
@@ -311,6 +355,29 @@ const UploadPage = () => {
               _hover={{ opacity: 0.8 }}
             >
               {loading ? <Spinner color="white" /> : "upload"}
+            </Button>
+            {/* <Text my={2} fontSize="sm" textAlign="center">
+							OR
+						</Text> */}
+            {/* <Link to="/home">
+							<Text color="zinc.400" fontSize="sm" textAlign="center">
+								Continue without logging in
+							</Text>
+						</Link> */}
+          </Box>
+          <Box mt={6}>
+            <Button
+              onClick={() => {
+                if (loading == false) {
+                  handleDeploy();
+                }
+              }}
+              bg="accent.main"
+              py={5}
+              w="full"
+              _hover={{ opacity: 0.8 }}
+            >
+              {loading ? <Spinner color="white" /> : "mint"}
             </Button>
             {/* <Text my={2} fontSize="sm" textAlign="center">
 							OR
