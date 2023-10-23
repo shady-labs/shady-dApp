@@ -1,7 +1,9 @@
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
 
+// TO-DO: if wallet is connected then fetch signer and wallet address 
 export const signer  = new ethers.providers.Web3Provider(window.ethereum).getSigner();
+export const wallet_address  = new ethers.providers.Web3Provider(window.ethereum).getSigner().getAddress();
 
 export const sdk = ThirdwebSDK.fromSigner(
   signer,
@@ -11,9 +13,13 @@ export const sdk = ThirdwebSDK.fromSigner(
 });
 
 const metadata = {
+  //required
   name: "UTOPIA",
+  primary_sale_recipient: wallet_address,
+
+  //optional
   description: "...",
-  primary_sale_recipient: "0x90269D31311a0FEB0907b7DAAc0b9D1234c85709",
+  image: "..." //album image art
 }
 
 export const deployContract = async (name, recipient, description, ipfsUrl) => {
