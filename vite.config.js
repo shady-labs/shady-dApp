@@ -4,4 +4,7 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
+  build: {
+    target: 'esnext' //browsers can handle the latest ES features
+  }
 })
