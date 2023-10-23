@@ -18,6 +18,7 @@ import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
 import { deployContract } from "../contract/deploy";
 import { mint } from "../contract/mint";
+import { set } from "react-hook-form";
 
 const UploadPage = () => {
   const [error, setError] = useState(null);
@@ -29,6 +30,7 @@ const UploadPage = () => {
   const [bannerUrl, setBannerUrl] = useState([]);
   const [artist, setArtist] = useState([]);
   const [audioDuration, setAudioDuration] = useState(0);
+  const [trackUrl, setTrackUrl] = useState([]);
   // search query test
   const [temp, setTemp] = useState([]);
   const [artistNotFound, setArtistNotFound] = useState(false);
@@ -65,7 +67,7 @@ const UploadPage = () => {
 
   const useDeploy = async () => {
     try {
-      const tx = await deployContract();
+      const tx = await deployContract(songName, "temp description", bannerUrl);
 
       return tx;
     } catch (err) {
@@ -73,9 +75,14 @@ const UploadPage = () => {
     }
   };
 
-  const mintNFT = async () => {
+  const mintNFT = async (tx) => {
     try {
-      const txx = await mint();
+      const txx = await mint(tx,{
+        name: songName,
+        description: "temp description",
+        image: bannerUrl,
+        animation_url: trackUrl,
+      });
       return txx;
     } catch (err) {
       console.log(err);
@@ -192,6 +199,7 @@ const UploadPage = () => {
                     name: songName,
                     animation_url: cid,
                   };
+                  setTrackUrl(cid);
                   console.log(uploadJson);
                   StoreContent(uploadJson).then((res) => {
                     console.log(res);
@@ -208,6 +216,7 @@ const UploadPage = () => {
                 banner
               ).then((res) => {
                 console.log(res);
+                setTrackUrl(cid);
                 StoreContent(res).then((res) => {
                   console.log(res);
                 });
@@ -231,7 +240,8 @@ const UploadPage = () => {
       setLoading(true);
       {
         await useDeploy().then(async (res) => {
-          mintNFT();
+          // res = tx
+          mintNFT(res);
         });
       setLoading(false);
       }
