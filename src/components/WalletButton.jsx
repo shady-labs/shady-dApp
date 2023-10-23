@@ -18,6 +18,7 @@ function WalletButton() {
     >
       <ConnectWallet
         theme={darkTheme({
+          fontFamily: "Manrope Variable, sans-serif",
           colors: {
             borderColor: "#000000",
             modalBg: "#000000",
@@ -31,8 +32,12 @@ function WalletButton() {
         accentButtonBg={"#8E05C2"}
         btnTitle={"Sign In"}
         modalTitle={"Shady Labs"}
-        switchToActiveChain={true}
         modalSize={"compact"}
+        switchToActiveChain={true}
+        hideTestnetFaucet={true}
+        /* detailsBtn={() => {
+          return <button> .... </button>;
+        }} */
         welcomeScreen={{
           title: "Sign in to explore the shady labs",
           img: {
