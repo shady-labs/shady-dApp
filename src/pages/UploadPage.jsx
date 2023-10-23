@@ -18,7 +18,6 @@ import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
 import { deployContract } from "../contract/deploy";
 import { mint } from "../contract/mint";
-import { set } from "react-hook-form";
 
 const UploadPage = () => {
   const [error, setError] = useState(null);
