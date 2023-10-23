@@ -1,14 +1,4 @@
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-
-// An example of a signer using the ethers library
-import { ethers } from "ethers";
-const signer = new ethers.Wallet(import.meta.env.VITE_PRIVATE_KEY);
-
-// If used on the FRONTEND pass your 'clientId'
-const sdk = ThirdwebSDK.fromSigner(signer, "mumbai", {
-  clientId:import.meta.env.VITE_THIRDWEB_CLIENT_ID,
-  secretKey:import.meta.env.VITE_THIRDWEB_SECRET_KEY,
-});
+import { sdk } from "./deploy.js";
 
 const contract = await sdk.getContract("0xeF01cbFB7306E7cBE78432032916CbEB0119A506");
 
@@ -22,7 +12,6 @@ const metadatas = [{
   image: "ipfs://bafybeiff76lkm5luuuaquqeubacshhwxrss7kpfbuvspvwwkstwu2eqoly/Travis%20Scott%20-%20Utopia.webp", // This can be an image url or file
   animation_url: "ipfs://bafybeihftxryi5ceqvyqowxbaf7lzfumwb2ohuxkxjxppmtmk75oos5aem/MY%20EYES.mp3",
 }];
-
 
 export const mint = async () => {
   const tx = await contract.erc721.lazyMint(metadatas);

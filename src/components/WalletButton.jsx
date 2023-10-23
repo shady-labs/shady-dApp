@@ -17,35 +17,31 @@ function WalletButton() {
       ]}
     >
       <ConnectWallet
-        theme={darkTheme(
-          {colors:{
-          borderColor: "#000000",
+        theme={darkTheme({
+          colors: {
+            borderColor: "#000000",
             modalBg: "#000000",
             dropdownBg: "#000000",
             accentText: "#8E05C2",
             accentButtonBg: "#8E05C2",
             primaryButtonText: "#FFFFFF",
-          primaryButtonBg : "#8E05C2 ",}}
-
-          )}
+            primaryButtonBg: "#8E05C2 ",
+          },
+        })}
         accentButtonBg={"#8E05C2"}
         btnTitle={"Sign In"}
         modalTitle={"Shady Labs"}
         switchToActiveChain={true}
         modalSize={"compact"}
         welcomeScreen={{
-          title:
-            "Sign in to explore the shady labs",
+          title: "Sign in to explore the shady labs",
           img: {
             src: "https://shadylabs.xyz/logo.svg",
             width: 150,
             height: 150,
           },
         }}
-        modalTitleIconUrl={
-          "https://shadylabs.xyz/logo.svg"
-        }
-        
+        modalTitleIconUrl={"https://shadylabs.xyz/logo.svg"}
       />
     </ThirdwebProvider>
   );

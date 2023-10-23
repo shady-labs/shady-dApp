@@ -13,8 +13,6 @@ import {
 import { useState, useEffect } from "react";
 import { MdError } from "react-icons/md";
 import { StoreContent } from "../utils/StoreContent";
-import { useDispatch, useSelector } from "react-redux";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
@@ -65,7 +63,7 @@ const UploadPage = () => {
     }
   };
 
-  const deployy = async () => {
+  const useDeploy = async () => {
     try {
       const tx = await deployContract();
 
@@ -228,28 +226,19 @@ const UploadPage = () => {
     }
   };
 
-
-
-
-
-
   const handleDeploy = async () => {
     try {
       setLoading(true);
       {
-        await mintNFT()/* .then(async (res) => {
+        await useDeploy().then(async (res) => {
           mintNFT();
-        }); */
+        });
       setLoading(false);
       }
     } catch (err) {
       console.log(err);
     }
   };
-
-
-
-  
 
   return (
     <Box minH="calc(100vh - 5rem)" maxW="2xl" mx="auto" p={6}>

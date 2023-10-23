@@ -1,15 +1,13 @@
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-
-// An example of a signer using the ethers library
 import { ethers } from "ethers";
-const signer = new ethers.Wallet(import.meta.env.VITE_PRIVATE_KEY);
 
-const sdk = ThirdwebSDK.fromSigner(
+export const signer  = new ethers.providers.Web3Provider(window.ethereum).getSigner();
+
+export const sdk = ThirdwebSDK.fromSigner(
   signer,
   "mumbai",
  {
   clientId:import.meta.env.VITE_THIRDWEB_CLIENT_ID,
-  secretKey:import.meta.env.VITE_THIRDWEB_SECRET_KEY,
 });
 
 const metadata = {
@@ -19,6 +17,6 @@ const metadata = {
 }
 
 export const deployContract = async (name, recipient, description, ipfsUrl) => {
-    const txResult = await sdk.deployer.deployBuiltInContract("nft-drop", metadata);
+    const txResult = await sdk.deployer.deployBuiltInContract("nft-collection", metadata);
     console.log (txResult);
 };
