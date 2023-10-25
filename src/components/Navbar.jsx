@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 import { Box, Button, Flex, Image, IconButton, Spacer } from "@chakra-ui/react";
-
+import { useOutsideClick } from '@chakra-ui/react'
 import {
   FiHome,
   FiGrid,
@@ -12,15 +12,22 @@ import {
   FiArrowLeft,
 } from "react-icons/fi";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 var size = "large";
 const Navbar = ({ changeHomelayoutSize }) => {
   const [navSize, changeNavSize] = useState("large");
+  const ref = useRef();
+  useOutsideClick({
+    ref: ref,
+    handler: () => handleSizeChange("small"),
+  })
 
-  const handleSizeChange = (size) => {
-    changeNavSize(size);
-    changeHomelayoutSize(size);
+  const handleSizeChange = (inputSize) => {
+    console.log("inputSize: ", inputSize);
+    size = inputSize;
+    changeNavSize(inputSize);
+    changeHomelayoutSize(inputSize);
     console.log("navSize: ", navSize);
   };
   return (
@@ -38,13 +45,23 @@ const Navbar = ({ changeHomelayoutSize }) => {
       bg="#18181b"
       bgImage="linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5))"
       onClick={() => {
+        console.log("navbar clicked current size:", navSize)
         if (navSize == "small") {
           // change navbar size to small
           // changeNavSize("small")
           size = "large";
           handleSizeChange("large");
+          console.log("small changed to: ", navSize);
+        }
+        else{
+          if(navSize == "large"){
+            size = "small";
+            handleSizeChange("small");
+            console.log("large changed to: ", navSize);
+          }
         }
       }}
+      useOutSideClick = {true}
     >
       <Flex direction="column" p={4}>
         <NavContent changeNavSize={handleSizeChange} navSize={navSize} />
