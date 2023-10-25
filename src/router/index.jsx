@@ -56,6 +56,10 @@ export const router = createBrowserRouter([
         path: "search",
         element: <SearchPage />,
       },
+      {
+        path: "search/:inputQuery",
+        element: <SearchPage />,
+      }
     ],
   },
   {

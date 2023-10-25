@@ -10,7 +10,7 @@ import { BsSearch } from "react-icons/bs";
 import { searchBarAutoComplete } from "../graphql/query/searchBarAutoComplete";
 import SearchPage from "../pages/SearchPage";
 
-const Search = ({handleQuery, isSearchPage}) => {
+const Search = ({handleQuery, isSearchPage,inputQuery}) => {
   const [searchQuery, setSearchQuery] = useState([]);
 
   useEffect(() => {
@@ -52,6 +52,7 @@ const Search = ({handleQuery, isSearchPage}) => {
           onChange={async (e) => {
             setSearchQuery(e.target.value);
           }}
+          defaultValue={inputQuery}
           p={2}
         />
       </InputGroup>

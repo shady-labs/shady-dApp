@@ -7,8 +7,10 @@ import { getAllTracks } from "../graphql/query/getAllTracks";
 import { getAllArtists } from "../graphql/query/getAllArtists";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import SongCard from "../components/SongCard";
+import { useParams, useNavigate } from "react-router-dom";
 
-const SearchPage = ({inputQuery}) => {
+const SearchPage = () => {
+  const {inputQuery} = useParams();
   const [searchQuery, setSearchQuery] = useState([]);
   const [artistSearchResults, setArtistSearchResults] = useState([]);
   const [trackSearchResults, setTrackSearchResults] = useState([]);
@@ -60,50 +62,12 @@ const SearchPage = ({inputQuery}) => {
     duration: 1,
     },
   ]);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!fetched) {
-      setIsLoading(true);
-      if(inputQuery != "" && inputQuery != null && inputQuery!=" "){
-        handleQuery(inputQuery);
-      }
-      else{
-
-        getAllTracks().then(
-          (res) => {
-            setTopTracks(res);
-            console.log("Top Tracks: ", res)
-            topTracks.map((track) => {
-              console.log("top track details: "+JSON.stringify(
-                {
-                  "_id": track._id,
-                  "title": "",
-                  "artistes": [track.artistsName[0]],
-                  "coverImage": track.trackImage,
-                  "songUrl": track.trackUrl,
-                  "duration": track.duration,
-                  "likes": {
-                    "64b27271cbbc5494326b3f5d":true,
-                    "64be80fb0e97b62cf659af8c":true,
-                    "64e63265d233402a9f2edee9":true
-                  },
-                  "type": "Song",
-                  "__v": 0,
-                }
-              ));
-            });
-            getAllArtists().then(
-              (res) => {
-                setTopArtists(res);
-                console.log("Top Artists: ", res)
-                setFetched(true);
-                setIsLoading(false);
-              },
-            );
-          },
-        );
-      }
+    console.log("Search Query: ", inputQuery)
+    if(inputQuery){
+      handleQuery(inputQuery);
     }
   }, []);
 
@@ -114,6 +78,7 @@ const SearchPage = ({inputQuery}) => {
     console.log("Search Query: ", query)
     setIsLoading(true);
     if(query != "" && query != null && query!=" "){
+      navigate("/search/" + query);
     await searchBarAutoComplete(query).then(
       (res) => {  
         //console.log("Search result: ", res)
@@ -133,13 +98,12 @@ const SearchPage = ({inputQuery}) => {
       },
     );}
     else{
-      await getAllTracks().then(
-        (res) => {
-          console.log("Search Query: ", res)
-          setIsTopCharts(true);
-          setIsLoading(false);
-        },
-      );
+      navigate("/search");
+      setIsLoading(false);
+      if(inputQuery){
+        setIsTopCharts(false);
+      }
+      // setIsTopCharts(true);
     }
   };
 
@@ -147,6 +111,7 @@ const SearchPage = ({inputQuery}) => {
     <Box bg="#000" minH="100vh" p={4}>
       <Search handleQuery={handleQuery}
         isSearchPage={true}
+        inputQuery={inputQuery}
       />
       <Flex direction="column" minH="25rem" align="center" justify="center">
         <Heading>Search Your Jam!</Heading>
