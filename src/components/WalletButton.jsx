@@ -4,6 +4,9 @@ import {
   metamaskWallet,
   embeddedWallet,
   darkTheme,
+  safeWallet,
+  walletConnect,
+  localWallet,
 } from "@thirdweb-dev/react";
 
 function WalletButton() {
@@ -14,6 +17,14 @@ function WalletButton() {
       supportedWallets={[
         metamaskWallet({ recommended: true }),
         embeddedWallet(),
+        safeWallet({
+          personalWallets: [
+            metamaskWallet(),
+            walletConnect({ recommended: true }),
+            localWallet(),
+            embeddedWallet(),
+          ],
+        }),
       ]}
     >
       <ConnectWallet
