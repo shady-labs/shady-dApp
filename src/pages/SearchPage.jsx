@@ -8,6 +8,7 @@ import { getAllArtists } from "../graphql/query/getAllArtists";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import SongCard from "../components/SongCard";
 import { useParams, useNavigate } from "react-router-dom";
+import ArtistCard from "../components/ArtistCard";
 
 const SearchPage = () => {
   const {inputQuery} = useParams();
@@ -162,10 +163,6 @@ const SearchPage = () => {
               </Grid>
             }
             <Text color="zinc.300">
-              Artist Search Results: {artistSearchResults.length} :{" "}
-            </Text>
-            {}
-            <Text color="zinc.300">
               Track of Artist: {setTrackofArtistResult.length} :{" "}
             </Text>
             {
@@ -201,9 +198,33 @@ const SearchPage = () => {
               </Grid>
             }
             <Text color="zinc.300">
+              Artist Search Results: {artistSearchResults.length+setArtistofTrackResult.length} :{" "}
+            </Text>
+            {
+              <Flex
+              direction="row"
+              >
+              {
+                artistSearchResults.map((artist) => (
+                  <>
+  
+                  <ArtistCard key={artist._id} artist={artist} />
+                  </>
+                ))
+              }
+              {
+                setArtistofTrackResult.map((artist) => (
+                  <>
+  
+                  <ArtistCard key={artist._id} artist={artist} />
+                  </>
+                ))
+              }
+              </Flex>
+            }
+            <Text color="zinc.300">
               Artist of Track Results: {setArtistofTrackResult.length} :{" "}
             </Text>
-            {}
           </>
         )}
       </Flex>
