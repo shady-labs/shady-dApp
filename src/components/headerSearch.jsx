@@ -27,7 +27,11 @@ const HeaderSearch = ({ handleQuery }) => {
   const navigate = useNavigate();
 
   return (
-    <Stack spacing={4}>
+    <Box
+      mb={6}
+      pb={4}
+      w={{ base: "full", md: "sm  " }} 
+    >
       <InputGroup>
         <InputLeftAddon
           background={"black"}
@@ -51,7 +55,7 @@ const HeaderSearch = ({ handleQuery }) => {
           border="1px"
           focusBorderColor="#fff"
           borderColor="zinc.300"
-          placeholder="Search Songs, Albums, Artists or Podcasts"
+          placeholder=""
           w="full"
           outline={0}
           bg="transparent"
@@ -62,7 +66,7 @@ const HeaderSearch = ({ handleQuery }) => {
           p={2}
         />
       </InputGroup>
-    </Stack>
+    </Box>
   );
 };
 
