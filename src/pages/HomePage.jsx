@@ -4,6 +4,7 @@ import TrackSection from "../components/TrackSection";
 import ArtistSection from "../components/ArtistSection";
 import Header from "../components/Header";
 import Footer from "../components/Footer"
+import Genres from "../components/Genres";
 
 const HomePage = () => {
 	return (
@@ -20,6 +21,7 @@ const HomePage = () => {
         <HomeHero />
         <TrackSection title="New Releases" />
         <ArtistSection />
+        <Genres/>
         <TrackSection title="New Releases" />
         <ArtistSection />
         <TrackSection title="New Releases" />
