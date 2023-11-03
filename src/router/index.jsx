@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         element: <ArtistesPage />,
       },
       {
-        path: "artist/:artistname",
+        path: "artist/:artistName",
         element: <ArtistePage />,
       },
       {
@@ -56,6 +56,10 @@ export const router = createBrowserRouter([
         path: "search",
         element: <SearchPage />,
       },
+      {
+        path: "search/:inputQuery",
+        element: <SearchPage />,
+      }
     ],
   },
   {

@@ -13,11 +13,11 @@ import {
 import { useState, useEffect } from "react";
 import { MdError } from "react-icons/md";
 import { StoreContent } from "../utils/StoreContent";
-import { useDispatch, useSelector } from "react-redux";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { uploadTrack } from "../graphql/mutation/uploadTrack";
 import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
+import { deployContract } from "../contract/deploy";
+import { mint } from "../contract/mint";
 
 const UploadPage = () => {
   const [error, setError] = useState(null);
@@ -29,6 +29,7 @@ const UploadPage = () => {
   const [bannerUrl, setBannerUrl] = useState([]);
   const [artist, setArtist] = useState([]);
   const [audioDuration, setAudioDuration] = useState(0);
+  const [trackUrl, setTrackUrl] = useState([]);
   // search query test
   const [temp, setTemp] = useState([]);
   const [artistNotFound, setArtistNotFound] = useState(false);
@@ -60,6 +61,30 @@ const UploadPage = () => {
     } catch (err) {
       console.log(err);
       /* notify(err); */
+    }
+  };
+
+  const useDeploy = async () => {
+    try {
+      const tx = await deployContract(songName, "temp description", bannerUrl);
+
+      return tx;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const mintNFT = async (tx) => {
+    try {
+      const txx = await mint(tx,{
+        name: songName,
+        description: "temp description",
+        image: bannerUrl,
+        animation_url: trackUrl,
+      });
+      return txx;
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -173,6 +198,7 @@ const UploadPage = () => {
                     name: songName,
                     animation_url: cid,
                   };
+                  setTrackUrl(cid);
                   console.log(uploadJson);
                   StoreContent(uploadJson).then((res) => {
                     console.log(res);
@@ -189,6 +215,7 @@ const UploadPage = () => {
                 banner
               ).then((res) => {
                 console.log(res);
+                setTrackUrl(cid);
                 StoreContent(res).then((res) => {
                   console.log(res);
                 });
@@ -202,6 +229,21 @@ const UploadPage = () => {
       // await setTimeout(uploadMetadata(), 5000);
       // await mintNFT();
       setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDeploy = async () => {
+    try {
+      setLoading(true);
+      {
+        await useDeploy().then(async (res) => {
+          // res = tx
+          mintNFT(res);
+        });
+      setLoading(false);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -311,6 +353,29 @@ const UploadPage = () => {
               _hover={{ opacity: 0.8 }}
             >
               {loading ? <Spinner color="white" /> : "upload"}
+            </Button>
+            {/* <Text my={2} fontSize="sm" textAlign="center">
+							OR
+						</Text> */}
+            {/* <Link to="/home">
+							<Text color="zinc.400" fontSize="sm" textAlign="center">
+								Continue without logging in
+							</Text>
+						</Link> */}
+          </Box>
+          <Box mt={6}>
+            <Button
+              onClick={() => {
+                if (loading == false) {
+                  handleDeploy();
+                }
+              }}
+              bg="accent.main"
+              py={5}
+              w="full"
+              _hover={{ opacity: 0.8 }}
+            >
+              {loading ? <Spinner color="white" /> : "mint"}
             </Button>
             {/* <Text my={2} fontSize="sm" textAlign="center">
 							OR

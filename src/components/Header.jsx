@@ -4,8 +4,10 @@ import { Box, Flex, Avatar, Spacer, Heading } from "@chakra-ui/react";
 
 import { NavLink } from "react-router-dom";
 
+
 const Header = () => {
   return (
+    
     <Box maxW={"97%"}>
       <Flex direction="row" justifyContent={"space-between"} pt={2}>
         <Heading

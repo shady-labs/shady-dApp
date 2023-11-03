@@ -2,6 +2,7 @@ import { Box, Button, Flex, Hide, Image, Text } from "@chakra-ui/react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { BsSoundwave } from "react-icons/bs";
+import { convertToMins } from "../utils";
 
 const ArtisteSong = ({ song, handlePlay }) => {
   const { currentTrack, isPlaying } = useSelector((state) => state.player);
@@ -23,7 +24,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
       >
         <Flex gap={{ base: 2, md: 4 }} align="center">
           <Image
-            src={song?.coverImage}
+            src={song?.trackImage}
             alt={song?.title}
             w={{ base: "3rem", md: "5rem" }}
             h={{ base: "3rem", md: "5rem" }}
@@ -32,7 +33,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
           />
           <Box>
             <Flex align="center" gap={2}>
-              <Text fontSize={{ base: "sm", md: "lg" }}>{song?.title}</Text>
+              <Text fontSize={{ base: "sm", md: "lg" }}>{song?.name}</Text>
               {isCurrentTrack && (
                 <Flex align="center" color="accent.main">
                   <BsSoundwave size={20} />
@@ -48,14 +49,14 @@ const ArtisteSong = ({ song, handlePlay }) => {
               )}
             </Flex>
             <Text color="zinc.400" fontSize={{ base: "xs", md: "sm" }}>
-              {song?.artistes.join(", ")}
+              {song?.artistsName.join(", ")}
             </Text>
           </Box>
         </Flex>
         <Flex align="center" gap={3} pr={3}>
           {isCurrentTrack && isPlaying ? null : (
             <Button
-              onClick={playSong}
+              // onClick={playSong}
               variant="unstyled"
               color="accent.light"
               fontSize={{ base: 24, md: 36 }}
@@ -69,7 +70,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
           )}
           <Hide below="md">
             <Text fontSize="sm" color="zinc.400">
-              {song?.duration?.split(".")?.join(":")}
+              {convertToMins(song?.duration)}
             </Text>
           </Hide>
         </Flex>

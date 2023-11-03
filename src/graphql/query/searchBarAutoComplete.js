@@ -127,7 +127,8 @@ const searchArtistByTrackName = async search => {
   }
 }
 
-const searchTrackByArtistName = async search => {
+export const searchTrackByArtistName = async search => {
+  console.log('entered searchTrackByArtistName function', search)
   const GET_TRACK_BY_ARTIST_NAME = gql`
     query GetTracksByArtistName($name: String!) {
       getTracksByArtistName(name: $name) {
