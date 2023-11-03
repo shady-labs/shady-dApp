@@ -8,7 +8,7 @@ import {
   Image,
   Text,
   Button,
-  IconButton
+  IconButton,
 } from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
@@ -62,7 +62,8 @@ const Footer = () => {
         <Text fontSize="md">
           Built with 🎧 by{" "}
           <Link
-            href="https://github.com/MA-Ahmad"
+            href="https://github.com/shady-labs"
+            target="_blank"
             textDecoration="underline"
             _hover={{ textDecoration: "underline" }}
             isExternal
@@ -71,36 +72,39 @@ const Footer = () => {
           </Link>
         </Text>
         <Stack spacing={1} direction={{ base: "column", md: "row" }}>
-          <IconButton
-            isRound={true}
-            href="https://github.com/shady-labs"
-            target="_blank"
-            variant="solid"
-            colorScheme="white"
-            aria-label="Done"
-            fontSize="20px"
-            icon={<FaGithub color="white" />}
-          />
-          <IconButton
-            isRound={true}
-            href="https://twitter.com/theshadylabs"
-            target="_blank"
-            variant="solid"
-            colorScheme="white"
-            aria-label="Done"
-            fontSize="20px"
-            icon={<FaTwitter color="white" />}
-          />
-          <IconButton
-            isRound={true}
+          <Link href="https://github.com/shady-labs" target="_blank">
+            <IconButton
+              isRound={true}
+              variant="solid"
+              colorScheme="white"
+              aria-label="Done"
+              fontSize="20px"
+              icon={<FaGithub color="white" />}
+            />
+          </Link>
+          <Link href="https://twitter.com/theshadylabs" target="_blank">
+            <IconButton
+              isRound={true}
+              variant="solid"
+              colorScheme="white"
+              aria-label="Done"
+              fontSize="20px"
+              icon={<FaTwitter color="white" />}
+            />
+          </Link>
+          <Link
             href="https://www.linkedin.com/company/shady-labs/"
             target="_blank"
-            variant="solid"
-            colorScheme="white"
-            aria-label="Done"
-            fontSize="20px"
-            icon={<FaLinkedin color="white" />}
-          />
+          >
+            <IconButton
+              isRound={true}
+              variant="solid"
+              colorScheme="white"
+              aria-label="Done"
+              fontSize="20px"
+              icon={<FaLinkedin color="white" />}
+            />
+          </Link>
         </Stack>
       </Stack>
     </Box>

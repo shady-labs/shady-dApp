@@ -7,22 +7,27 @@ import Footer from "../components/Footer"
 
 const HomePage = () => {
 	return (
-		<Grid
-			templateColumns={{ base: "1fr", lg: "repeat(8, 1fr)" }}
-			minH="100vh"
-			maxW={{ base: "100vw", lg: "100vw" }}
-			pl={{ base: 2, md: 14, lg: 12, xl: 0 }}
-			pb={24}
-			pt={{ base: 10, md: 1 }}>
-			<GridItem colSpan={8} pl={1}>
-				<Header/>
-				<HomeHero />
-				<TrackSection title="New Releases" />
-				<ArtistSection/>
-				<Footer/>
-			</GridItem>
-		</Grid>
-	);
+    <Grid
+      templateColumns={{ base: "1fr", lg: "repeat(8, 1fr)" }}
+      minH="100vh"
+      maxW={{ base: "100vw", lg: "100vw" }}
+      pl={{ base: 2, md: 14, lg: 12, xl: 0 }}
+      pb={24}
+      pt={{ base: 10, md: 1 }}
+    >
+      <GridItem colSpan={8} pl={1}>
+        <Header />
+        <HomeHero />
+        <TrackSection title="New Releases" />
+        <ArtistSection />
+        <TrackSection title="New Releases" />
+        <ArtistSection />
+        <TrackSection title="New Releases" />
+        <ArtistSection />
+        <Footer />
+      </GridItem>
+    </Grid>
+  );
 };
 
 export default HomePage;
