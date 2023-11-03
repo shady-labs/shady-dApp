@@ -22,9 +22,7 @@ const Footer = () => {
         direction={{ base: "column", md: "row" }}
       >
         <Box maxW="300px">
-          <Link href="https://templateskart.com" isExternal>
-            <Image w="60px" src="../../public/logo.svg" alt="TemplatesKart" />
-          </Link>
+          <Image w="60px" src="logo.svg" alt="Shady labs" />
           <Text mt={2} color="gray.500" fontSize="md">
             The Decentralised Music Platform made FOR Indie Music & Artists.
           </Text>
