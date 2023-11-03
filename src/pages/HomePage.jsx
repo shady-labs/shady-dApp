@@ -3,6 +3,7 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import TrackSection from "../components/TrackSection";
 import ArtistSection from "../components/ArtistSection";
 import Header from "../components/Header";
+import Footer from "../components/Footer"
 
 const HomePage = () => {
 	return (
@@ -18,7 +19,7 @@ const HomePage = () => {
 				<HomeHero />
 				<TrackSection title="New Releases" />
 				<ArtistSection/>
-				
+				<Footer/>
 			</GridItem>
 		</Grid>
 	);
