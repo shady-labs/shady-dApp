@@ -1,17 +1,7 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Text,
-  IconButton,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import Slider from "react-slick";
 import { motion } from "framer-motion";
-import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 
 const SLIDER_SETTINGS = {
   dots: false,
@@ -33,12 +23,8 @@ const CARDS = [
 ];
 
 const HomeHero = () => {
-  const [slider, setSlider] = useState(null);
-  const top = useBreakpointValue({ base: "90%", md: "40%" });
-  const side = useBreakpointValue({ base: "30%", md: "10px" });
-
   return (
-    <Box position={"relative"} height={"600px"} width="97%" overflow={"hidden"}>
+    <Box position={"relative"} height="56vh" width="97%" overflow={"hidden"}>
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"
@@ -50,38 +36,8 @@ const HomeHero = () => {
         type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
       />
-      {/* Left Icon */}
-      <IconButton
-        aria-label="left-arrow"
-        colorScheme="purple"
-        opacity={0.8}
-        borderRadius="full"
-        position="absolute"
-        left={side}
-        top={top}
-        transform={"translate(0%, -50%)"}
-        zIndex={2}
-        onClick={() => slider?.slickPrev()}
-      >
-        <BiLeftArrowAlt />
-      </IconButton>
-      {/* Right Icon */}
-      <IconButton
-        aria-label="right-arrow"
-        colorScheme="purple"
-        opacity={0.8}
-        borderRadius="full"
-        position="absolute"
-        right={side}
-        top={top}
-        transform={"translate(0%, -50%)"}
-        zIndex={2}
-        onClick={() => slider?.slickNext()}
-      >
-        <BiRightArrowAlt />
-      </IconButton>
       {/* Slider */}
-      <Slider {...SLIDER_SETTINGS} ref={(slider) => setSlider(slider)}>
+      <Slider {...SLIDER_SETTINGS}>
         {CARDS.map((url, index) => (
           <Box
             key={index}
@@ -91,7 +47,6 @@ const HomeHero = () => {
             height="56vh"
             width="97%"
             bg="#810CA8"
-            // h={96}
             rounded="lg"
             pos="relative"
             backgroundImage={`url(${url})`}
