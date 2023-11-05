@@ -29,8 +29,10 @@ const HeaderSearch = ({ handleQuery }) => {
   return (
     <Box
       mb={6}
-      pb={4}
-      w={{ base: "full", md: "sm  " }} 
+      pb={0}
+      w={{ base: "full", md: "full" }} 
+      pr={10}
+      pt={1}
     >
       <InputGroup>
         <InputLeftAddon
