@@ -24,6 +24,6 @@ export const deployContract = async (name, description, ipfsUrl) => {
     description: description,
     image: ipfsUrl, //album image art
   });
-  console.log("https://thirdweb.com/mumbai/", txResult);
+  console.log('https://thirdweb.com/mumbai/'+ txResult);
   return txResult;
 };
