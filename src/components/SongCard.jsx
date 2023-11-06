@@ -8,7 +8,11 @@ import {
   setPlaying,
   setTrackList,
 } from "../redux/slices/playerSlice";
-import { AiFillPauseCircle, AiFillPlayCircle } from "react-icons/ai";
+import {
+  AiFillPauseCircle,
+  AiFillPlayCircle,
+  AiOutlineMenu,
+} from "react-icons/ai";
 import { Link } from "react-router-dom";
 import ReactCardFlip from "react-card-flip";
 
@@ -26,10 +30,7 @@ const SongCard = ({ song }) => {
   const isCurrentTrack = currentTrack?._id === song?._id;
 
   return (
-    <section
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
-    >
+    <section onMouseLeave={() => setIsFlipped(false)}>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <Box
           as={motion.div}
@@ -44,7 +45,6 @@ const SongCard = ({ song }) => {
           role="group"
         >
           <Box
-            onClick={playSong}
             cursor="pointer"
             h={{ base: "8rem", md: "10rem" }}
             mb={4}
@@ -60,6 +60,7 @@ const SongCard = ({ song }) => {
               _groupHover={{ transform: "scale(1.1)" }}
             />
             <Box
+              onClick={playSong}
               _groupHover={{ opacity: 1 }}
               opacity={0}
               transition="0.5s ease"
@@ -89,6 +90,22 @@ const SongCard = ({ song }) => {
                 )}
               </Button>
             </Box>
+            <Button
+              variant="unstyled"
+              display="inline-flex"
+              alignItems="flex-start"
+              justifyContent="flex-end"
+              p={0}
+              color="gray.300"
+              rounded="full"
+              position="absolute"
+              top={2}
+              right={2}
+              zIndex={10}
+              onClick={() => setIsFlipped(true)}
+            >
+              <AiOutlineMenu color="inherit" size={20} />
+            </Button>
           </Box>
           <Flex gap={2} justify="space-between">
             <Box px={2}>
@@ -126,7 +143,6 @@ const SongCard = ({ song }) => {
           role="group"
         >
           <Box
-            onClick={playSong}
             cursor="pointer"
             h={{ base: "8rem", md: "10rem" }}
             mb={4}
@@ -142,6 +158,7 @@ const SongCard = ({ song }) => {
               _groupHover={{ transform: "scale(1.1)" }}
             />
             <Box
+              onClick={playSong}
               _groupHover={{ opacity: 1 }}
               opacity={0}
               transition="0.5s ease"
@@ -171,6 +188,22 @@ const SongCard = ({ song }) => {
                 )}
               </Button>
             </Box>
+            <Button
+              variant="unstyled"
+              display="inline-flex"
+              alignItems="flex-start"
+              justifyContent="flex-end"
+              p={0}
+              color="gray.300"
+              rounded="full"
+              position="absolute"
+              top={2}
+              right={2}
+              zIndex={10}
+              onClick={() => setIsFlipped(false)}
+            >
+              <AiOutlineMenu color="inherit" size={20} />
+            </Button>
           </Box>
           <Flex gap={2} justify="space-between">
             <Box px={2}>
