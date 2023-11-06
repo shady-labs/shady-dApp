@@ -54,7 +54,8 @@ const SongCard = ({ song }) => {
             <Image
               src={song?.coverImage}
               alt={song?.title}
-              w="full"
+              boxSize={{ base: "8rem", md: "10rem" }}
+              objectFit="cover"
               roundedTop="base"
               transition="0.5s ease"
               _groupHover={{ transform: "scale(1.1)" }}
