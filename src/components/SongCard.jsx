@@ -38,7 +38,7 @@ const SongCard = ({ song }) => {
           animate="animate"
           variants={fadeInUp}
           rounded="lg"
-          bg="blue.900"
+          bg="zinc.900"
           minW={{ base: "8rem", md: "10rem" }}
           pb={4}
           overflow="hidden"
@@ -138,7 +138,7 @@ const SongCard = ({ song }) => {
           animate="animate"
           variants={fadeInUp}
           rounded="lg"
-          bg="blue.900"
+          bg="zinc.900"
           minW={{ base: "8rem", md: "10rem" }}
           pb={4}
           overflow="hidden"
