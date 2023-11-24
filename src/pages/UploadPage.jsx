@@ -31,7 +31,6 @@ const UploadPage = () => {
   const [audioDuration, setAudioDuration] = useState(0);
   const [trackUrl, setTrackUrl] = useState([]);
   // search query test
-  const [temp, setTemp] = useState([]);
   const [artistNotFound, setArtistNotFound] = useState(false);
 
   /* const validateFields = () => {
@@ -66,7 +65,7 @@ const UploadPage = () => {
 
   const useDeploy = async () => {
     try {
-      const tx = await deployContract(songName, "temp description", bannerUrl);
+      const tx = await deployContract(songName, artistName, bannerUrl);
 
       return tx;
     } catch (err) {
@@ -78,7 +77,7 @@ const UploadPage = () => {
     try {
       const txx = await mint(tx,{
         name: songName,
-        description: "temp description",
+        description: artistName,
         image: bannerUrl,
         animation_url: trackUrl,
       });
