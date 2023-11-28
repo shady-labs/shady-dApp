@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { MdGraphicEq } from "react-icons/md";
 
-import { convertToMins } from "../../utils";
+import { convertToMins } from "../../utils/index";
 
 const PlayingBar = ({ time, track, onSeek, trackRef }) => {
 	return (
@@ -29,8 +29,9 @@ const PlayingBar = ({ time, track, onSeek, trackRef }) => {
         <SliderTrack bg="#E5B8F4">
           <SliderFilledTrack bg="#810CA8" />
         </SliderTrack>
-        <SliderThumb boxSize={3} outline={0}>
-          <Box color="#810CA8" as={MdGraphicEq} />
+        <SliderThumb boxSize={2} outline={0}>
+          {/* <Box color="#810CA8" as={MdGraphicEq} /> */}
+          <Box color="#810CA8"/>
         </SliderThumb>
       </Slider>
       {/* added minutes fix */}

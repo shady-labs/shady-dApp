@@ -5,11 +5,11 @@ import {
   nextTrack,
   prevTrack,
   setPlaying
-} from '../../redux/slices/playerSlice'
-import VolumeControl from './VolumeControl'
-import TrackDetails from './TrackDetails'
-import PlayControls from './PlayControls'
-import PlayingBar from './PlayingBar'
+} from '../redux/slices/playerSlice'
+import VolumeControl from './components/VolumeControl'
+import TrackDetails from './components/TrackDetails'
+import PlayControls from './components/PlayControls'
+import PlayingBar from './components/PlayingBar'
 
 const MusicPlayer = () => {
   const { isOpen, onClose } = useDisclosure()
@@ -155,6 +155,7 @@ const MusicPlayer = () => {
   return (
     <>
       <SimpleGrid
+        height={"11vh"}
         templateColumns='repeat(3, 1fr)'
         align='center'
         justify='space-between'
@@ -163,13 +164,15 @@ const MusicPlayer = () => {
         left='0'
         zIndex={100}
         width='full'
-        p={4}
+        pt={2}
+        pr={4}
+        pl={4}
         roundedTop='lg'
         bgColor='blackAlpha.700'
         backdropFilter='blur(90px)'
       >
         <TrackDetails track={currentTrack} />
-        <Flex direction='column' gap={2}>
+        <Flex direction='column' gap={1}>
           <PlayingBar
             onSeek={seekPoint}
             time={songDetails?.time}

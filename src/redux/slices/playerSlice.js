@@ -14,7 +14,7 @@ export const playerSlice = createSlice({
 	reducers: {
 		resetPlayer: (state) => {
 			state.currentTrack = null;
-			state.isPlaying = false;
+			state.isPlaying = true;
 			state.currentIndex = 0;
 			state.trackList = [];
 			state.repeatStatus = "OFF";
