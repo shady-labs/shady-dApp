@@ -1,6 +1,5 @@
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
-import { initialise } from "./intialise";
 import { contractAbi } from "./contractAbi";
 
 export const deployFractionalContract = async (name, symbol, collection_contract_address) => {  
@@ -31,8 +30,7 @@ export const deployFractionalContract = async (name, symbol, collection_contract
   await collection_contract.erc721.setApprovalForAll(txResult, true);
   console.log("approval set");
 
-  /* contractAbi={contractAbi} */
-  const contract = await sdk.getContract(collection_contract_address, contractAbi);
+  const contract = await sdk.getContract(txResult, contractAbi);
   const data = await contract.call("initialize", [collection_contract_address, "0", "100000"]);
   console.log("intialised! ", data);
 
