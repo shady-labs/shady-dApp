@@ -63,7 +63,7 @@ const TrackSection = ({ title }) => {
         pb={4}
         className="scrollbar_style"
       >
-        {allTracks.slice(0, 10).map((track) => (
+        {allTracks.toReversed().slice(0,10).map((track) => (
           <>
             <SongCard
               key={track._id}

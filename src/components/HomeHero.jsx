@@ -13,13 +13,14 @@ const SLIDER_SETTINGS = {
   autoplaySpeed: 3000,
   slidesToShow: 1,
   slidesToScroll: 1,
+  pauseOnHover: true,
 };
 
-const CARDS = [
-  "./backgroundShadyBanner.jpeg",
-  "./backgroundShadyBanner2.JPG",
-  "./backgroundShadyBanner3.JPG",
-];
+// const CARDS = [
+//   "./backgroundShadyBanner.jpeg",
+//   "./backgroundShadyBanner2.JPG",
+//   "./backgroundShadyBanner3.JPG",
+// ];
 
 const HomeHero = () => {
   return (
@@ -37,61 +38,162 @@ const HomeHero = () => {
       />
       {/* Slider */}
       <Slider {...SLIDER_SETTINGS}>
-        {CARDS.map((url, index) => (
-          <Box
-            key={index}
-            as={motion.div}
-            initial="initial"
-            animate="animate"
-            height="57vh"
-            width="97%"
-            bg="#810CA8"
-            rounded="lg"
-            pos="relative"
-            backgroundImage={`url(${url})`}
-            bgSize="cover"
-            backdropBlur="8px"
-            backdropFilter="auto"
+        <Box
+          as={motion.div}
+          initial="initial"
+          animate="animate"
+          height="57vh"
+          width="97%"
+          bg="#810CA8"
+          rounded="lg"
+          pos="relative"
+          backgroundImage={"./backgroundShadyBanner.jpeg"}
+          bgSize="cover"
+          backdropBlur="8px"
+          backdropFilter="auto"
+        >
+          <Flex
+            align="flex-end"
+            pos="absolute"
+            bottom={0}
+            left={0}
+            w="full"
+            h="full"
+            p={4}
+            pb={6}
+            bgGradient="linear(to-t, zinc.900, transparent)"
           >
-            <Flex
-              align="flex-end"
-              pos="absolute"
-              bottom={0}
-              left={0}
-              w="full"
-              h="full"
-              p={4}
-              pb={6}
-              bgGradient="linear(to-t, zinc.900, transparent)"
-            >
-              <Box w="full">
-                <Heading
-                  as="h1"
-                  fontSize={{ base: "2xl", md: "4xl" }}
-                  fontWeight={600}
-                  mb={2}
+            <Box w="full">
+              <Heading
+                as="h1"
+                fontSize={{ base: "2xl", md: "4xl" }}
+                fontWeight={600}
+                mb={2}
+              >
+                Welcome to Shady
+              </Heading>
+              <Text fontSize={{ base: "sm", md: "md" }} w="80%">
+                Music Reimagined and Decentralised.
+              </Text>
+              <Link to="/browse">
+                <Button
+                  bg="zinc.100"
+                  color="zinc.800"
+                  fontSize={{ base: "sm", md: "md" }}
+                  py={{ base: 3, md: 5 }}
+                  px={{ base: 5, md: 8 }}
+                  mt={4}
                 >
-                  Welcome to Shady
-                </Heading>
-                <Text fontSize={{ base: "sm", md: "md" }} w="80%">
-                  Music Reimagined and Decentralised.
-                </Text>
-                <Link to="/browse">
-                  <Button
-                    bg="zinc.100"
-                    color="zinc.800"
-                    fontSize={{ base: "sm", md: "md" }}
-                    py={{ base: 3, md: 5 }}
-                    px={{ base: 5, md: 8 }}
-                    mt={4}
-                  >
-                    Listen Now
-                  </Button>
-                </Link>
-              </Box>
-            </Flex>
-          </Box>
-        ))}
+                  Listen Now
+                </Button>
+              </Link>
+            </Box>
+          </Flex>
+        </Box>
+        <Box
+          as={motion.div}
+          initial="initial"
+          animate="animate"
+          height="57vh"
+          width="97%"
+          bg="#810CA8"
+          rounded="lg"
+          pos="relative"
+          backgroundImage={"./backgroundShadyBanner2.JPG"}
+          bgSize="cover"
+          backdropBlur="8px"
+          backdropFilter="auto"
+        >
+          <Flex
+            align="flex-end"
+            pos="absolute"
+            bottom={0}
+            left={0}
+            w="full"
+            h="full"
+            p={4}
+            pb={6}
+            bgGradient="linear(to-t, zinc.900, transparent)"
+          >
+            <Box w="full">
+              <Heading
+                as="h1"
+                fontSize={{ base: "2xl", md: "4xl" }}
+                fontWeight={600}
+                mb={2}
+              >
+                Ever Owned a Track?
+              </Heading>
+              <Text fontSize={{ base: "sm", md: "md" }} w="80%">
+                Music Reimagined and Decentralised.
+              </Text>
+              <Link to="/browse">
+                <Button
+                  bg="zinc.100"
+                  color="zinc.800"
+                  fontSize={{ base: "sm", md: "md" }}
+                  py={{ base: 3, md: 5 }}
+                  px={{ base: 5, md: 8 }}
+                  mt={4}
+                >
+                  Listen Now
+                </Button>
+              </Link>
+            </Box>
+          </Flex>
+        </Box>
+        <Box
+          as={motion.div}
+          initial="initial"
+          animate="animate"
+          height="57vh"
+          width="97%"
+          bg="#810CA8"
+          rounded="lg"
+          pos="relative"
+          backgroundImage={"./backgroundShadyBanner3.JPG"}
+          bgSize="cover"
+          backdropBlur="8px"
+          backdropFilter="auto"
+        >
+          <Flex
+            align="flex-end"
+            pos="absolute"
+            bottom={0}
+            left={0}
+            w="full"
+            h="full"
+            p={4}
+            pb={6}
+            bgGradient="linear(to-t, zinc.900, transparent)"
+          >
+            <Box w="full">
+              <Heading
+                as="h1"
+                fontSize={{ base: "2xl", md: "4xl" }}
+                fontWeight={600}
+                mb={2}
+              >
+                Welcome to Shady
+              </Heading>
+              <Text fontSize={{ base: "sm", md: "md" }} w="80%">
+                Music Reimagined and Decentralised.
+              </Text>
+              <Link to="/browse">
+                <Button
+                  bg="zinc.100"
+                  color="zinc.800"
+                  fontSize={{ base: "sm", md: "md" }}
+                  py={{ base: 3, md: 5 }}
+                  px={{ base: 5, md: 8 }}
+                  mt={4}
+                >
+                  Listen Now
+                </Button>
+              </Link>
+            </Box>
+          </Flex>
+        </Box>
       </Slider>
     </Box>
   );
