@@ -4,15 +4,22 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { MusicPlayer } from "../components/MusicPlayer/index.jsx";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
+import { resetPlayer } from "../redux/slices/playerSlice";
+import { useDispatch } from "react-redux";
 const HomeLayout = () => {
 	const { currentTrack } = useSelector((state) => state.player);
 	const { pathname } = useLocation();
   const [navSize, changeNavSize] = useState("large")
 
+  const dispatch = useDispatch();
+  
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [pathname]);
+
+  useEffect(() => {
+    dispatch(resetPlayer());
+  }, [dispatch]);
 
 	return (
     <>
