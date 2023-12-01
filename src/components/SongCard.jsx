@@ -54,9 +54,9 @@ const SongCard = ({ song }) => {
             <Image
               src={song?.coverImage}
               alt={song?.title}
-              h={{ base: "8rem", md: "10rem" }}
               w="full"
-              objectFit="cover"
+					    h="full"
+              objectFit="cover" // <-- need to remove this and accept the image's aspect ratio
               roundedTop="base"
               transition="0.5s ease"
               _groupHover={{ transform: "scale(1.1)" }}
