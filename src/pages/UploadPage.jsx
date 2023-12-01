@@ -18,6 +18,7 @@ import { getArtistsByName } from "../graphql/query/getArtistsByName";
 import { addArtist } from "../graphql/mutation/addArtist";
 import { deployContract } from "../contract/deploy";
 import { mint } from "../contract/mint";
+import { deployFractionalContract } from "../contract/fractionalise";
 
 const UploadPage = () => {
   const [error, setError] = useState(null);
@@ -86,6 +87,16 @@ const UploadPage = () => {
       console.log(err);
     }
   };
+
+  const useDeployFractional = async (tx) => {
+    try {
+      const txxx = await deployFractionalContract(songName, "DEF", tx);
+
+      return txxx;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -239,7 +250,10 @@ const UploadPage = () => {
       {
         await useDeploy().then(async (res) => {
           // res = tx
-          mintNFT(res);
+          mintNFT(res).then(
+            useDeployFractional(res)
+          );
+          
         });
       setLoading(false);
       }
@@ -374,7 +388,7 @@ const UploadPage = () => {
               w="full"
               _hover={{ opacity: 0.8 }}
             >
-              {loading ? <Spinner color="white" /> : "mint"}
+              {loading ? <Spinner color="white" /> : "deploy & mint"}
             </Button>
             {/* <Text my={2} fontSize="sm" textAlign="center">
 							OR
