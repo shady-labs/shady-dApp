@@ -1,13 +1,16 @@
-import WalletButton from "./WalletButton";
-
 import { Box, Flex, Avatar, Spacer, Heading } from "@chakra-ui/react";
 
 import { NavLink } from "react-router-dom";
 
+import {
+  DynamicContextProvider,
+  DynamicWidget,
+} from "@dynamic-labs/sdk-react-core";
+
+import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 
 const Header = () => {
   return (
-    
     <Box maxW={"97%"}>
       <Flex direction="row" justifyContent={"space-between"} pt={2}>
         <Heading
@@ -16,8 +19,7 @@ const Header = () => {
           color="accent.light"
           fontWeight={200}
           pl={2}
-        >
-        </Heading>
+        ></Heading>
         <Box dir="Row" pb={4}>
           <Flex>
             <NavLink to="/user">
@@ -28,7 +30,16 @@ const Header = () => {
               />
             </NavLink>
             <Spacer display={{ base: "none", md: "block" }} mx={2} />
-            <WalletButton />
+            <DynamicContextProvider
+              settings={{
+                environmentId: "ac028ea8-26b1-4d54-bfb0-5b2d0d84b434",
+                walletConnectors: [EthereumWalletConnectors],
+              }}
+            >
+              <DynamicWidget 
+              innerButtonComponent={<button>Sign In</button>}
+              />
+            </DynamicContextProvider>
           </Flex>
         </Box>
       </Flex>
