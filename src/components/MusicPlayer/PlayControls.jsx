@@ -1,24 +1,18 @@
 import { Button, Flex, Hide } from "@chakra-ui/react";
 import { AiFillPauseCircle, AiFillPlayCircle } from "react-icons/ai";
+
 import {
-	TbArrowsShuffle,
-	TbPlayerTrackNextFilled,
-	TbPlayerTrackPrevFilled,
-	TbRepeat,
-	TbRepeatOff,
-	TbRepeatOnce,
+	TbPlayerSkipForwardFilled,
+	TbPlayerSkipBackFilled,
 } from "react-icons/tb";
-import { useDispatch } from "react-redux";
-import { toggleRepeat } from "../../redux/slices/playerSlice";
+
 
 const PlayControls = ({
 	onNext,
 	onPrevious,
 	onPlay,
 	isPlaying,
-	repeatStatus,
 }) => {
-	const dispatch = useDispatch();
 	return (
     <Flex
       align="center"
@@ -26,7 +20,7 @@ const PlayControls = ({
       gap={{ base: 1, md: 6 }}
       ml={{ base: 8, md: 0 }}
     >
-      <Hide below="md">
+      {/* <Hide below="md">
         <Button
           color="zinc.600"
           variant="unstyled"
@@ -36,7 +30,7 @@ const PlayControls = ({
         >
           <TbArrowsShuffle color="inherit" size={16} />
         </Button>
-      </Hide>
+      </Hide> */}
       <Button
         onClick={onPrevious}
         variant="unstyled"
@@ -48,14 +42,14 @@ const PlayControls = ({
         alignItems="center"
         justifyContent="center"
       >
-        <TbPlayerTrackPrevFilled size={16} />
+        <TbPlayerSkipBackFilled size={16} />
       </Button>
       <Button
         onClick={onPlay}
         variant="unstyled"
         color="#8E05C2"
         p={0}
-        fontSize={{ base: 36, md: 48 }}
+        fontSize={{ base: 36, md: 48}}
         display="inline-flex"
         alignItems="center"
         justifyContent="center"
@@ -72,9 +66,9 @@ const PlayControls = ({
         alignItems="center"
         justifyContent="center"
       >
-        <TbPlayerTrackNextFilled size={16} />
+        <TbPlayerSkipForwardFilled size={16} />
       </Button>
-      <Hide below="md">
+      {/* <Hide below="md">
         <Button
           onClick={() => dispatch(toggleRepeat())}
           color={repeatStatus == "OFF" ? "zinc.600" : "accent.light"}
@@ -91,7 +85,7 @@ const PlayControls = ({
             <TbRepeat color="inherit" size={18} />
           )}
         </Button>
-      </Hide>
+      </Hide> */}
     </Flex>
   );
 };

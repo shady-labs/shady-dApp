@@ -1,16 +1,44 @@
+import { useState } from "react";
 import {
-	Button,
-	Flex,
-	Slider,
-	SliderFilledTrack,
-	SliderThumb,
-	SliderTrack,
+  Button,
+  Flex,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
 } from "@chakra-ui/react";
 import { BsFillVolumeMuteFill, BsFillVolumeUpFill } from "react-icons/bs";
 
 const VolumeControl = ({ onToggle, onChange, volume }) => {
-	return (
-    <Flex align="center">
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+  return (
+    <Flex
+      align="center"
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+    >
+      {isHovering && (
+        <Slider
+          aria-label="volume-slider"
+          width="5rem"
+          onChange={onChange}
+          value={volume ? volume * 100 : 0}
+          zIndex={1000}
+        >
+          <SliderTrack boxSize={0.5} bg="#E5B8F4">
+            <SliderFilledTrack bg="#810CA8" />
+          </SliderTrack>
+          <SliderThumb boxSize={2} outline={0} />
+        </Slider>
+      )}
       <Button
         variant="unstyled"
         p={0}
@@ -19,20 +47,12 @@ const VolumeControl = ({ onToggle, onChange, volume }) => {
         boxSize={6}
         onClick={onToggle}
       >
-        {volume === 0 ? <BsFillVolumeMuteFill /> : <BsFillVolumeUpFill />}
+        {volume === 0 ? (
+          <BsFillVolumeMuteFill color="#52525b" size={18} />
+        ) : (
+          <BsFillVolumeUpFill color="#E5B8F4" size={18} />
+        )}
       </Button>
-
-      <Slider
-        aria-label="volume-slider"
-        width="7.5rem"
-        onChange={onChange}
-        value={volume ? volume * 100 : 0}
-      >
-        <SliderTrack bg="#E5B8F4">
-          <SliderFilledTrack bg="#810CA8" />
-        </SliderTrack>
-        <SliderThumb boxSize={3} outline={0} />
-      </Slider>
     </Flex>
   );
 };

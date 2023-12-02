@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Flex, Hide, SimpleGrid, useDisclosure } from '@chakra-ui/react'
+import { Grid, GridItem, Button,Flex, Hide, SimpleGrid, useDisclosure } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   nextTrack,
@@ -10,6 +10,14 @@ import VolumeControl from './VolumeControl'
 import TrackDetails from './TrackDetails'
 import PlayControls from './PlayControls'
 import PlayingBar from './PlayingBar'
+
+import {
+  TbArrowsShuffle,
+  TbRepeat,
+  TbRepeatOff,
+  TbRepeatOnce,
+} from "react-icons/tb";
+import { toggleRepeat } from "../../redux/slices/playerSlice";
 
 const MusicPlayer = () => {
   const { isOpen, onClose } = useDisclosure()
@@ -155,21 +163,23 @@ const MusicPlayer = () => {
   return (
     <>
       <SimpleGrid
-        templateColumns='repeat(3, 1fr)'
-        align='center'
-        justify='space-between'
-        position='fixed'
-        bottom='0'
-        left='0'
+        templateColumns="repeat(3, 1fr)"
+        align="center"
+        justify="space-between"
+        position="fixed"
+        bottom="0"
+        left="0"
         zIndex={100}
-        width='full'
+        width="full"
         p={4}
-        roundedTop='lg'
-        bgColor='blackAlpha.700'
-        backdropFilter='blur(90px)'
+        pt={2}
+        pb={2}
+        // roundedTop="lg"
+        bgColor="blackAlpha.700"
+        backdropFilter="blur(90px)"
       >
         <TrackDetails track={currentTrack} />
-        <Flex direction='column' gap={2}>
+        <Flex direction="column" gap={0.5}>
           <PlayingBar
             onSeek={seekPoint}
             time={songDetails?.time}
@@ -184,9 +194,9 @@ const MusicPlayer = () => {
             repeatStatus={repeatStatus}
           />
         </Flex>
-        <Flex align='center' justify='flex-end' gap={{ base: 0, md: 4 }}>
-          <Flex justifyContent='space-between' gap={0}>
-            <Hide below='md'>
+        <Flex align="center" justify="flex-end">
+          <Flex justifyContent="space-between" gap={0}>
+            <Hide below="md">
               <VolumeControl
                 onChange={changeVolume}
                 onToggle={volumeToggle}
@@ -200,20 +210,51 @@ const MusicPlayer = () => {
               onPlay={() => setAudioPlaying(true)}
               onEnded={handleEnded}
               onTimeUpdate={() => {
-                setSongDetails(prev => ({
+                setSongDetails((prev) => ({
                   ...prev,
                   time: Math.round(
                     (audioRef.current.currentTime / audioRef.current.duration) *
                       100
-                  )
-                }))
+                  ),
+                }));
               }}
             />
+          </Flex>
+          <Flex>
+            <Hide below="md">
+              <Button
+                onClick={() => dispatch(toggleRepeat())}
+                color={repeatStatus == "OFF" ? "zinc.600" : "accent.light"}
+                variant="unstyled"
+                display="inline-flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                {repeatStatus === "OFF" ? (
+                  <TbRepeatOff color="inherit" size={18} />
+                ) : repeatStatus === "SINGLE" ? (
+                  <TbRepeatOnce color="inherit" size={18} />
+                ) : (
+                  <TbRepeat color="inherit" size={18} />
+                )}
+              </Button>
+            </Hide>
+            <Hide below="md">
+              <Button
+                color="zinc.600"
+                variant="unstyled"
+                display="inline-flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <TbArrowsShuffle color="inherit" size={18} />
+              </Button>
+            </Hide>
           </Flex>
         </Flex>
       </SimpleGrid>
     </>
-  )
+  );
 }
 
 export { MusicPlayer }
