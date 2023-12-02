@@ -32,7 +32,7 @@ const Header = () => {
             <Spacer display={{ base: "none", md: "block" }} mx={2} />
             <DynamicContextProvider
               settings={{
-                environmentId: "9de17155-64fc-4e3c-8c63-32ef126c370d",
+                environmentId: "ac028ea8-26b1-4d54-bfb0-5b2d0d84b434",
                 walletConnectors: [EthereumWalletConnectors],
               }}
             >
