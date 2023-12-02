@@ -10,6 +10,17 @@ import VolumeControl from './VolumeControl'
 import TrackDetails from './TrackDetails'
 import PlayControls from './PlayControls'
 import PlayingBar from './PlayingBar'
+import { PiQueueFill } from "react-icons/pi";
+
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverCloseButton,
+} from "@chakra-ui/react";
+
 
 import {
   TbArrowsShuffle,
@@ -173,19 +184,21 @@ const MusicPlayer = () => {
         width="full"
         p={4}
         pt={2}
-        pb={2}
+        pb={1.5}
         // roundedTop="lg"
         bgColor="blackAlpha.700"
         backdropFilter="blur(90px)"
       >
         <TrackDetails track={currentTrack} />
-        <Flex direction="column" gap={0.5}>
+        <Flex direction="column">
           <PlayingBar
             onSeek={seekPoint}
             time={songDetails?.time}
             track={currentTrack}
             trackRef={audioRef.current}
           />
+          {/* <Flex direction="row" justify="space-around"> */}
+          {/* <TrackDetails track={currentTrack} /> */}
           <PlayControls
             isPlaying={isPlaying}
             onNext={handleNextSong}
@@ -193,6 +206,7 @@ const MusicPlayer = () => {
             onPrevious={handlePreviousSong}
             repeatStatus={repeatStatus}
           />
+          {/* </Flex> */}
         </Flex>
         <Flex align="center" justify="flex-end">
           <Flex justifyContent="space-between" gap={0}>
@@ -250,6 +264,31 @@ const MusicPlayer = () => {
                 <TbArrowsShuffle color="inherit" size={18} />
               </Button>
             </Hide>
+            <Popover placement="top-start" returnFocusOnClose={false}>
+              <PopoverTrigger>
+                <Button
+                  color="#E5B8F4"
+                  variant="unstyled"
+                  display="inline-flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <PiQueueFill color="inherit" size={18} />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                bgColor="#000"
+                border={"0px"}
+                mb={2}
+                height={"40vh"}
+              >
+                <PopoverHeader fontWeight="semibold" border={"0px"}>
+                  Queue Implementation
+                </PopoverHeader>
+                <PopoverCloseButton />
+                <PopoverBody></PopoverBody>
+              </PopoverContent>
+            </Popover>
           </Flex>
         </Flex>
       </SimpleGrid>

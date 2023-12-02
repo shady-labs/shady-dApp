@@ -2,8 +2,8 @@ import { Button, Flex, Hide } from "@chakra-ui/react";
 import { AiFillPauseCircle, AiFillPlayCircle } from "react-icons/ai";
 
 import {
-	TbPlayerSkipForwardFilled,
-	TbPlayerSkipBackFilled,
+	TbPlayerTrackNextFilled,
+	TbPlayerTrackPrevFilled,
 } from "react-icons/tb";
 
 
@@ -42,14 +42,14 @@ const PlayControls = ({
         alignItems="center"
         justifyContent="center"
       >
-        <TbPlayerSkipBackFilled size={16} />
+        <TbPlayerTrackPrevFilled size={16} />
       </Button>
       <Button
         onClick={onPlay}
         variant="unstyled"
         color="#8E05C2"
         p={0}
-        fontSize={{ base: 36, md: 48}}
+        fontSize={{ base: 30, md: 40}}
         display="inline-flex"
         alignItems="center"
         justifyContent="center"
@@ -66,7 +66,7 @@ const PlayControls = ({
         alignItems="center"
         justifyContent="center"
       >
-        <TbPlayerSkipForwardFilled size={16} />
+        <TbPlayerTrackNextFilled size={16} />
       </Button>
       {/* <Hide below="md">
         <Button
