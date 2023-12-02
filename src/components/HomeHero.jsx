@@ -73,7 +73,7 @@ const HomeHero = () => {
                 Welcome to Shady
               </Heading>
               <Text fontSize={{ base: "sm", md: "md" }} w="80%">
-                Music Reimagined and Decentralised.
+                The Decentralised Music Streaming Platform
               </Text>
               <Link to="/browse">
                 <Button
@@ -122,12 +122,12 @@ const HomeHero = () => {
                 fontWeight={600}
                 mb={2}
               >
-                Ever Owned a Track?
+                Stream Indie Music
               </Heading>
               <Text fontSize={{ base: "sm", md: "md" }} w="80%">
-                Music Reimagined and Decentralised.
+                Newer perspective to Artist Revenue & Appreciation.
               </Text>
-              <Link to="/browse">
+              <Link to="/search">
                 <Button
                   bg="zinc.100"
                   color="zinc.800"
@@ -136,7 +136,7 @@ const HomeHero = () => {
                   px={{ base: 5, md: 8 }}
                   mt={4}
                 >
-                  Listen Now
+                  Tune In
                 </Button>
               </Link>
             </Box>
@@ -174,12 +174,12 @@ const HomeHero = () => {
                 fontWeight={600}
                 mb={2}
               >
-                Welcome to Shady
+                Mint Tracks
               </Heading>
               <Text fontSize={{ base: "sm", md: "md" }} w="80%">
-                Music Reimagined and Decentralised.
+                Get partial rights your favorite track using NFTs.
               </Text>
-              <Link to="/browse">
+              <Link to="/upload">
                 <Button
                   bg="zinc.100"
                   color="zinc.800"
@@ -188,7 +188,7 @@ const HomeHero = () => {
                   px={{ base: 5, md: 8 }}
                   mt={4}
                 >
-                  Listen Now
+                  Mint Now
                 </Button>
               </Link>
             </Box>
