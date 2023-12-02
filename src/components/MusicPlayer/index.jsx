@@ -184,7 +184,7 @@ const MusicPlayer = () => {
         width="full"
         p={4}
         pt={2}
-        pb={1.5}
+        pb={2}
         // roundedTop="lg"
         bgColor="blackAlpha.700"
         backdropFilter="blur(90px)"
@@ -277,10 +277,11 @@ const MusicPlayer = () => {
                 </Button>
               </PopoverTrigger>
               <PopoverContent
-                bgColor="#000"
                 border={"0px"}
                 mb={2}
                 height={"40vh"}
+                bgColor="blackAlpha.700"
+                backdropFilter="blur(90px)"
               >
                 <PopoverHeader fontWeight="semibold" border={"0px"}>
                   Queue Implementation

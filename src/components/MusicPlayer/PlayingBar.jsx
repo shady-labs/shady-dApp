@@ -25,7 +25,7 @@ const PlayingBar = ({ time, track, onSeek, trackRef }) => {
         onChange={onSeek}
         value={!isNaN(time) ? time : 0}
       >
-        <SliderTrack boxSize={0.5} bg="#E5B8F4">
+        <SliderTrack boxSize={1} bg="#E5B8F4">
           <SliderFilledTrack bg="#810CA8" />
         </SliderTrack>
         <SliderThumb

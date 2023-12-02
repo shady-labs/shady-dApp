@@ -33,10 +33,10 @@ const VolumeControl = ({ onToggle, onChange, volume }) => {
           value={volume ? volume * 100 : 0}
           zIndex={1000}
         >
-          <SliderTrack boxSize={0.5} bg="#E5B8F4">
+          <SliderTrack boxSize={1} bg="#E5B8F4">
             <SliderFilledTrack bg="#810CA8" />
           </SliderTrack>
-          <SliderThumb boxSize={2} outline={0} />
+          {/* <SliderThumb boxSize={0} outline={0} /> */}
         </Slider>
       )}
       <Button

@@ -36,8 +36,8 @@ const Header = () => {
                 walletConnectors: [EthereumWalletConnectors],
               }}
             >
-              <DynamicWidget 
-              innerButtonComponent={<button>Sign In</button>}
+              <DynamicWidget
+                innerButtonComponent={<button>Sign In</button>}
               />
             </DynamicContextProvider>
           </Flex>

@@ -16,12 +16,10 @@ import {
 } from "@apollo/client";
 import '@fontsource-variable/manrope';
 
-
 export const client = new ApolloClient({
   uri: "https://asia-south2-shady-labs.cloudfunctions.net/function-5",
   cache: new InMemoryCache(),
 });
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

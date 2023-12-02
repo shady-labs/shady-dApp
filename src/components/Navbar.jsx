@@ -101,7 +101,7 @@ const Navbar = ({ changeHomelayoutSize }) => {
           ? { base: "20", md: "12rem", lg: "16rem", xl: "15rem" }
           : { base: "0", md: "0rem", lg: "0rem", xl: "0rem" }
       }
-      minH={{ base: "5rem", md: "88vh" }}
+      minH={{ base: "5rem", md: "91vh" }}
       bg="#18181b"
       bgImage="linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5))"
     >
