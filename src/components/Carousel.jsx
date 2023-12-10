@@ -16,13 +16,8 @@ const SLIDER_SETTINGS = {
   pauseOnHover: true,
 };
 
-// const CARDS = [
-//   "./backgroundShadyBanner.jpeg",
-//   "./backgroundShadyBanner2.JPG",
-//   "./backgroundShadyBanner3.JPG",
-// ];
 
-const HomeHero = () => {
+const Carousel = () => {
   return (
     <Box position={"relative"} height="57vh" width="97%" overflow={"hidden"}>
       {/* CSS files for react-slick */}
@@ -199,4 +194,4 @@ const HomeHero = () => {
   );
 };
 
-export default HomeHero;
+export default Carousel;

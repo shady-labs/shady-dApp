@@ -4,7 +4,6 @@ import {
   Flex,
   Slider,
   SliderFilledTrack,
-  SliderThumb,
   SliderTrack,
 } from "@chakra-ui/react";
 import { BsFillVolumeMuteFill, BsFillVolumeUpFill } from "react-icons/bs";
@@ -36,7 +35,6 @@ const VolumeControl = ({ onToggle, onChange, volume }) => {
           <SliderTrack boxSize={1} bg="#E5B8F4">
             <SliderFilledTrack bg="#810CA8" />
           </SliderTrack>
-          {/* <SliderThumb boxSize={0} outline={0} /> */}
         </Slider>
       )}
       <Button

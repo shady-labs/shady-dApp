@@ -1,4 +1,4 @@
-import HomeHero from "../components/HomeHero";
+import Carousel from "../components/Carousel";
 import { Grid, GridItem } from "@chakra-ui/react";
 import TrackSection from "../components/TrackSection";
 import ArtistSection from "../components/ArtistSection";
@@ -18,10 +18,10 @@ const HomePage = () => {
     >
       <GridItem colSpan={8} pl={1}>
         <Header />
-        <HomeHero />
+        <Carousel />
         <TrackSection title="New Releases" />
         <ArtistSection />
-        <Genres/>
+        <Genres />
         <TrackSection title="New Releases" />
         <ArtistSection />
         <TrackSection title="New Releases" />
