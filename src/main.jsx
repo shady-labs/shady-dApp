@@ -17,7 +17,7 @@ import {
 import '@fontsource-variable/manrope';
 
 export const client = new ApolloClient({
-  uri: "https://asia-south2-shady-labs.cloudfunctions.net/function-5",
+  uri: "https://shady-labs.onrender.com/",
   cache: new InMemoryCache(),
 });
 
