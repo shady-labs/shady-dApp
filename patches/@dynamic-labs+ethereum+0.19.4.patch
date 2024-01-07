@@ -1,0 +1,10 @@
+diff --git a/node_modules/@dynamic-labs/ethereum/src/polyfills.js b/node_modules/@dynamic-labs/ethereum/src/polyfills.js
+index 277b520..2bc5fb7 100644
+--- a/node_modules/@dynamic-labs/ethereum/src/polyfills.js
++++ b/node_modules/@dynamic-labs/ethereum/src/polyfills.js
+@@ -1,4 +1,4 @@
+-import { Buffer } from 'buffer/index.js';
++import { Buffer } from 'buffer';
+ 
+ /* eslint-disable */
+ /**

@@ -7,7 +7,6 @@ import {
 	SliderTrack,
 	Text,
 } from "@chakra-ui/react";
-import { MdGraphicEq } from "react-icons/md";
 
 import { convertToMins } from "../../utils";
 
@@ -22,15 +21,18 @@ const PlayingBar = ({ time, track, onSeek, trackRef }) => {
         _focus={{ outline: 0 }}
         aria-label="seek-slider"
         defaultValue={0}
-        width="45rem"
+        width="40rem"
         onChange={onSeek}
         value={!isNaN(time) ? time : 0}
       >
-        <SliderTrack bg="#E5B8F4">
+        <SliderTrack boxSize={1} bg="#E5B8F4">
           <SliderFilledTrack bg="#810CA8" />
         </SliderTrack>
-        <SliderThumb boxSize={3} outline={0}>
-          <Box color="#810CA8" as={MdGraphicEq} />
+        <SliderThumb
+          boxSize={2}
+          outline={0}
+        >
+          <Box color="#810CA8" />
         </SliderThumb>
       </Slider>
       {/* added minutes fix */}
