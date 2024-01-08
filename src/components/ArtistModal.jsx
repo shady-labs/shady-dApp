@@ -40,16 +40,17 @@ export default function ArtistModal() {
     <>
       <Button
         bg="accent.light"
+        textColor={"blackAlpha.900"}
         _hover={{ opacity: 0.8 }}
         onClick={() => {
           <OverlayOne />;
           onOpen();
         }}
       >
-        <Avatar
+        {/* <Avatar
           size="md"
           src="https://img.freepik.com/premium-photo/gorilla-wearing-pair-headphones-with-purple-background_962508-4153.jpg"
-        />
+        /> */}
         Join as Artist!
       </Button>
       <Modal
@@ -57,10 +58,9 @@ export default function ArtistModal() {
         isOpen={isOpen}
         onClose={onClose}
         size="xl"
-        variant="purple"
       >
         {overlay}
-        <ModalContent bg="#0c0e13" color="white" borderRadius="25px">
+        <ModalContent bg="#0c0e13" color="white" borderRadius="25px" outlineColor={"white"}>
           <ModalHeader>
             {/* <Avatar
           size="md"
