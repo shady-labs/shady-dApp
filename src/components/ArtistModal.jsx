@@ -16,9 +16,10 @@ import {
   InputGroup,
   Textarea,
 } from "@chakra-ui/react";
-import React from "react";
+import React, {useState} from "react";
 
 export default function ArtistModal() {
+
   const OverlayOne = () => (
     <ModalOverlay
       bg="blackAlpha.300"
@@ -28,6 +29,12 @@ export default function ArtistModal() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay] = React.useState(<OverlayOne />);
+
+  const [artistName, setArtistName] = useState([]);
+  const [walletAddress, setWalletAddress] = useState([]);
+  const [emailAddress, setEmailAddress] = useState([]);
+  const [description, setDescription] = useState([]);
+  const [country, setCountry] = useState([]);
 
   return (
     <>
@@ -72,8 +79,8 @@ export default function ArtistModal() {
                   type="text"
                   color="zinc.300"
                   fontSize="sm"
-                  value={""}
-                  /* onChange={(e) => setSongName(e.target.value)} */
+                  value={artistName}
+                  onChange={(e) => setArtistName(e.target.value)}
                   placeholder="e.g. Drake"
                 />
               </InputGroup>
@@ -88,8 +95,8 @@ export default function ArtistModal() {
                   type="text"
                   color="zinc.300"
                   fontSize="sm"
-                  value={""}
-                  /* onChange={(e) => setSongName(e.target.value)} */
+                  value={walletAddress}
+                  onChange={(e) => setWalletAddress(e.target.value)}
                   placeholder="e.g. 0x1234567890abcdef"
                 />
               </InputGroup>
@@ -104,8 +111,8 @@ export default function ArtistModal() {
                   type="text"
                   color="zinc.300"
                   fontSize="sm"
-                  value={""}
-                  /* onChange={(e) => setSongName(e.target.value)} */
+                  value={emailAddress}
+                  onChange={(e) => setEmailAddress(e.target.value)}
                   placeholder="e.g. email@domain.com"
                 />
               </InputGroup>
@@ -116,13 +123,13 @@ export default function ArtistModal() {
                 Enter your description here
               </FormLabel>
               <Textarea
-                value={""}
                 border="1px"
                 borderColor="zinc.600"
                 height="170px"
                 rounded="base"
                 variant="outline"
-                /* onChange={handleInputChange} */
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 placeholder="e.g. I am a singer, songwriter, and producer from Toronto, Canada. I am known for my unique blend of rap and R&B, and working closely with OVO Sound, the record label I co-founded in 2012."
                 size="sm"
               />
@@ -137,11 +144,13 @@ export default function ArtistModal() {
                 borderColor="zinc.600"
                 rounded="base"
                 placeholder="Select"
-                variant="outline" /* color="zinc.300" */
+                variant="outline" color="zinc.300"
                 fontSize="sm"
               >
                 <option>India</option>
                 <option>United States</option>
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
               </Select>
             </FormControl>
           </ModalBody>
