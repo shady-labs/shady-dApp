@@ -17,6 +17,8 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import React, {useState} from "react";
+import { addUser } from "../graphql/mutation/addUser";
+import { ethers } from "ethers";
 
 export default function ArtistModal() {
 
@@ -35,6 +37,27 @@ export default function ArtistModal() {
   const [emailAddress, setEmailAddress] = useState([]);
   const [description, setDescription] = useState([]);
   const [country, setCountry] = useState([]);
+  const [wallet_address, setWallet_address]= useState(["temp address"]);
+  const callAddUser = async () => {
+    try {
+      addUser(
+        artistName, true, "image", wallet_address, country
+      );
+      console.log(walletAddress)
+      onClose();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getWalletAddress= async() =>{
+    const wallet =await new ethers.providers.Web3Provider(window.ethereum).getSigner().getAddress();
+    // console.log("wallet: "+wallet)
+    setWallet_address(wallet);
+    return wallet
+  }
+
+
 
   return (
     <>
@@ -42,7 +65,10 @@ export default function ArtistModal() {
         bg="accent.light"
         textColor={"blackAlpha.900"}
         _hover={{ opacity: 0.8 }}
-        onClick={() => {
+        onClick={async () => {
+          // setWalletAddress(getWalletAdress);
+          console.log("button triggered")
+          await getWalletAddress();
           <OverlayOne />;
           onOpen();
         }}
@@ -88,18 +114,10 @@ export default function ArtistModal() {
 
             <FormControl isRequired pt={3}>
               <FormLabel fontSize="sm" color="zinc.400">
-                Wallet Address
+                Wallet Address: {
+                  wallet_address
+                }
               </FormLabel>
-              <InputGroup borderColor="zinc.400" rounded="base">
-                <Input
-                  type="text"
-                  color="zinc.300"
-                  fontSize="sm"
-                  value={walletAddress}
-                  onChange={(e) => setWalletAddress(e.target.value)}
-                  placeholder="e.g. 0x1234567890abcdef"
-                />
-              </InputGroup>
             </FormControl>
 
             <FormControl isRequired pt={3}>
@@ -155,7 +173,9 @@ export default function ArtistModal() {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>Save</Button>
+            <Button onClick={
+              callAddUser
+            }>Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
