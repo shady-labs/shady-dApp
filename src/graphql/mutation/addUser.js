@@ -17,9 +17,9 @@ mutation AddUser($userInput: UserInput) {
 }
 `;
 
-export const addUser = async (name, isArtist, image, address, region) => {
+export const addUser = async (name, isArtist, image, address, region, email) => {
     try {
-        console.log("name: "+name+" isArtist "+isArtist+" image "+image+" region "+region)
+        console.log("name: "+name+" isArtist "+isArtist+" image "+image+" region "+region+" email "+email)
         const { gqlloading, gqlerror, data } = await client.mutate({
         mutation: USER_INPUT,
         variables: {
@@ -28,7 +28,8 @@ export const addUser = async (name, isArtist, image, address, region) => {
                 "isArtist": isArtist,
                 "image": image,
                 "address": address,
-                "region": "india"        
+                "region": "india",
+                "email": email,       
             }
         }
       });
