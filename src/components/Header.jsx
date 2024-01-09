@@ -3,10 +3,9 @@ import { Box, Flex, Avatar, Spacer, Heading, Button } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
 import {
-  DynamicContextProvider,
+
   DynamicWidget,
 } from "@dynamic-labs/sdk-react-core";
-
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import ArtistModal from "./ArtistModal";
 
@@ -25,14 +24,7 @@ const Header = () => {
           <Flex>
             <ArtistModal />
             <Spacer display={{ base: "none", md: "block" }} mx={2} />
-            <DynamicContextProvider
-              settings={{
-                environmentId: "ac028ea8-26b1-4d54-bfb0-5b2d0d84b434",
-                walletConnectors: [EthereumWalletConnectors],
-              }}
-            >
               <DynamicWidget innerButtonComponent={<button>Sign In</button>} />
-            </DynamicContextProvider>
           </Flex>
         </Box>
       </Flex>
