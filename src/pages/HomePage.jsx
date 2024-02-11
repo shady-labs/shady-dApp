@@ -25,6 +25,9 @@ const HomePage = () => {
         <TrackSection title="New Releases" />
         <ArtistSection />
         <TrackSection title="New Releases" />
+        <TrackSection title="New Releases" />
+        <TrackSection title="New Releases" />
+        <TrackSection title="New Releases" />
         <ArtistSection />
         <Footer />
       </GridItem>
