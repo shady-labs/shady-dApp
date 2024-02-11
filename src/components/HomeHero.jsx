@@ -16,15 +16,9 @@ const SLIDER_SETTINGS = {
   pauseOnHover: true,
 };
 
-// const CARDS = [
-//   "./backgroundShadyBanner.jpeg",
-//   "./backgroundShadyBanner2.JPG",
-//   "./backgroundShadyBanner3.JPG",
-// ];
-
 const HomeHero = () => {
   return (
-    <Box position={"relative"} height="57vh" width="97%" overflow={"hidden"}>
+    <Box position={"relative"} height="40vh" width="97%" overflow={"hidden"}>
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"
@@ -42,7 +36,7 @@ const HomeHero = () => {
           as={motion.div}
           initial="initial"
           animate="animate"
-          height="57vh"
+          height="40vh"
           width="97%"
           bg="#810CA8"
           rounded="lg"
@@ -94,7 +88,7 @@ const HomeHero = () => {
           as={motion.div}
           initial="initial"
           animate="animate"
-          height="57vh"
+          height="40vh"
           width="97%"
           bg="#810CA8"
           rounded="lg"
@@ -146,7 +140,7 @@ const HomeHero = () => {
           as={motion.div}
           initial="initial"
           animate="animate"
-          height="57vh"
+          height="40vh"
           width="97%"
           bg="#810CA8"
           rounded="lg"
