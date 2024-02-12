@@ -15,11 +15,14 @@ const Header = () => {
       <Flex direction="row" justifyContent={"space-between"} pt={2}>
         <Heading
           as="h1"
-          fontSize={{ base: "lg", md: "lg" }}
+          fontSize={{ base: "3xl", md: "3xl" }}
           color="accent.light"
           fontWeight={200}
-          pl={2}
-        ></Heading>
+          // pl={2}
+          pt={5}
+          pb={5}
+        >
+        </Heading>
         <Box dir="Row" pb={4}>
           <Flex>
             <ArtistModal />

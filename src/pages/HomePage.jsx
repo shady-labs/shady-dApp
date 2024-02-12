@@ -21,7 +21,7 @@ const HomePage = () => {
         <HomeHero />
         <TrackSection title="New Releases" />
         <ArtistSection />
-        <Genres/>
+        <Genres />
         <TrackSection title="New Releases" />
         <ArtistSection />
         <TrackSection title="New Releases" />
