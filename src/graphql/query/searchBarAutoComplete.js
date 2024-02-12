@@ -28,9 +28,13 @@ export const searchBarAutoComplete = async search => {
       await searchTrackByArtistName(search).then(res => {
         data.push(res)
       })
-      console.log('data: ', data)
+      // console.log('data: ', data)
     }
+    const result = data[0].map(item => item.result);
+    console.log('data: ', result)
+    // return data.map(item => item.name).map(name => name[0]).map(name => name['name']);
     return data
+    
   } catch (err) {
     console.log(err)
   }
@@ -59,7 +63,7 @@ const searchTrackByName = async search => {
           name: search
         }
       })
-      console.log(data['getTracksByName'].length)
+      // console.log(data['getTracksByName'].length)
       return data['getTracksByName']
     }
   } catch (err) {
@@ -89,7 +93,7 @@ const searchArtistByName = async search => {
           name: search
         }
       })
-      console.log(data['getArtistsByName'].length)
+      // console.log(data['getArtistsByName'].length)
       return data['getArtistsByName']
     }
   } catch (err) {
@@ -119,7 +123,7 @@ const searchArtistByTrackName = async search => {
           name: search
         }
       })
-      console.log(data['getArtistByTrackName'].length)
+      // console.log(data['getArtistByTrackName'].length)
       return data['getArtistByTrackName']
     }
   } catch (err) {
@@ -151,7 +155,7 @@ export const searchTrackByArtistName = async search => {
           name: search
         }
       })
-      console.log(data['getTracksByArtistName'].length)
+      // console.log(data['getTracksByArtistName'].length)
       return data['getTracksByArtistName']
     }
   } catch (err) {
