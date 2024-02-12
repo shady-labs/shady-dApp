@@ -42,7 +42,8 @@ export const Search = ( props: Props ) => {
 			"id": "",
 			"title": "",
 			"redirect": "",
-			"icon_url": ""
+			"icon_url": "",
+			"description": "",
 		},
 	]);
 	const [ showResults, setShowResults ] = useState( false );
@@ -74,7 +75,8 @@ export const Search = ( props: Props ) => {
 							id: track["_id"],
 							title: track["name"],
 							redirect: "",
-							icon_url: ""
+							icon_url: "",
+							description: track["artistsName"][0],
 						});
 					  })
 					}
@@ -86,7 +88,8 @@ export const Search = ( props: Props ) => {
 							id: "not found",
 							title: "not found",
 							redirect: "",
-							icon_url: ""
+							icon_url: "",
+							description: "",
 						})
 					}
 				  });
@@ -123,6 +126,11 @@ export const Search = ( props: Props ) => {
 								? <Spinner size="sm" />
 								: <Icon as={ FaSearch } />
 						}
+						onClick={
+							async(e) => {
+								document.location.href="/search";
+							}
+						}
 					/>
 				}
 
@@ -152,6 +160,11 @@ export const Search = ( props: Props ) => {
 							isLoading
 								? <Spinner size="sm" />
 								: <Icon as={ FaSearch } />
+						}
+						onClick={
+							async(e) => {
+								document.location.href="/search";
+							}
 						}
 					/>
 				}
@@ -202,6 +215,9 @@ export const Search = ( props: Props ) => {
 													}
 														<Text fontWeight="medium" color="black">
 															{result.title}
+														</Text>
+														<Text fontWeight="small" color="grey">
+															{result.description}
 														</Text>
 												</Box>
 											</Flex>
