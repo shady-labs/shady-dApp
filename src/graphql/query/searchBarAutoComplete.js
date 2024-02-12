@@ -3,10 +3,10 @@ import { client } from '../../main'
 import { useState } from 'react'
 
 export const searchBarAutoComplete = async search => {
-  console.log('entered searchBarAutoComplete function')
+  // console.log('entered searchBarAutoComplete function')
   //const [data, setData] = useState([]);
   var data = []
-  console.log('Input search Query: ', search)
+  // console.log('Input search Query: ', search)
   try {
     if (search != '' && search != null && search != ' ') {
       //track name search
@@ -30,7 +30,7 @@ export const searchBarAutoComplete = async search => {
       })
       // console.log('data: ', data)
     }
-    console.log('data: ', data)
+    // console.log('data: ', data)
     return data
     
   } catch (err) {
@@ -130,7 +130,7 @@ const searchArtistByTrackName = async search => {
 }
 
 export const searchTrackByArtistName = async search => {
-  console.log('entered searchTrackByArtistName function', search)
+  // console.log('entered searchTrackByArtistName function', search)
   const GET_TRACK_BY_ARTIST_NAME = gql`
     query GetTracksByArtistName($name: String!) {
       getTracksByArtistName(name: $name) {
