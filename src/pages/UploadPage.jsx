@@ -9,6 +9,16 @@ import {
   InputGroup,
   Spinner,
   Text,
+  Step,
+  StepDescription,
+  StepIcon,
+  StepIndicator,
+  StepNumber,
+  StepSeparator,
+  StepStatus,
+  StepTitle,
+  Stepper,
+  useSteps,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { MdError } from "react-icons/md";
@@ -33,6 +43,18 @@ const UploadPage = () => {
   const [trackUrl, setTrackUrl] = useState([]);
   // search query test
   const [artistNotFound, setArtistNotFound] = useState(false);
+  const steps = [
+    { title: 'First', description: 'Contact Info' },
+    { title: 'Second', description: 'Date & Time' },
+    { title: 'Third', description: 'Select Rooms' },
+  ];
+  const [ activeStep, setActiveStep ] = useState(
+    useSteps({
+      index: 0,
+      count: steps.length,
+    })
+  );
+
 
   /* const validateFields = () => {
 		if (audio == "" || songName == "" || artistName == "" || banner == "") {
@@ -98,11 +120,33 @@ const UploadPage = () => {
     }
   }
 
+  const handleStepper = async () => {
+    if(songName!="" && artistName!=""){
+      // step 1 finished
+      setActiveStep(1);
+      console.log("step 1 finished")
+      console.log("[audioDuration]:"+banner)
+      if(audioDuration!="" && banner!=""){
+        console.log(" step 2 completed")
+        setActiveStep(2)
+        console.log("audio present")
+        // step 2 finished
+        if(1>2){
+          // step 3 finished
+          setActiveStep(2);
+          console.log("step 3 completed")
+        }
+      }
+    }
+
+  }
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       console.log("delay function running");
       handleQuery(artistName);
       handleQuery();
+      handleStepper();
     }, 400);
 
     return () => clearTimeout(delayDebounceFn);
@@ -275,6 +319,25 @@ const UploadPage = () => {
           </Heading>
           <Text fontSize="sm">Add your mix to the jam!</Text>
         </Box>
+        <Stepper index={activeStep} colorScheme="purple">
+      {steps.map((step, index) => (
+        <Step key={index}>
+          <StepIndicator>
+            <StepStatus
+              complete={<StepIcon />}
+              incomplete={<StepNumber />}
+              active={<StepNumber />}
+            />
+          </StepIndicator>
+
+          <Box flexShrink='0'>
+            <StepTitle>{step.title}</StepTitle>
+            <StepDescription>{step.description}</StepDescription>
+          </Box>
+          <StepSeparator />
+        </Step>
+      ))}
+    </Stepper>
         <Flex direction="column" gap={4}>
           <FormControl>
             <FormLabel fontSize="xs" color="zinc.400"></FormLabel>
@@ -316,8 +379,14 @@ const UploadPage = () => {
                 color="zinc.300"
                 fontSize="md"
                 // value={banner}
-                onChange={(e) => {
-                  setBanner(e.target.files[0]);
+                onChange={async (e) => {
+                  console.log("[]",banner.length)
+                  setBanner(await e.target.files[0]);
+                  console.log(banner.length)
+                  console.log("[audio length at banner upload]", audio.name)
+                  if(audio.name>0 && songName!="" && artistName!=""){
+                    setActiveStep(2);
+                  }
                 }}
                 placeholder="Upload Track Cover Image"
               />
@@ -338,6 +407,10 @@ const UploadPage = () => {
                   computeLength(e.target.files[0]).then((res) => {
                     setAudioDuration(Math.round(res.duration));
                   });
+                  console.log("[banner length at audio upload]", banner.name)
+                  if(banner.name.length>0 && songName!="" && artistName!=""){
+                    setActiveStep(2);
+                  }
                 }}
                 placeholder="Upload Track File"
                 color="#fff"
