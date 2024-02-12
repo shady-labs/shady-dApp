@@ -172,7 +172,7 @@ export const Search = ( props: Props ) => {
 			{
 				showResults && (
 					<Box
-						bgColor="white"
+						bgColor="black"
 						maxHeight={ resultListMaxHeight }
 						overflowY="auto"
 						borderRadius="0.3em"
@@ -192,31 +192,25 @@ export const Search = ( props: Props ) => {
 											borderBottom="1px solid rgba(34,36,38,.1)"
 											cursor="pointer"
 											_hover={ {
-												bgColor: '#f9fafb'
+												bgColor: 'grey'
 											} }
+											bgColor="black"
 											onClick={ () => {} }
 										>
 											<Flex alignItems="center">
-												<Box p="0.8em" margin="0" color="black"
-
-													bgColor="white"
-													maxHeight={ resultListMaxHeight }
-													overflowY="auto"
-													borderRadius="0.3em"
-													boxShadow="0 2px 4px 0 rgb(34 36 38 / 12%), 0 2px 10px 0 rgb(34 36 38 / 15%);"
-													sx={ {
-														"&::-webkit-scrollbar": {
-															display: 'none'
-														}
-													} }
+												<Box p="0.3em" margin="0" color="black"
 												>
 													{ 
 														
 													}
-														<Text fontWeight="medium" color="black">
+														<Text fontSize="medium" fontWeight="medium" color="white">
 															{result.title}
 														</Text>
-														<Text fontWeight="small" color="grey">
+														<Text fontSize="medium" fontWeight="small" color="white" _hover={
+															{
+																color: "white"
+															}
+														}>
 															{result.description}
 														</Text>
 												</Box>
