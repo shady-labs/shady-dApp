@@ -30,9 +30,7 @@ export const searchBarAutoComplete = async search => {
       })
       // console.log('data: ', data)
     }
-    const result = data[0].map(item => item.result);
-    console.log('data: ', result)
-    // return data.map(item => item.name).map(name => name[0]).map(name => name['name']);
+    console.log('data: ', data)
     return data
     
   } catch (err) {

@@ -92,7 +92,7 @@ export const Search = ( props: Props ) => {
 					onChange={(e) => {
 						setArtistName(e.target.value)
 						handleQuery(e.target.value).then((data) => {
-						  setArtist(data);
+						//   setArtist(data);
 						});
 					  }}
 					onFocus={ () => setShowResults( true ) }
