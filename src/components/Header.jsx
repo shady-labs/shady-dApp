@@ -1,6 +1,7 @@
 import { Box, Flex, Avatar, Spacer, Heading, Button } from "@chakra-ui/react";
 
 import { NavLink } from "react-router-dom";
+import { Search } from "./SearchHeader";
 
 import {
 
@@ -22,6 +23,7 @@ const Header = () => {
           pt={5}
           pb={5}
         >
+          <Search />
         </Heading>
         <Box dir="Row" pb={4}>
           <Flex>
