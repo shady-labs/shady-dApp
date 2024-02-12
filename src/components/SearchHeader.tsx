@@ -74,7 +74,7 @@ export const Search = ( props: Props ) => {
 						searchResults.push({
 							id: track["_id"],
 							title: track["name"],
-							redirect: "",
+							redirect: "/artist/"+track["artistsName"][0],
 							icon_url: "",
 							description: track["artistsName"][0],
 						});
@@ -107,7 +107,7 @@ export const Search = ( props: Props ) => {
 		setTimeout( () => {
 			setShowResults( false );
 			setIsloading(false);
-		}, 170 );
+		}, 400 );
 	};
 
 	return (
