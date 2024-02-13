@@ -18,6 +18,7 @@ import LoadingSkeleton from "../components/LoadingSkeleton";
 import { useParams, useNavigate } from "react-router-dom";
 import ArtisteSong from "../components/ArtisteSong";
 import ArtistCardAlt from "../components/ArtistCardAlt";
+import Footer from "../components/Footer";
 
 const SearchPage = () => {
   const { inputQuery } = useParams();
@@ -268,6 +269,9 @@ const SearchPage = () => {
           </>
         )}
       </Flex>
+      <GridItem>
+        <Footer />
+      </GridItem>
     </Box>
   );
 };
