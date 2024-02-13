@@ -34,17 +34,6 @@ export const searchBarAutoComplete = async search => {
     console.log("data3: ", data[3][0])
     data[3].map(track => {
       console.log("[track]: ",track)
-      // data[0].add({
-      //   artistsID: track["artistsID"],
-      //   artistsName: track["artistsName"],
-      //   genre: track["genre"],
-      //   duration: track["duration"],
-      //   name: track["name"],
-      //   trackImage: track["trackImage"],
-      //   trackUrl: track["trackUrl"],
-      //   _typename: track["_typename"],
-      //   _id: track["_id"]
-      // })
       data[0] = [...data[0], track]
     })
     // console.log('data: ', data)
