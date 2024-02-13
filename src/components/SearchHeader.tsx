@@ -239,7 +239,7 @@ export const Search = (props: Props) => {
                         </>
                       ) : (
                         <>
-                          <Avatar p="0.3em" src={result.icon_url}></Avatar>
+                          <Avatar p="0.2em" src={result.icon_url} size={"lg"}></Avatar>
                         </>
                       )}
                       <Flex alignItems="center">
@@ -249,6 +249,7 @@ export const Search = (props: Props) => {
                             fontSize="medium"
                             fontWeight="medium"
                             color="white"
+							/* p="0.5em" */
                           >
                             {result.title}
                           </Text>
