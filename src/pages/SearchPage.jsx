@@ -118,9 +118,13 @@ const SearchPage = () => {
   };
 
   const onSongPlay = (track) => {
-    const index = data.artist?.setTrackofArtistResult.findIndex((s) => s._id == track._id);
+    const index = data.artist?.setTrackofArtistResult.findIndex(
+      (s) => s._id == track._id
+    );
 
-    dispatch(setTrackList({ list: data.Artist?.setTrackofArtistResult, index }));
+    dispatch(
+      setTrackList({ list: data.Artist?.setTrackofArtistResult, index })
+    );
     dispatch(playTrack(track));
   };
 
@@ -158,22 +162,22 @@ const SearchPage = () => {
               <SimpleGrid columns={3} gap={4}>
                 {trackSearchResults.map((track) => (
                   <ArtisteSong
-                  key={track._id}
-                  song={{
-                    _id: track._id,
-                    title: track.name,
-                    artistes: track.artistsName,
-                    coverImage: track.trackImage,
-                    songUrl: track.trackUrl,
-                    duration: track.duration,
-                    likes: {
-                      "64b27271cbbc5494326b3f5d": true,
-                      "64be80fb0e97b62cf659af8c": true,
-                      "64e63265d233402a9f2edee9": true,
-                    },
-                    type: "Song",
-                    __v: 0,
-                  }}
+                    key={track._id}
+                    song={{
+                      _id: track._id,
+                      title: track.name,
+                      artistes: track.artistsName,
+                      coverImage: track.trackImage,
+                      songUrl: track.trackUrl,
+                      duration: track.duration,
+                      likes: {
+                        "64b27271cbbc5494326b3f5d": true,
+                        "64be80fb0e97b62cf659af8c": true,
+                        "64e63265d233402a9f2edee9": true,
+                      },
+                      type: "Song",
+                      __v: 0,
+                    }}
                   />
                 ))}
               </SimpleGrid>
@@ -192,28 +196,28 @@ const SearchPage = () => {
               <SimpleGrid columns={3} gap={4}>
                 {setTrackofArtistResult.map((track) => (
                   <ArtisteSong
-                  key={track._id}
-                  song={{
-                    _id: track._id,
-                    title: track.name,
-                    artistes: track.artistsName,
-                    coverImage: track.trackImage,
-                    songUrl: track.trackUrl,
-                    duration: track.duration,
-                    likes: {
-                      "64b27271cbbc5494326b3f5d": true,
-                      "64be80fb0e97b62cf659af8c": true,
-                      "64e63265d233402a9f2edee9": true,
-                    },
-                    type: "Song",
-                    __v: 0,
-                  }}
+                    key={track._id}
+                    song={{
+                      _id: track._id,
+                      title: track.name,
+                      artistes: track.artistsName,
+                      coverImage: track.trackImage,
+                      songUrl: track.trackUrl,
+                      duration: track.duration,
+                      likes: {
+                        "64b27271cbbc5494326b3f5d": true,
+                        "64be80fb0e97b62cf659af8c": true,
+                        "64e63265d233402a9f2edee9": true,
+                      },
+                      type: "Song",
+                      __v: 0,
+                    }}
                   />
                 ))}
               </SimpleGrid>
             </Box>
 
-            <Box mt={12}>
+            {/* <Box mt={12}>
               <Heading
                 as="h3"
                 pb={5}
@@ -230,7 +234,7 @@ const SearchPage = () => {
                   />
                 ))}
               </SimpleGrid>
-            </Box>
+            </Box> */}
 
             <Box mt={12}>
               <Heading
@@ -241,24 +245,39 @@ const SearchPage = () => {
               >
                 Artists
               </Heading>
+
               {
                 <Flex direction="column">
-                  {artistSearchResults.map((artist) => (
-                    <>
-                      <ArtistCardAlt key={artist._id} artist={artist} />
-                    </>
-                  ))}
-                  {setArtistofTrackResult.map((artist) => (
+                  <SimpleGrid columns={2} gap={4}>
+                    {artistSearchResults.slice(0, 5).map((artist) => (
+                      <>
+                        <ArtistCardAlt key={artist._id} artist={artist} />
+                      </>
+                    ))}
+                  </SimpleGrid>
+                </Flex>
+              }
+            </Box>
+
+            {/* <Box mt={12}>
+              <Heading
+                as="h3"
+                pb={5}
+                fontSize={{ base: "lg", md: "xl" }}
+                fontWeight={500}
+              >
+                Artists
+              </Heading>
+              {
+                <Flex direction="column">
+                  {setArtistofTrackResult.slice(0, 5).map((artist) => (
                     <>
                       <ArtistCardAlt key={artist._id} artist={artist} />
                     </>
                   ))}
                 </Flex>
               }
-              <Text color="zinc.300">
-                Artist of Track Results: {setArtistofTrackResult.length} :{" "}
-              </Text>
-            </Box>
+            </Box> */}
           </>
         )}
       </Flex>
