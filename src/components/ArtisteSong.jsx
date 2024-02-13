@@ -4,22 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { BsSoundwave } from "react-icons/bs";
 import { convertToMins } from "../utils";
 import {
-	setCurrentTrack,
-	setPlaying,
-	setTrackList,
+  setCurrentTrack,
+  setPlaying,
+  setTrackList,
 } from "../redux/slices/playerSlice";
+import { motion } from "framer-motion";
+import { fadeInUp } from "../theme/motionVariants";
 
 const ArtisteSong = ({ song, handlePlay }) => {
   const dispatch = useDispatch();
-	const { currentTrack, isPlaying } = useSelector((state) => state.player);
+  const { currentTrack, isPlaying } = useSelector((state) => state.player);
 
-	const playSong = () => {
-		dispatch(setCurrentTrack(song));
-		dispatch(setTrackList({ list: [song] }));
-		dispatch(setPlaying(true));
-	};
+  const playSong = () => {
+    dispatch(setCurrentTrack(song));
+    dispatch(setTrackList({ list: [song] }));
+    dispatch(setPlaying(true));
+  };
 
-	const isCurrentTrack = currentTrack?._id === song?._id;
+  const isCurrentTrack = currentTrack?._id === song?._id;
 
   return (
     <>
@@ -32,6 +34,10 @@ const ArtisteSong = ({ song, handlePlay }) => {
         bg="black"
         _hover={{ bg: "zinc.800" }}
         rounded="lg"
+        as={motion.div}
+        initial="initial"
+        animate="animate"
+        variants={fadeInUp}
       >
         <Flex gap={{ base: 2, md: 4 }} align="center">
           <Image
@@ -60,10 +66,10 @@ const ArtisteSong = ({ song, handlePlay }) => {
               )}
             </Flex>
             <Text color="zinc.400" fontSize={{ base: "sm", md: "lg" }}>
-            {song?.title}
+              {song?.title}
             </Text>
             <Text color="zinc.400" fontSize={{ base: "sm", md: "sm" }}>
-            {song?.artistes}
+              {song?.artistes}
             </Text>
           </Box>
         </Flex>
