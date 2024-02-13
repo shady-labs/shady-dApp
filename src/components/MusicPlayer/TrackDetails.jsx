@@ -2,7 +2,9 @@ import { Flex, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const TrackDetails = ({ track }) => {
+  
 	return (
+  
     <Flex align="center" gap={{ base: 2, md: 4 }}>
       <Image
         src={track?.coverImage}
@@ -27,7 +29,7 @@ const TrackDetails = ({ track }) => {
             color="zinc.500"
             noOfLines={{ base: 1, md: undefined }}
           >
-            {track?.artistes.join(", ")}
+            {track?.artistes}
           </Text>
         </Link>
       </Flex>
