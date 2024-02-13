@@ -3,10 +3,10 @@ import { client } from '../../main'
 import { useState } from 'react'
 
 export const searchBarAutoComplete = async search => {
-  console.log('entered searchBarAutoComplete function')
+  // console.log('entered searchBarAutoComplete function')
   //const [data, setData] = useState([]);
   var data = []
-  console.log('Input search Query: ', search)
+  // console.log('Input search Query: ', search)
   try {
     if (search != '' && search != null && search != ' ') {
       //track name search
@@ -28,9 +28,17 @@ export const searchBarAutoComplete = async search => {
       await searchTrackByArtistName(search).then(res => {
         data.push(res)
       })
-      console.log('data: ', data)
+      // console.log('data: ', data)
     }
+    console.log("[data0]: ",data[0][0])
+    console.log("data3: ", data[3][0])
+    data[3].map(track => {
+      console.log("[track]: ",track)
+      data[0] = [...data[0], track]
+    })
+    // console.log('data: ', data)
     return data
+    
   } catch (err) {
     console.log(err)
   }
@@ -59,7 +67,7 @@ const searchTrackByName = async search => {
           name: search
         }
       })
-      console.log(data['getTracksByName'].length)
+      // console.log(data['getTracksByName'].length)
       return data['getTracksByName']
     }
   } catch (err) {
@@ -89,7 +97,7 @@ const searchArtistByName = async search => {
           name: search
         }
       })
-      console.log(data['getArtistsByName'].length)
+      // console.log(data['getArtistsByName'].length)
       return data['getArtistsByName']
     }
   } catch (err) {
@@ -119,7 +127,7 @@ const searchArtistByTrackName = async search => {
           name: search
         }
       })
-      console.log(data['getArtistByTrackName'].length)
+      // console.log(data['getArtistByTrackName'].length)
       return data['getArtistByTrackName']
     }
   } catch (err) {
@@ -128,7 +136,7 @@ const searchArtistByTrackName = async search => {
 }
 
 export const searchTrackByArtistName = async search => {
-  console.log('entered searchTrackByArtistName function', search)
+  // console.log('entered searchTrackByArtistName function', search)
   const GET_TRACK_BY_ARTIST_NAME = gql`
     query GetTracksByArtistName($name: String!) {
       getTracksByArtistName(name: $name) {
@@ -151,7 +159,7 @@ export const searchTrackByArtistName = async search => {
           name: search
         }
       })
-      console.log(data['getTracksByArtistName'].length)
+      // console.log(data['getTracksByArtistName'].length)
       return data['getTracksByArtistName']
     }
   } catch (err) {

@@ -1,15 +1,27 @@
 import { Box, Button, Flex, Hide, Image, Text } from "@chakra-ui/react";
 import { AiFillPlayCircle } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsSoundwave } from "react-icons/bs";
 import { convertToMins } from "../utils";
+import {
+  setCurrentTrack,
+  setPlaying,
+  setTrackList,
+} from "../redux/slices/playerSlice";
+import { motion } from "framer-motion";
+import { fadeInUp } from "../theme/motionVariants";
 
 const ArtisteSong = ({ song, handlePlay }) => {
+  const dispatch = useDispatch();
   const { currentTrack, isPlaying } = useSelector((state) => state.player);
-  const isCurrentTrack = currentTrack?._id === song?._id;
+
   const playSong = () => {
-    handlePlay(song);
+    dispatch(setCurrentTrack(song));
+    dispatch(setTrackList({ list: [song] }));
+    dispatch(setPlaying(true));
   };
+
+  const isCurrentTrack = currentTrack?._id === song?._id;
 
   return (
     <>
@@ -19,12 +31,17 @@ const ArtisteSong = ({ song, handlePlay }) => {
         py={2}
         px={{ base: 1, md: 3 }}
         w="full"
-        bg="zinc.900"
+        bg="black"
+        _hover={{ bg: "zinc.800" }}
         rounded="lg"
+        as={motion.div}
+        initial="initial"
+        animate="animate"
+        variants={fadeInUp}
       >
         <Flex gap={{ base: 2, md: 4 }} align="center">
           <Image
-            src={song?.trackImage}
+            src={song?.coverImage}
             alt={song?.title}
             w={{ base: "3rem", md: "5rem" }}
             h={{ base: "3rem", md: "5rem" }}
@@ -48,15 +65,18 @@ const ArtisteSong = ({ song, handlePlay }) => {
                 </Flex>
               )}
             </Flex>
-            <Text color="zinc.400" fontSize={{ base: "xs", md: "sm" }}>
-              {song?.artistsName.join(", ")}
+            <Text color="zinc.400" fontSize={{ base: "sm", md: "lg" }}>
+              {song?.title}
+            </Text>
+            <Text color="zinc.400" fontSize={{ base: "sm", md: "sm" }}>
+              {song?.artistes}
             </Text>
           </Box>
         </Flex>
         <Flex align="center" gap={3} pr={3}>
           {isCurrentTrack && isPlaying ? null : (
             <Button
-              // onClick={playSong}
+              onClick={playSong}
               variant="unstyled"
               color="accent.light"
               fontSize={{ base: 24, md: 36 }}

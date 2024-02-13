@@ -43,10 +43,10 @@ const Search = ({handleQuery, isSearchPage,inputQuery}) => {
         </InputLeftAddon>
         <Input
           border="1px"
-          focusBorderColor="#fff"
-          borderColor="zinc.700"
+          focusBorderColor="zinc.300"
+          borderColor="zinc.300"
           placeholder="Search Songs, Albums, Artists or Podcasts"
-          w="full"
+          w="30vw"
           outline={0}
           bg="transparent"
           onChange={async (e) => {
