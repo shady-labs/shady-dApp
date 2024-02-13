@@ -86,7 +86,7 @@ export const Search = ( props: Props ) => {
 						searchResults.push({
 							id: track["_id"],
 							title: track["name"],
-							redirect: "/artist/"+track["artistsName"][0],
+							redirect: "/search/"+track["name"],
 							icon_url: track["trackImage"],
 							description: track["artistsName"][0],
 							type: "track"
