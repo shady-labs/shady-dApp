@@ -117,17 +117,6 @@ const SearchPage = () => {
     }
   };
 
-  const onSongPlay = (track) => {
-    const index = data.artist?.setTrackofArtistResult.findIndex(
-      (s) => s._id == track._id
-    );
-
-    dispatch(
-      setTrackList({ list: data.Artist?.setTrackofArtistResult, index })
-    );
-    dispatch(playTrack(track));
-  };
-
   return (
     <Box bg="#000" minH="100vh" p={4}>
       <Search
