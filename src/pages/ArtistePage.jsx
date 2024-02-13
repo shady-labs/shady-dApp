@@ -164,11 +164,27 @@ const ArtistePage = () => {
 
           <Flex direction="column" gap={4}>
             {songs?.map((song) => (
+              
+              //  handlePlay={onSongPlay}
+              
               <ArtisteSong
-                key={song._id}
-                song={song}
-                handlePlay={onSongPlay}
-              />
+                  key={song._id}
+                  song={{
+                    _id: song._id,
+                    title: song.name,
+                    artistes: song.artistsName,
+                    coverImage: song.trackImage,
+                    songUrl: song.trackUrl,
+                    duration: song.duration,
+                    likes: {
+                      "64b27271cbbc5494326b3f5d": true,
+                      "64be80fb0e97b62cf659af8c": true,
+                      "64e63265d233402a9f2edee9": true,
+                    },
+                    type: "Song",
+                    __v: 0,
+                  }}
+                  />
             ))}
           </Flex>
         </Box>
