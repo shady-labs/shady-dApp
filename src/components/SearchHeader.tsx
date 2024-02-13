@@ -127,8 +127,9 @@ export const Search = ( props: Props ) => {
 	return (
 		<Box
 			position="relative"
-			w="100%"
+			width={"30vw"}
 			{ ...rest }
+			zIndex={"overlay"}
 		>
 			<InputGroup mb="10px">
 				{
@@ -150,7 +151,7 @@ export const Search = ( props: Props ) => {
 
 				<Input
 					borderColor="rgba(34,36,38,.15)"
-					borderRadius="full"
+					borderRadius="lg"
 					placeholder={ placeholder }
 					value={ value }
 					onChange={async(e) => {
@@ -162,7 +163,8 @@ export const Search = ( props: Props ) => {
 						// //   setArtist(data);
 						// });
 					  }}
-					onFocus={ () => setShowResults( true ) }
+					onFocus={ () => setShowResults( true )
+					}
 					onBlur={ onBlur }
 				/>
 
@@ -196,6 +198,7 @@ export const Search = ( props: Props ) => {
 								display: 'none'
 							}
 						} }
+						zIndex={"overlay"}
 					>
 						{
 							searchResults.length >= 0
@@ -210,6 +213,7 @@ export const Search = ( props: Props ) => {
 											} }
 											bgColor="black"
 											onClick={ () => {}}
+											zIndex={"overlay"}
 										>
 											<Flex alignItems="flex-start">
 												{
