@@ -8,8 +8,6 @@ const ArtistCardAlt = ({ artist }) => {
         direction="column"
         align="center"
         p={1}
-        _hover={{ transform: "scale(1.05)" }}
-        transition="0.5s ease"
       ></Flex>
     <Flex
         align="center"
@@ -18,6 +16,7 @@ const ArtistCardAlt = ({ artist }) => {
         px={{ base: 1, md: 3 }}
         w={ 500 }
         bg="zinc.900"
+        _hover={{ bg: "black" }}
         rounded="lg"
     >
         <Flex gap={{ base: 2, md: 4 }} align="center">

@@ -29,7 +29,8 @@ const ArtisteSong = ({ song, handlePlay }) => {
         py={2}
         px={{ base: 1, md: 3 }}
         w="full"
-        bg="zinc.900"
+        bg="black"
+        _hover={{ bg: "zinc.800" }}
         rounded="lg"
       >
         <Flex gap={{ base: 2, md: 4 }} align="center">
@@ -59,6 +60,9 @@ const ArtisteSong = ({ song, handlePlay }) => {
               )}
             </Flex>
             <Text color="zinc.400" fontSize={{ base: "sm", md: "lg" }}>
+            {song?.title}
+            </Text>
+            <Text color="zinc.400" fontSize={{ base: "sm", md: "sm" }}>
             {song?.artistes}
             </Text>
           </Box>

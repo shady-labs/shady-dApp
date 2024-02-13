@@ -147,8 +147,6 @@ const SearchPage = () => {
           <Text color="zinc.300">No Results</Text>
         ) : (
           <>
-            {/* <Genre /> */}
-
             <Box mt={12}>
               <Heading
                 as="h3"
@@ -190,7 +188,30 @@ const SearchPage = () => {
                 fontSize={{ base: "lg", md: "xl" }}
                 fontWeight={500}
               >
-                Songs by $(artistName)
+                Artists
+              </Heading>
+
+              {
+                <Flex direction="column">
+                  <SimpleGrid columns={2} gap={1}>
+                    {artistSearchResults.slice(0, 6).map((artist) => (
+                      <>
+                        <ArtistCardAlt key={artist._id} artist={artist} />
+                      </>
+                    ))}
+                  </SimpleGrid>
+                </Flex>
+              }
+            </Box>
+
+            <Box mt={12}>
+              <Heading
+                as="h3"
+                pb={5}
+                fontSize={{ base: "lg", md: "xl" }}
+                fontWeight={500}
+              >
+                Songs by {inputQuery}
               </Heading>
 
               <SimpleGrid columns={3} gap={4}>
@@ -235,29 +256,6 @@ const SearchPage = () => {
                 ))}
               </SimpleGrid>
             </Box> */}
-
-            <Box mt={12}>
-              <Heading
-                as="h3"
-                pb={5}
-                fontSize={{ base: "lg", md: "xl" }}
-                fontWeight={500}
-              >
-                Artists
-              </Heading>
-
-              {
-                <Flex direction="column">
-                  <SimpleGrid columns={2} gap={4}>
-                    {artistSearchResults.slice(0, 5).map((artist) => (
-                      <>
-                        <ArtistCardAlt key={artist._id} artist={artist} />
-                      </>
-                    ))}
-                  </SimpleGrid>
-                </Flex>
-              }
-            </Box>
 
             {/* <Box mt={12}>
               <Heading
