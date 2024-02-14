@@ -10,6 +10,7 @@ import {
   FiSettings,
   FiArrowLeft,
 } from "react-icons/fi";
+import { AvatarNav } from "./avatarNav";
 
 const NAV_ITEMS = [
   { link: "/home", name: "Home", icon: <FiHome size={20} color="white" /> },
@@ -113,8 +114,10 @@ const Navbar = ({ changeHomelayoutSize }) => {
           {TopNav({ handleSizeChange, navSize })}
           <Spacer />
           {Nav({ navSize })}
+          
         </Flex>
       </Flex>
+      {/* {<AvatarNav />} */}
     </Box>
   );
 };
