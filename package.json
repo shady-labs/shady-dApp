@@ -36,6 +36,7 @@
     "graphql": "^16.8.0",
     "patch-package": "^8.0.0",
     "react": "^18.2.0",
+    "react-card-flip": "^1.2.2",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.46.1",
