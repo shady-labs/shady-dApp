@@ -5,7 +5,6 @@ import React from "react";
 import {
   Avatar, Button, Icon, Image, Img, IconButton,
 } from "@chakra-ui/react";
-import logo from "/public/logo.svg"; // Fix: Correct import statement for logo.svg
 
 const getAddress = () => {
   const { primaryWallet } = useDynamicContext();
