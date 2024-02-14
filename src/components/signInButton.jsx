@@ -7,13 +7,21 @@ import {
 } from "@chakra-ui/react";
 import { ethers } from "ethers";
 import logo from "/public/logo.svg"; // Fix: Correct import statement for logo.svg
+
+const getWalletAddress= async() =>{
+  const wallet = await new ethers.providers.Web3Provider(window.ethereum).getSigner().getAddress();
+  // console.log("wallet: "+wallet)
+  return wallet
+}
+
 export const LoginView = () => {
+  
+  if(window.ethereum != null){
   const { setShowAuthFlow } = useDynamicContext();
   const { setShowDynamicUserProfile } = useDynamicContext();
-
-  if(window.ethereum != null){
-  const wallet =  new ethers.providers.Web3Provider(window.ethereum).getSigner().getAddress();
-  if (wallet === undefined){
+  //const wallet =  await new ethers.providers.Web3Provider(window.ethereum).getSigner().getAddress();
+  console.log(getWalletAddress.wallet)
+  if (getWalletAddress.wallet == undefined){
     console.log("brute force initiated")
     return(
         <Button
