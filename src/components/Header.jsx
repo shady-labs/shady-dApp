@@ -2,12 +2,6 @@ import { Box, Flex, Avatar, Spacer, Heading, Button } from "@chakra-ui/react";
 
 import { NavLink } from "react-router-dom";
 import { Search } from "./SearchHeader";
-
-import {
-  DynamicWidget,
-  DynamicConnectButton,
-} from "@dynamic-labs/sdk-react-core";
-import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import ArtistModal from "./ArtistModal";
 import { LoginView } from "./signInButton";
 
@@ -31,8 +25,7 @@ const Header = () => {
           <Flex>
             <ArtistModal />
             <Spacer display={{ base: "none", md: "block" }} mx={2} />
-            {/* <DynamicWidget variant="modal" /> */}
-            
+            {/* <DynamicWidget variant="modal" /> */} 
             <LoginView />
           </Flex>
         </Box>
