@@ -136,7 +136,6 @@ export const Search = (props: Props) => {
   return (
     <Box
       position="absolute"
-      top={"20px"}
       width={"30vw"}
       {...rest}
       zIndex={"overlay"}
@@ -159,7 +158,8 @@ export const Search = (props: Props) => {
           focusBorderColor="zinc.300"
           borderRadius="lg"
           border="1px"
-          bg="transparent"
+          bg="black"
+          opacity={0.4}
           placeholder={placeholder}
           value={value}
           //textColor={"white"}

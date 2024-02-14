@@ -1,4 +1,4 @@
-import { Box, Flex, Avatar, Spacer, Heading, Button } from "@chakra-ui/react";
+import { Box, Flex, Avatar, Spacer, Heading, Button, StylesProvider } from "@chakra-ui/react";
 
 import { NavLink } from "react-router-dom";
 import { Search } from "./SearchHeader";
@@ -16,8 +16,7 @@ const Header = () => {
           color="accent.light"
           fontWeight={200}
           // pl={2}
-          pt={5}
-          pb={5}
+          
         >
           <Search />
         </Heading>

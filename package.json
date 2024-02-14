@@ -13,9 +13,9 @@
   "dependencies": {
     "@apollo/client": "^3.8.3",
     "@chakra-ui/react": "^2.6.1",
-    "@dynamic-labs/ethereum": "^0.19.4",
+    "@dynamic-labs/ethereum": "^1.1.2",
     "@dynamic-labs/ethers-v5": "^0.19.4",
-    "@dynamic-labs/sdk-react-core": "^0.19.4",
+    "@dynamic-labs/sdk-react-core": "^1.1.2",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
