@@ -1,5 +1,5 @@
 import {
-  DynamicConnectButton, DynamicWidget,useDynamicContext, DynamicUserProfile, CheckIcon,
+  useDynamicContext, DynamicUserProfile,
 } from "@dynamic-labs/sdk-react-core";
 import React from "react";
 import {
@@ -15,8 +15,7 @@ const getAddress = () => {
 
 
 export const LoginView = () => {
-  const { setShowAuthFlow } = useDynamicContext();
-  const { setShowDynamicUserProfile } = useDynamicContext();
+  const { setShowAuthFlow, setShowDynamicUserProfile, user} = useDynamicContext();
 
   if (getAddress() == null){
     return(
@@ -35,10 +34,10 @@ export const LoginView = () => {
       <>
         <IconButton onClick={() => setShowDynamicUserProfile(true)}
         isRound="true"
-        icon={<Avatar src="https://img.freepik.com/premium-photo/gorilla-wearing-pair-headphones-with-purple-background_962508-4153.jpg" />}
+        icon={<Avatar size="sm" src="https://img.freepik.com/premium-photo/gorilla-wearing-pair-headphones-with-purple-background_962508-4153.jpg" />}
         >  
         </IconButton>
-        <DynamicUserProfile />
+        <DynamicUserProfile variant='dropdown' />
       </>
     );
   };
