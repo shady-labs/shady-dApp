@@ -24,6 +24,8 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+/* const [isLoggedIn, setIsLoggedIn] = useState(false); */
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
@@ -55,6 +57,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                     authToken,
                     user,
                   }) => {
+                    /* if (true) {
+                      setIsLoggedIn(true);
+                    } */
                     console.log(
                       `Welcome ${user?.email} your token is ${authToken}`,
                     );

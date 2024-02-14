@@ -4,12 +4,13 @@ import { NavLink } from "react-router-dom";
 import { Search } from "./SearchHeader";
 
 import {
-
   DynamicWidget,
+  DynamicConnectButton,
 } from "@dynamic-labs/sdk-react-core";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import ArtistModal from "./ArtistModal";
 import { LoginView } from "./signInButton";
+
 
 const Header = () => {
   return (
@@ -30,8 +31,9 @@ const Header = () => {
           <Flex>
             <ArtistModal />
             <Spacer display={{ base: "none", md: "block" }} mx={2} />
-              {/* <DynamicWidget innerButtonComponent={<button>Sign In</button>} /> */}
-              <LoginView />
+            {/* <DynamicWidget variant="modal" /> */}
+            
+            <LoginView />
           </Flex>
         </Box>
       </Flex>

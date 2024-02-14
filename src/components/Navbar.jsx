@@ -117,7 +117,7 @@ const Navbar = ({ changeHomelayoutSize }) => {
           
         </Flex>
       </Flex>
-      <AvatarNav />
+      {<AvatarNav />}
     </Box>
   );
 };
