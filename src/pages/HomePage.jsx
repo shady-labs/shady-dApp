@@ -26,6 +26,12 @@ const HomePage = () => {
         <ArtistSection />
         <TrackSection title="New Releases" />
         <ArtistSection />
+        <TrackSection title="New Releases" />
+        <ArtistSection />
+        <TrackSection title="New Releases" />
+        <ArtistSection />
+        <TrackSection title="New Releases" />
+        <ArtistSection />
         <Footer />
       </GridItem>
     </Grid>
