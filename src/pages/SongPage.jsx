@@ -26,7 +26,7 @@ import ArtistModal from "../components/ArtistModal";
 import { LoginView } from "../components/signInButton";
 
 const SongPage = () => {
-  const { songName } = useParams();
+  const { songName, songId } = useParams();
   const dispatch = useDispatch();
 
   const Song = gql`
@@ -47,7 +47,9 @@ const SongPage = () => {
 
   const { loading, error, data } = useQuery(Song, {
     variables: {
+      _id: songId,
       name: songName,
+      
     },
   });
 

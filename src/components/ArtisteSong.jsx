@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import { fadeInUp } from "../theme/motionVariants";
 import { Link } from "react-router-dom";
 
-const ArtisteSong = ({ song, handlePlay, artist }) => {
+const ArtisteSong = ({ song, handlePlay }) => {
   const dispatch = useDispatch();
   const { currentTrack, isPlaying } = useSelector((state) => state.player);
 
