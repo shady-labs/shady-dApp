@@ -20,8 +20,7 @@ import { useDispatch } from "react-redux";
 import { playTrack, setTrackList } from "../redux/slices/playerSlice";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import { gql, useQuery } from "@apollo/client";
-import { searchTrackByArtistName, searchTrackByName } from "../graphql/query/searchBarAutoComplete";
-import Header from "../components/Header";
+import { searchTrackByName } from "../graphql/query/searchBarAutoComplete";
 import { Search } from "../components/SearchHeader";
 import ArtistModal from "../components/ArtistModal";
 import { LoginView } from "../components/signInButton";
@@ -55,7 +54,7 @@ const SongPage = () => {
   if (loading) return console.log("loading");
   if (error) return `Error! ${error}`;
   if (data) {
-    console.log("data", data);
+    //console.log("data", data);
     // if (trackError) return `Track Error! ${error}`;
     // if (trackData) {
     //   data.artist.songs = trackData.getTracksByArtistId;
@@ -63,9 +62,9 @@ const SongPage = () => {
     searchTrackByName(songName).then((res) => {
       // data.artist.songs = res;
       setSongs(res);
-      console.log("res", res);
+      //console.log("res", res);
     });
-    console.log(data.getTracksByName);
+    //console.log(data.getTracksByName);
   }
 
   const handlePlay = () => {
