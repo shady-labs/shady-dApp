@@ -11,7 +11,7 @@ import UserPage from "../pages/UserPage";
 import SearchPage from "../pages/SearchPage";
 import BrowsePage from "../pages/BrowsePage";
 import LandingLayout from "../layouts/LandingLayout";
-
+import SongPage from "../pages/SongPage";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <SettingsPage />,
+      },
+      {
+        path: ":artistName/song/:songName",
+        element: <SongPage />,
       },
       {
         path: "user",
