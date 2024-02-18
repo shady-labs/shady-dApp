@@ -92,6 +92,7 @@ const SongCard = ({ song }) => {
 			</Box>
 			<Flex gap={2} justify="space-between">
 				<Box px={2}>
+				<Link to={`/${song?.artistes[0]}/song/${song?.title}`}>
 					<Heading
 						as="h5"
 						fontSize={{ base: "sm", md: "md" }}
@@ -99,6 +100,7 @@ const SongCard = ({ song }) => {
 						fontWeight={500}>
 						{song?.title}
 					</Heading>
+					</Link>
 					<Link to={`/artist/${song?.artistes[0]}`}>
 						<Text
 							fontSize={{ base: "xs", md: "sm" }}
