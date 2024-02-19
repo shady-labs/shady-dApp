@@ -16,7 +16,7 @@ const HomePage = () => {
       pb={24}
       pt={{ base: 10, md: 1 }}
     >
-      <GridItem colSpan={8} pl={1}>
+      <GridItem colSpan={8} pl={0}>
         <Header />
         <HomeHero />
         <TrackSection title="New Releases" />
