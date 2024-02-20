@@ -33,6 +33,13 @@ export const playerSlice = createSlice({
 			state.trackList = action.payload.list;
 			state.currentIndex = action.payload.index ? action.payload.index : 0;
 		},
+		PushTrackList: (state, action) => {
+			console.log(action.payload.list)
+			// state.trackList = action.payload.list;
+			state.trackList.push(action.payload.list[0])
+			state.currentIndex = action.payload.index ? action.payload.index : 0;
+			console.log("state.trackList:",state.trackList, "state.currentIndex", state.currentIndex)
+		},
 		nextTrack: (state) => {
 			if (state.currentIndex >= state.trackList.length - 1) {
 				state.currentIndex = 0;
@@ -75,6 +82,7 @@ export const {
 	setPlaying,
 	playTrack,
 	setTrackList,
+	PushTrackList,
 	nextTrack,
 	prevTrack,
 	toggleRepeat,

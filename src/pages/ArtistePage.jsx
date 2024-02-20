@@ -17,7 +17,7 @@ import ArtisteSong from "../components/ArtisteSong";
 import { BsFillPlayFill } from "react-icons/bs";
 import { MdErrorOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { playTrack, setTrackList } from "../redux/slices/playerSlice";
+import { playTrack, setTrackList, PushTrackList, setCurrentTrack, setPlaying } from "../redux/slices/playerSlice";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import { gql, useQuery } from "@apollo/client";
 import { searchTrackByArtistName } from "../graphql/query/searchBarAutoComplete";
@@ -44,7 +44,23 @@ const ArtistePage = () => {
     }
   `;
   const [songs, setSongs] = useState([]);
-
+  const [playerTracks, setPlayerTracks] = useState([
+    {
+      artistes: ['Drake'],
+      coverImage: "abcd",
+      duration: 123,
+      likes: {
+        "asdjasdads": true,
+        "sdjasdk": true,
+        "fedwesnjm": true,
+      },
+      songUrl: "temp",
+      title: "titel",
+      type: "Song",
+      _v: 0,
+      _id: "id"
+    }
+  ]);
   const { loading, error, data } = useQuery(Artist, {
     variables: {
       name: artistName,
@@ -55,6 +71,7 @@ const ArtistePage = () => {
   if (error) return `Error! ${error}`;
   if (data) {
     console.log("data", data);
+    
     // if (trackError) return `Track Error! ${error}`;
     // if (trackData) {
     //   data.artist.songs = trackData.getTracksByArtistId;
@@ -68,8 +85,32 @@ const ArtistePage = () => {
   }
 
   const handlePlay = () => {
-    dispatch(setTrackList({ list: data.artist?.tracksName }));
-    dispatch(playTrack(data.artist?.songs[0]));
+    playerTracks.splice(0, playerTracks.length)
+    {songs?.map((song) => (
+      //  handlePlay={onSongPlay}
+      console.log("playerTracks: ",playerTracks),
+      playerTracks.push(
+        {
+          _id: song._id,
+          title: song.name,
+          artistes: song.artistsName,
+          coverImage: song.trackImage,
+          songUrl: song.trackUrl,
+          duration: song.duration,
+          likes: {
+            "64b27271cbbc5494326b3f5d": true,
+            "64be80fb0e97b62cf659af8c": true,
+            "64e63265d233402a9f2edee9": true,
+          },
+          type: "Song",
+          __v: 0,
+        }
+      )
+    ))}
+    dispatch(setCurrentTrack(playerTracks[0]))
+    dispatch(setTrackList({ list: playerTracks}));
+    dispatch(setPlaying(true))
+    // dispatch(playTrack(data.artist?.songs[0]));
   };
 
   const onSongPlay = (song) => {
