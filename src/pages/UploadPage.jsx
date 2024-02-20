@@ -36,13 +36,16 @@ const UploadPage = () => {
   const [songName, setSongName] = useState([]);
   const [audio, setAudio] = useState([]);
   const [artistName, setArtistName] = useState([]);
+  const [albumName, setAlbumName] = useState([]);
   const [banner, setBanner] = useState([]);
   const [bannerUrl, setBannerUrl] = useState([]);
   const [artist, setArtist] = useState([]);
+  const [album, setAlbum] = useState([]);
   const [audioDuration, setAudioDuration] = useState(0);
   const [trackUrl, setTrackUrl] = useState([]);
   // search query test
   const [artistNotFound, setArtistNotFound] = useState(false);
+  const [albumNotFound, setAlbumNotFound] = useState(false);
   const steps = [
     { title: 'First', description: 'Contact Info' },
     { title: 'Second', description: 'Date & Time' },
@@ -362,6 +365,19 @@ const UploadPage = () => {
                   setArtistName(e.target.value);
                 }}
                 placeholder="Enter the Artist and Feature Name"
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <InputGroup border="1px" borderColor="zinc.600" rounded="base">
+              <Input
+                color="zinc.300"
+                fontSize="sm"
+                value={artistName}
+                onChange={(e) => {
+                  setArtistName(e.target.value);
+                }}
+                placeholder="Enter the Album name"
               />
             </InputGroup>
           </FormControl>
