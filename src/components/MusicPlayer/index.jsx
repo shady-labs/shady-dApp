@@ -171,6 +171,33 @@ const MusicPlayer = () => {
     }
   }
 
+  if ('mediaSession' in navigator) {
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+    title: currentTrack?.title,
+    artist: currentTrack?.artistes,
+    // album: 'Utopia',
+    artwork: [
+        { src: currentTrack?.coverImage },
+    ]
+    });
+  
+    navigator.mediaSession.setActionHandler('play', function() {
+      audioRef.current.play()
+    });
+    navigator.mediaSession.setActionHandler('pause', function() {
+      audioRef.current.pause()
+    });
+/*     navigator.mediaSession.setActionHandler('seekbackward', function() {});
+    navigator.mediaSession.setActionHandler('seekforward', function() {}); */
+    navigator.mediaSession.setActionHandler('previoustrack', function() {
+      handlePreviousSong()
+    });
+    navigator.mediaSession.setActionHandler('nexttrack', function() {
+      handleNextSong()
+    });
+  }
+
   return (
     <>
       <SimpleGrid
