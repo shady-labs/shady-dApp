@@ -15,13 +15,16 @@ const TrackDetails = ({ track }) => {
         rounded="lg"
       />
       <Flex direction="column" align="flex-start">
+      <Link to={`/${track?.artistes[0]}/song/${track?.title}`}>
         <Text
           textAlign="left"
           fontSize={{ base: "sm", md: "md" }}
           noOfLines={1}
+          isActive={{ base: 1, md: 10 }}
         >
           {track?.title}
         </Text>
+        </Link>
         <Link to={`/artist/${track?.artistes}`}>
           <Text
             textAlign="left"

@@ -44,7 +44,7 @@ export const searchBarAutoComplete = async search => {
   }
 }
 
-const searchTrackByName = async search => {
+export const searchTrackByName = async search => {
   const GET_TRACKS_BY_NAME = gql`
     query GetTracksByName($name: String) {
       getTracksByName(name: $name) {

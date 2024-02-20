@@ -10,6 +10,7 @@ import {
 } from "../redux/slices/playerSlice";
 import { motion } from "framer-motion";
 import { fadeInUp } from "../theme/motionVariants";
+import { Link } from "react-router-dom";
 
 const ArtisteSong = ({ song, handlePlay }) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
   const isCurrentTrack = currentTrack?._id === song?._id;
 
   return (
-    <>
+    //<Link to={`/${song?.artistes[0]}/song/${song?.title}`}>
       <Flex
         align="center"
         justify="space-between"
@@ -95,7 +96,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
           </Hide>
         </Flex>
       </Flex>
-    </>
+    //</Link>
   );
 };
 

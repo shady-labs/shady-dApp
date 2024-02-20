@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 const HomeLayout = () => {
 	const { currentTrack } = useSelector((state) => state.player);
 	const { pathname } = useLocation();
-  const [navSize, changeNavSize] = useState("large")
+  const [navSize, changeNavSize] = useState("small")
 
 	useEffect(() => {
 		window.scrollTo(0, 0);

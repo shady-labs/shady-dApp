@@ -19,8 +19,9 @@ import {
 import { ethers } from "ethers";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { addUser } from "./graphql/mutation/addUser.js";
+
 export const client = new ApolloClient({
-  uri: "https://shady-labs.onrender.com/",
+  uri: import.meta.env.VITE_BACKEND_URL,
   cache: new InMemoryCache(),
 });
 

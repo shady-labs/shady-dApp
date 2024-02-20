@@ -38,7 +38,7 @@ const NAV_ITEMS = [
 ];
 
 const Navbar = ({ changeHomelayoutSize }) => {
-  const [navSize, changeNavSize] = useState("large");
+  const [navSize, changeNavSize] = useState("small");
   const handleSizeChange = (inputSize) => {
     changeNavSize(inputSize);
     changeHomelayoutSize(inputSize);
