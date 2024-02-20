@@ -188,8 +188,12 @@ const MusicPlayer = () => {
     navigator.mediaSession.setActionHandler('pause', function() {
       audioRef.current.pause()
     });
-/*     navigator.mediaSession.setActionHandler('seekbackward', function() {});
-    navigator.mediaSession.setActionHandler('seekforward', function() {}); */
+    navigator.mediaSession.setActionHandler('seekbackward', function() {
+      seekPoint(songDetails?.time - 10)
+    });
+    navigator.mediaSession.setActionHandler('seekforward', function() {
+      seekPoint(songDetails?.time + 10)
+    });
     navigator.mediaSession.setActionHandler('previoustrack', function() {
       handlePreviousSong()
     });
