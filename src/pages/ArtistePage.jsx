@@ -107,7 +107,6 @@ const ArtistePage = () => {
         }
       )
     ))}
-    playerTracks.splice(0,1)
     dispatch(setCurrentTrack(playerTracks[0]))
     dispatch(setTrackList({ list: playerTracks}));
     dispatch(setPlaying(true))
