@@ -28,13 +28,13 @@ import {
   TbRepeatOff,
   TbRepeatOnce,
 } from "react-icons/tb";
-import { toggleRepeat } from "../../redux/slices/playerSlice";
+import { toggleRepeat, toggleShuffle} from "../../redux/slices/playerSlice";
 
 const MusicPlayer = () => {
   const { isOpen, onClose } = useDisclosure()
   const modalRef = useRef()
   const dispatch = useDispatch()
-  const { currentTrack, repeatStatus, currentIndex, trackList, isPlaying } =
+  const { currentTrack, repeatStatus, shuffleStatus, currentIndex, trackList, isPlaying } =
     useSelector(state => state.player)
   const audioRef = useRef()
 
@@ -286,11 +286,12 @@ const MusicPlayer = () => {
             </Hide>
             <Hide below="md">
               <Button
-                color="zinc.600"
+                color={shuffleStatus == "OFF" ? "zinc.600" : "accent.light"}
                 variant="unstyled"
                 display="inline-flex"
                 alignItems="center"
                 justifyContent="center"
+                onClick={() => dispatch(toggleShuffle())}
               >
                 <TbArrowsShuffle color="inherit" size={18} />
               </Button>
