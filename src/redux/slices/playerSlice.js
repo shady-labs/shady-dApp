@@ -6,6 +6,7 @@ const initialState = {
 	isPlaying: false,
 	currentIndex: 0,
 	trackList: [],
+	unShuffleList: [],
 	repeatStatus: "OFF",
 	shuffleStatus: "OFF",
 };
@@ -33,9 +34,12 @@ export const playerSlice = createSlice({
 		},
 		setTrackList: (state, action) => {
 			if(state.shuffleStatus=="ON"){
-				action.payload.list = shuffle(action.payload.list)
+				state.trackList = shuffle(action.payload.list)
 			}
-			state.trackList = action.payload.list;
+			else{
+				state.trackList = action.payload.list
+				state.unShuffleList = action.payload.list
+			}
 			state.currentIndex = action.payload.index ? action.payload.index : 0;
 		},
 		PushTrackList: (state, action) => {
@@ -91,12 +95,11 @@ export const playerSlice = createSlice({
 			switch (state.shuffleStatus) {
 				case "OFF":
 					state.shuffleStatus = "ON";
-					console.log("before shuffle", state.trackList)
-					state.trackList = shuffle(state.trackList)
-					console.log("after shuffle", state.trackList)					
+					state.trackList = shuffle(state.trackList)				
 					break;
 				case "ON":
 					state.shuffleStatus = "OFF";
+					state.trackList = state.unShuffleList;
 					break;
 				default:
 					break;

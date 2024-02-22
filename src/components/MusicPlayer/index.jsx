@@ -19,6 +19,7 @@ import {
   PopoverHeader,
   PopoverBody,
   PopoverCloseButton,
+  Image
 } from "@chakra-ui/react";
 
 
@@ -44,7 +45,6 @@ const MusicPlayer = () => {
   const [audioPlaying, setAudioPlaying] = useState(
     audioRef.current && audioRef.current.playing
   )
-
   useEffect(() => {
     if (audioPlaying) {
       dispatch(setPlaying(true))
@@ -172,7 +172,6 @@ const MusicPlayer = () => {
   }
 
   if ('mediaSession' in navigator) {
-
     navigator.mediaSession.metadata = new MediaMetadata({
     title: currentTrack?.title,
     artist: currentTrack?.artistes,
@@ -316,7 +315,28 @@ const MusicPlayer = () => {
                 backdropFilter="blur(90px)"
               >
                 <PopoverHeader fontWeight="semibold" border={"0px"}>
-                  Queue Implementation
+                  Queue Implementation {
+
+                    trackList.map((track)=>{
+                      // console.log(track.coverImage)
+                      return (
+                        <>
+                            <Flex
+                            >
+                              <Image
+                                src={track?.coverImage}
+                                alt={track?.title}
+                                padding={"2"}
+                                w={{ base: "2rem", md: "3rem" }}
+                                h={{ base: "2rem", md: "3rem" }}
+                                rounded="lg"
+                                objectFit="cover" />
+                              <h1>{track.title}</h1>
+                            </Flex>
+                        </>
+                      )
+                    })
+                  }
                 </PopoverHeader>
                 <PopoverCloseButton />
                 <PopoverBody></PopoverBody>
