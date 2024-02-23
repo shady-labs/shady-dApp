@@ -15,7 +15,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <Box p={{ base: 5, md: 8 }} maxW="7xl" marginInline="auto">
+    <Box p={{ base: 5, md: 8 }} maxW="9xl" marginInline="auto">
       <Stack
         spacing={{ base: 8, md: 0 }}
         justifyContent="space-between"
