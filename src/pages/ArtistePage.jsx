@@ -107,8 +107,9 @@ const ArtistePage = () => {
         }
       )
     ))}
-    dispatch(setCurrentTrack(playerTracks[0]))
+    // dispatch(setCurrentTrack(playerTracks[0]))
     dispatch(setTrackList({ list: playerTracks}));
+    dispatch(setCurrentTrack(playerTracks[0]))
     dispatch(setPlaying(true))
     // dispatch(playTrack(data.artist?.songs[0]));
   };
