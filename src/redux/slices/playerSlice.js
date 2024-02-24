@@ -24,6 +24,7 @@ export const playerSlice = createSlice({
 		},
 		setCurrentTrack: (state, action) => {
 			state.currentTrack = action.payload;
+			console.log("setCurrentTrack", action.payload)
 		},
 		setPlaying: (state, action) => {
 			state.isPlaying = action.payload;
@@ -35,12 +36,16 @@ export const playerSlice = createSlice({
 		setTrackList: (state, action) => {
 			if(state.shuffleStatus=="ON"){
 				state.trackList = shuffle(action.payload.list)
+				state.unShuffleList = action.payload.list;
 			}
 			else{
 				state.trackList = action.payload.list
 				state.unShuffleList = action.payload.list
 			}
 			state.currentIndex = action.payload.index ? action.payload.index : 0;
+			console.log("setting current track")
+			state.currentTrack = state.trackList[0]
+			state.isPlaying = true
 		},
 		PushTrackList: (state, action) => {
 			console.log(action.payload.list)
@@ -52,7 +57,7 @@ export const playerSlice = createSlice({
 		shuffleTrackList: (state, action) => {
 			console.log("before shuffle", state.trackList)
 			state.trackList = shuffle(state.trackList)
-			console.log("after shuffle", state.trackList)
+			console.log("after shuffle", state.currentIndex)
 		},
 		nextTrack: (state) => {
 			if (state.currentIndex >= state.trackList.length - 1) {
@@ -90,16 +95,18 @@ export const playerSlice = createSlice({
 			console.log("repeat aftertap", state.repeatStatus)
 		},
 		toggleShuffle: (state) => {
-			console.log("shuffle tapped")
-			console.log("shuffle ontap", state.shuffleStatus)
 			switch (state.shuffleStatus) {
 				case "OFF":
 					state.shuffleStatus = "ON";
-					state.trackList = shuffle(state.trackList)				
+					state.trackList = shuffle(state.trackList)
+					console.log("array length", state.trackList.length)
+					console.log("currentindex: ", state.currentIndex)
 					break;
 				case "ON":
 					state.shuffleStatus = "OFF";
 					state.trackList = state.unShuffleList;
+					console.log("array length", state.trackList.length)
+					console.log("currentindex: ", state.currentIndex)
 					break;
 				default:
 					break;
@@ -107,7 +114,6 @@ export const playerSlice = createSlice({
 			if(!state.shuffleStatus){
 				state.shuffleStatus = "OFF";
 			}
-			console.log("shuffle aftertap:", state.shuffleStatus)
 		},
 	},
 });

@@ -12,7 +12,6 @@ const HomeLayout = () => {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-    console.log("homelayout useeffect called")
 	}, [pathname]);
 
 	return (
@@ -36,7 +35,6 @@ const HomeLayout = () => {
         {
           currentTrack && <MusicPlayer />
         }
-        {currentTrack && console.log("current track &&")}
       </Grid>
     </>
   );

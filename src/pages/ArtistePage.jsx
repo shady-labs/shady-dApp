@@ -88,7 +88,6 @@ const ArtistePage = () => {
     playerTracks.splice(0, playerTracks.length)
     {songs?.map((song) => (
       //  handlePlay={onSongPlay}
-      console.log("playerTracks: ",playerTracks),
       playerTracks.push(
         {
           _id: song._id,
@@ -109,8 +108,8 @@ const ArtistePage = () => {
     ))}
     // dispatch(setCurrentTrack(playerTracks[0]))
     dispatch(setTrackList({ list: playerTracks}));
-    dispatch(setCurrentTrack(playerTracks[0]))
-    dispatch(setPlaying(true))
+    // dispatch(setCurrentTrack(playerTracks[0]))
+    // dispatch(setPlaying(true))
     // dispatch(playTrack(data.artist?.songs[0]));
   };
 
