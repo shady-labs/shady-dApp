@@ -17,14 +17,18 @@ export const deployContract = async (name, description, image) => {
     clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID,
   });
 
-  const txResult = await sdk.deployer.deployBuiltInContract("nft-collection", {
+  const txResult = await sdk.deployer.deployBuiltInContract(
+    "nft-drop",
+  ({
     //required
     name: name,
     primary_sale_recipient: wallet_address_string,
+    platform_fee_recipient: wallet_address_string,
+    fee_recipient: wallet_address_string,
     //optional
     description: description,
     image: image, //album image art
-  });
-  console.log('collection contract address: https://thirdweb.com/mumbai/'+ txResult);
+  }));
+  console.log('collection contract: https://thirdweb.com/mumbai/'+ txResult);
   return txResult;
 };

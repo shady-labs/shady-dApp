@@ -76,12 +76,12 @@ const UploadPage = () => {
 
   const mintNFT = async (tx) => {
     try {
-      const txx = await mint(tx,{
+      const txx = await mint(tx,[{
         name: songName,
         description: artistName,
         image: bannerUrl,
         animation_url: trackUrl,
-      });
+      }]);
       return txx;
     } catch (err) {
       console.log(err);

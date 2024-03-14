@@ -93,6 +93,22 @@ const ArtisteSong = ({ song, handlePlay }) => {
             <Text fontSize="sm" color="zinc.400">
               {convertToMins(song?.duration)}
             </Text>
+            <Button
+                /* onClick={handlePlay} */
+                display="inline-flex"
+                alignItems="center"
+                variant="unstyled"
+                bg="white"
+                fontSize={{ base: "sm", md: "md" }}
+                color="white"
+                textColor={"black"}
+                
+                py={1}
+                px={4}
+                /* leftIcon={<BsFillPlayFill size={20} />} */
+              >
+                Collect
+              </Button>
           </Hide>
         </Flex>
       </Flex>
