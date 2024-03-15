@@ -250,10 +250,14 @@ const UploadPage = () => {
       {
         await useDeploy().then(async (res) => {
           // res = tx
-          mintNFT(res).then(
-            useDeployFractional(res)
-          );
-          
+          /* await mintNFT(res).then(async (res2) => {
+            console.log("minted, proceeding to useDeployFractional()"),
+            await useDeployFractional(res);
+            console.log("fractional contract deployed")}
+          ); */
+          await mintNFT(res);
+          console.log("minted, proceeding to useDeployFractional()");
+          await useDeployFractional(res); 
         });
       setLoading(false);
       }

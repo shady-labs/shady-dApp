@@ -2,9 +2,13 @@ import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
 
 export const mint = async (contractAddress, metadatas) => {
-  const signer = new ethers.providers.Web3Provider(
-    window.ethereum
-  ).getSigner();
+  const signer = new ethers.providers.Web3Provider(window.ethereum).getSigner();
+
+  const wallet_address = new ethers.providers.Web3Provider(window.ethereum)
+    .getSigner()
+    .getAddress();
+
+  const wallet_address_string = (await wallet_address).toString();
 
   const sdk = ThirdwebSDK.fromSigner(signer, "mumbai", {
     clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID,
@@ -20,4 +24,33 @@ export const mint = async (contractAddress, metadatas) => {
 
   //console.log(receipt, tokenId, nft);
   console.log(tokenId, nft);
+
+  const presaleStartTime = new Date(Date.now());
+  const publicSaleStartTime = new Date(Date.now());
+  const claimConditions = [
+    /*     {
+      startTime: presaleStartTime, // start the presale now
+      //maxClaimableSupply: 5, // limit how many mints for this presale
+      price: 0.0, // presale price
+      maxClaimablePerWallet: 1, // limit how many mints per wallet
+      snapshot: ["0x...", "0x..."], // limit minting to only certain addresses
+    }, */
+    {
+      startTime: publicSaleStartTime, // 24h after presale, start public sale
+      maxClaimablePerWallet: 1, // limit how many mints per wallet
+      price: 0.0, // public sale price
+    },
+  ];
+  await contract.erc721.claimConditions.set(claimConditions);
+
+  const quantity = 1; // how many unique NFTs you want to claim
+
+  const txx = await contract.erc721.claimTo(wallet_address_string, quantity);
+  const receipt = txx.receipt; // the transaction receipt
+  const claimedTokenId = txx.id; // the id of the NFT claimed
+  //const claimedNFT = await txx.data(); // (optional) get the claimed NFT metadata
+
+  console.log("claim function last execeuted");
+
+  return txx;
 };
