@@ -1,7 +1,7 @@
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
 
-export const mint = async (contractAddress, metadatas) => {
+export const mint = async (contractAddress, metadatas, price) => {
   const signer = new ethers.providers.Web3Provider(window.ethereum).getSigner();
 
   const wallet_address = new ethers.providers.Web3Provider(window.ethereum)
@@ -38,7 +38,7 @@ export const mint = async (contractAddress, metadatas) => {
     {
       startTime: publicSaleStartTime, // 24h after presale, start public sale
       maxClaimablePerWallet: 1, // limit how many mints per wallet
-      price: 0.0, // public sale price
+      price: price, // public sale price
     },
   ];
   await contract.erc721.claimConditions.set(claimConditions);

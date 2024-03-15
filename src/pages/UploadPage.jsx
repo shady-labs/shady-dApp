@@ -9,6 +9,11 @@ import {
   InputGroup,
   Spinner,
   Text,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { MdError } from "react-icons/md";
@@ -26,6 +31,7 @@ const UploadPage = () => {
   const [songName, setSongName] = useState([]);
   const [audio, setAudio] = useState([]);
   const [artistName, setArtistName] = useState([]);
+  const [price, setPrice] = useState("0.000");
   const [banner, setBanner] = useState([]);
   const [bannerUrl, setBannerUrl] = useState([]);
   const [artist, setArtist] = useState([]);
@@ -43,7 +49,6 @@ const UploadPage = () => {
 			return true;
 		}
 	}; */
-
 
   /// uploads the audio to the ipfs
   const uploadAudio = async () => {
@@ -76,12 +81,14 @@ const UploadPage = () => {
 
   const mintNFT = async (tx) => {
     try {
-      const txx = await mint(tx,[{
-        name: songName,
-        description: artistName,
-        image: bannerUrl,
-        animation_url: trackUrl,
-      }]);
+      const txx = await mint(tx, [
+        {
+          name: songName,
+          description: artistName,
+          image: bannerUrl,
+          animation_url: trackUrl,
+        },
+      ], price);
       return txx;
     } catch (err) {
       console.log(err);
@@ -96,7 +103,7 @@ const UploadPage = () => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -257,9 +264,9 @@ const UploadPage = () => {
           ); */
           await mintNFT(res);
           console.log("minted, proceeding to useDeployFractional()");
-          await useDeployFractional(res); 
+          await useDeployFractional(res);
         });
-      setLoading(false);
+        setLoading(false);
       }
     } catch (err) {
       console.log(err);
@@ -348,6 +355,25 @@ const UploadPage = () => {
                 fontSize="md"
               />
             </InputGroup>
+          </FormControl>
+          <FormControl>
+
+          <NumberInput 
+          value={price}
+          onChange={(price) => setPrice(price)}
+          
+          min={0}
+          precision={3}
+          step={0.002}
+          >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+
+            
           </FormControl>
           {error && (
             <Flex align="center" color="red.500" gap={4}>
