@@ -50,7 +50,7 @@ const HorizontalMusicCard = ({ song, onPlay }) => {
 							{song?.title}
 						</Heading>
 						<Text fontSize="xs" noOfLines={1} color="zinc.400">
-							{song?.artistes?.join(", ")}
+							{song?.artists?.join(", ")}
 						</Text>
 					</Box>
 				</Flex>

@@ -3,14 +3,13 @@ import HomePage from "../pages/HomePage";
 import HomeLayout from "../layouts/HomeLayout";
 import ErrorPage from "../pages/ErrorPage";
 import UploadPage from "../pages/UploadPage";
-import ArtistePage from "../pages/ArtistePage";
-import ArtistesPage from "../pages/ArtistesPage";
+import ArtistPage from "../pages/ArtistPage";
+import ArtistsPage from "../pages/ArtistsPage";
 import FavoritesPage from "../pages/FavoritesPage";
 import SettingsPage from "../pages/SettingsPage";
 import UserPage from "../pages/UserPage";
 import SearchPage from "../pages/SearchPage";
 import BrowsePage from "../pages/BrowsePage";
-import LandingLayout from "../layouts/LandingLayout";
 import SongPage from "../pages/SongPage";
 
 export const router = createBrowserRouter([
@@ -29,12 +28,12 @@ export const router = createBrowserRouter([
         element: <BrowsePage />,
       },
       {
-        path: "artistes",
-        element: <ArtistesPage />,
+        path: "artists",
+        element: <ArtistsPage />,
       },
       {
         path: "artist/:artistName",
-        element: <ArtistePage />,
+        element: <ArtistPage />,
       },
       {
         path: "favorites",
@@ -66,20 +65,9 @@ export const router = createBrowserRouter([
       }
     ],
   },
-  {
-    path: "/landing",
-    element: <LandingLayout />,
-    errorElement: <ErrorPage />,
-  },
   // {
-  //   path: "/",
-  //   element: <UploadLayout />,
+  //   path: "/landing",
+  //   element: <LandingLayout />,
   //   errorElement: <ErrorPage />,
-  //   children: [
-  //     {
-  //       path: "upload",
-  //       element: <UploadPage />,
-  //     },
-  //   ],
   // },
 ]);

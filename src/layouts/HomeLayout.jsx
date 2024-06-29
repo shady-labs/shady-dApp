@@ -1,43 +1,31 @@
-import Navbar from "../components/Navbar";
-import { Outlet, useLocation } from "react-router-dom";
-import { Grid, GridItem } from "@chakra-ui/react";
-import { MusicPlayer } from "../components/MusicPlayer/index.jsx";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+
+import Navbar from "../components/Navbar";
+import { MusicPlayer } from "../components/MusicPlayer/index.jsx";
 
 const HomeLayout = () => {
 	const { currentTrack } = useSelector((state) => state.player);
 	const { pathname } = useLocation();
-  const [navSize, changeNavSize] = useState("small")
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-    console.log("homelayout useeffect called")
 	}, [pathname]);
 
 	return (
     <>
-      <Grid
-        position="relative"
-        templateColumns={{ base: "1fr", md: "repeat(10, 1fr)" }}
-        bg="#000"
-        color="#fff"
-      >
-        <GridItem colSpan={
-          navSize == "large" ? 2 : 1
-        }>
-          <Navbar changeHomelayoutSize = {changeNavSize}/>
-        </GridItem>
-        <GridItem colSpan={
-          navSize == "large" ? 8 : 9
-        } minH={{ base: "97vh", md: "100vh" }}>
+      <div className="relative grid grid-cols-1 md:grid-cols-10 gap-1 bg-black text-white">
+        <div className="col-span-1">
+          <Navbar/>
+        </div>
+        <div
+          className="col-span-9"
+        >
           <Outlet />
-        </GridItem>
-        {
-          currentTrack && <MusicPlayer />
-        }
-        {currentTrack && console.log("current track &&")}
-      </Grid>
+        </div>
+        {currentTrack && <MusicPlayer />}
+      </div>
     </>
   );
 };

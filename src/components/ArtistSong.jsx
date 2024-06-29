@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import { fadeInUp } from "../theme/motionVariants";
 import { Link } from "react-router-dom";
 
-const ArtisteSong = ({ song, handlePlay }) => {
+const ArtistSong = ({ song, handlePlay }) => {
   const dispatch = useDispatch();
   const { currentTrack, isPlaying } = useSelector((state) => state.player);
 
@@ -25,7 +25,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
   const isCurrentTrack = currentTrack?._id === song?._id;
 
   return (
-    //<Link to={`/${song?.artistes[0]}/song/${song?.title}`}>
+    //<Link to={`/${song?.artist[0]}/song/${song?.title}`}>
       <Flex
         align="center"
         justify="space-between"
@@ -70,7 +70,7 @@ const ArtisteSong = ({ song, handlePlay }) => {
               {song?.title}
             </Text>
             <Text color="zinc.400" fontSize={{ base: "sm", md: "sm" }}>
-              {song?.artistes}
+              {song?.artist}
             </Text>
           </Box>
         </Flex>
@@ -100,4 +100,4 @@ const ArtisteSong = ({ song, handlePlay }) => {
   );
 };
 
-export default ArtisteSong;
+export default ArtistSong;

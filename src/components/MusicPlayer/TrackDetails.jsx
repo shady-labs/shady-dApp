@@ -15,7 +15,7 @@ const TrackDetails = ({ track }) => {
         rounded="lg"
       />
       <Flex direction="column" align="flex-start">
-      <Link to={`/${track?.artistes[0]}/song/${track?.title}`}>
+      <Link to={`/${track?.artists[0]}/song/${track?.title}`}>
         <Text
           textAlign="left"
           fontSize={{ base: "sm", md: "md" }}
@@ -25,14 +25,14 @@ const TrackDetails = ({ track }) => {
           {track?.title}
         </Text>
         </Link>
-        <Link to={`/artist/${track?.artistes}`}>
+        <Link to={`/artist/${track?.artists}`}>
           <Text
             textAlign="left"
             fontSize={{ base: "xs", md: "sm" }}
             color="zinc.500"
             noOfLines={{ base: 1, md: undefined }}
           >
-            {track?.artistes}
+            {track?.artists}
           </Text>
         </Link>
       </Flex>

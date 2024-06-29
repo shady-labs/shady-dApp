@@ -86,7 +86,7 @@ const SongCard = ({ song }) => {
       </Box>
       <Flex gap={2} justify="space-between">
         <Box px={2}>
-          <Link to={`/${song?.artistes[0]}/song/${song?.title}`}>
+          <Link to={`/${song?.artists[0]}/song/${song?.title}`}>
             <Heading
               as="h5"
               fontSize={{ base: "sm", md: "md" }}
@@ -96,14 +96,14 @@ const SongCard = ({ song }) => {
               {song?.title}
             </Heading>
           </Link>
-          <Link to={`/artist/${song?.artistes[0]}`}>
+          <Link to={`/artist/${song?.artists[0]}`}>
             <Text
               fontSize={{ base: "xs", md: "sm" }}
               color="zinc.400"
               noOfLines={1}
             >
               {" "}
-              {song?.artistes.join(", ")}{" "}
+              {song?.artists.join(", ")}{" "}
             </Text>
           </Link>
         </Box>

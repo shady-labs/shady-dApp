@@ -1,5 +1,4 @@
 import HomeHero from "../components/HomeHero";
-import { Grid, GridItem } from "@chakra-ui/react";
 import TrackSection from "../components/TrackSection";
 import ArtistSection from "../components/ArtistSection";
 import Header from "../components/Header";
@@ -8,27 +7,16 @@ import Genres from "../components/Genres";
 
 const HomePage = () => {
 	return (
-    <Grid
-      templateColumns={{ base: "1fr", lg: "repeat(8, 1fr)" }}
-      minH="100vh"
-      maxW={{ base: "100vw", lg: "100vw" }}
-      pl={{ base: 2, md: 14, lg: 12, xl: 0 }}
-      pb={24}
-      pt={{ base: 10, md: 1 }}
-    >
-      <GridItem colSpan={8} pl={0}>
+    <div className="grid grid-cols-1 lg:grid-cols-8 min-h-screen max-w-screen pl-2 md:pl-14 lg:pl-12 xl:pl-0 pb-24 pt-10 md:pt-1">
+      <div className="col-span-8 pl-0">
         <Header />
         <HomeHero />
         <TrackSection title="New Releases" />
         <ArtistSection />
         <Genres />
-        <TrackSection title="New Releases" />
-        <ArtistSection />
-        <TrackSection title="New Releases" />
-        <ArtistSection />
         <Footer />
-      </GridItem>
-    </Grid>
+      </div>
+    </div>
   );
 };
 

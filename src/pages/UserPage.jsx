@@ -1,55 +1,26 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Image,
-  Text,
-} from "@chakra-ui/react";
-
 const UserPage = () => {
-
   return (
-    <Box minH="100vh" p={4} pb={32} pt={{ base: 16, md: 4 }}>
-      <Box pt={6}>
-        <Flex
-          maxW="full"
-          direction={{ base: "column", md: "row" }}
-          align="flex-start"
-          justify="flex-start"
-          gap={5}
-        >
-          <Box minWidth="14rem" h="14rem">
-            <Image
-              src={
-                "https://img.freepik.com/premium-photo/gorilla-wearing-pair-headphones-with-purple-background_962508-4153.jpg"
-              }
-              w="full"
-              h="full"
-              objectFit="cover"
-              rounded="lg"
+    <div className="min-h-screen p-4 pb-32 pt-16 md:pt-4">
+      <div className="pt-6">
+        <div className="flex flex-col md:flex-row items-start justify-start gap-5 max-w-full">
+          <div className="min-w-[14rem] h-[14rem]">
+            <img
+              src="https://img.freepik.com/premium-photo/gorilla-wearing-pair-headphones-with-purple-background_962508-4153.jpg"
+              alt="Gorilla with headphones"
+              className="w-full h-full object-cover rounded-lg"
             />
-          </Box>
-          <Box>
-            <Heading
-              as="h1"
-              fontSize={{ base: "lg", md: "3xl" }}
-              color="accent.light"
-              mb={4}
-              fontWeight={600}
-            >
+          </div>
+          <div>
+            <h1 className="text-lg md:text-3xl text-accent-light mb-4 font-semibold">
               A Shady User
-            </Heading>
-            <Text
-              fontSize={{ base: "sm", md: "md" }}
-              maxW="full"
-              color="zinc.300"
-            >
+            </h1>
+            <p className="text-sm md:text-md text-zinc-300 max-w-full">
               I am Awesome!
-            </Text>
-          </Box>
-        </Flex>
-      </Box>
-    </Box>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

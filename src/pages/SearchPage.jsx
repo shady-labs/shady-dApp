@@ -16,7 +16,7 @@ import {
 } from "../graphql/query/searchBarAutoComplete";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import { useParams, useNavigate } from "react-router-dom";
-import ArtisteSong from "../components/ArtisteSong";
+import ArtistSong from "../components/ArtistSong";
 import ArtistCardAlt from "../components/ArtistCardAlt";
 import Footer from "../components/Footer";
 
@@ -149,12 +149,12 @@ const SearchPage = () => {
 
               <SimpleGrid columns={3} gap={4}>
                 {trackSearchResults.map((track) => (
-                  <ArtisteSong
+                  <ArtistSong
                     key={track._id}
                     song={{
                       _id: track._id,
                       title: track.name,
-                      artistes: track.artistsName,
+                      artists: track.artistsName,
                       coverImage: track.trackImage,
                       songUrl: track.trackUrl,
                       duration: track.duration,
@@ -206,12 +206,12 @@ const SearchPage = () => {
 
               <SimpleGrid columns={3} gap={4}>
                 {setTrackofArtistResult.map((track) => (
-                  <ArtisteSong
+                  <ArtistSong
                     key={track._id}
                     song={{
                       _id: track._id,
                       title: track.name,
-                      artistes: track.artistsName,
+                      artists: track.artistsName,
                       coverImage: track.trackImage,
                       songUrl: track.trackUrl,
                       duration: track.duration,
@@ -240,7 +240,7 @@ const SearchPage = () => {
 
               <SimpleGrid columns={3} gap={4}>
                 {artistSearchResults.map((artist) => (
-                  <ArtisteSong
+                  <ArtistSong
                     key={artist._id}
                   />
                 ))}

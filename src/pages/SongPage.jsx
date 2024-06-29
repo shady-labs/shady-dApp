@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-import ArtisteSong from "../components/ArtisteSong";
+import ArtistSong from "../components/ArtistSong";
 import { BsFillPlayFill } from "react-icons/bs";
 import { MdErrorOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
@@ -211,12 +211,12 @@ const SongPage = () => {
               {songs?.map((song) => (
                 //  handlePlay={onSongPlay}
 
-                <ArtisteSong
+                <ArtistSong
                   key={song._id}
                   song={{
                     _id: song._id,
                     title: song.name,
-                    artistes: song.artistsName,
+                    artists: song.artistsName,
                     coverImage: song.trackImage,
                     songUrl: song.trackUrl,
                     duration: song.duration,

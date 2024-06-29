@@ -70,7 +70,7 @@ const TrackSection = ({ title }) => {
               song={{
                 _id: track._id,
                 title: track.name,
-                artistes: track.artistsName,
+                artists: track.artistsName,
                 coverImage: track.trackImage,
                 songUrl: track.trackUrl,
                 duration: track.duration,

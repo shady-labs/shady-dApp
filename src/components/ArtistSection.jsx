@@ -36,7 +36,7 @@ const ArtistSection = () => {
         <Heading as="h3" fontSize={{ base: "lg", md: "xl" }} fontWeight={500}>
           Top Artists Today
         </Heading>
-        <Link to="/artistes">
+        <Link to="/artists">
           <Button
             variant="unstyled"
             color="accent.light"

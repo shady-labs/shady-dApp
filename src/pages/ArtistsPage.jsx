@@ -4,7 +4,7 @@ import ArtistCard from '../components/ArtistCard'
 import { Box, Grid, Heading, Text } from '@chakra-ui/react'
 import { getAllArtists } from '../graphql/query/getAllArtists'
 
-const ArtistesPage = () => {
+const ArtistsPage = () => {
   const [allArtists, setallArtists] = useState([
     {
       _id: '',
@@ -40,10 +40,10 @@ const ArtistesPage = () => {
           fontWeight='semibold'
           mb={{ base: 1, md: 3 }}
         >
-          Artistes
+          Artists
         </Heading>
         <Text fontSize='sm' color='zinc.400'>
-          Discover new artistes
+          Discover new artists
         </Text>
       </Box>
       <Grid
@@ -63,4 +63,4 @@ const ArtistesPage = () => {
   )
 }
 
-export default ArtistesPage
+export default ArtistsPage

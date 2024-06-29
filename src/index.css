@@ -1,22 +1,11 @@
-@import '@fontsource-variable/manrope';
-body,
-html {
-	font-family: 'Manrope Variable', sans-serif;
-	color: #000;
-	position: relative;
-	background-color: #000;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span {
-	color: #e3e3e3;
-}
+/* Fixes White Color on Scroll
+*{
+	background: #000;
+} */
 
 body::-webkit-scrollbar {
 	width: 3px;
@@ -27,8 +16,7 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
 	width: 5px;
-	border-radius: 5px;
-	background: #636262;
+	background: #000;
 	margin: 1rem;
 }
 
@@ -45,17 +33,4 @@ body::-webkit-scrollbar-thumb {
 	border-radius: 5px;
 	background: transparent;
 	margin: 1rem;
-}
-
-.spin {
-	animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
 }

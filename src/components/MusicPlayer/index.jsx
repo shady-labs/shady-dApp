@@ -174,7 +174,7 @@ const MusicPlayer = () => {
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
     title: currentTrack?.title,
-    artist: currentTrack?.artistes,
+    artist: currentTrack?.artists,
     // album: 'Utopia',
     artwork: [
         { src: currentTrack?.coverImage },
