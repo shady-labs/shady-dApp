@@ -1,13 +1,11 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-
 const SettingsPage = () => {
   return (
-    <Box bg="#000" minH="100vh" p={4}>
-      <Flex direction="column" minH="25rem" align="center" justify="center">
-        <Heading>Settings</Heading>
-        <Text color="zinc.300">Some Shady Task Underway!</Text>
-      </Flex>
-    </Box>
+    <div className="bg-black min-h-screen p-4">
+      <div className="flex flex-col min-h-[25rem] items-center justify-center">
+        <h1 className="text-2xl font-bold text-white">Settings</h1>
+        <p className="text-gray-300">Some Shady Task Underway!</p>
+      </div>
+    </div>
   );
 };
 

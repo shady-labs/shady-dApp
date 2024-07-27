@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Flex,
-  Heading,
-  Text,
-  Grid,
-  GridItem,
-  Image,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import Search from "../components/Search";
-import {
-  searchBarAutoComplete,
-  searchTrackByArtistName,
-} from "../graphql/query/searchBarAutoComplete";
-import LoadingSkeleton from "../components/LoadingSkeleton";
 import { useParams, useNavigate } from "react-router-dom";
+import Search from "../components/Search";
+import { searchBarAutoComplete } from "../graphql/query/searchBarAutoComplete";
+import LoadingSkeleton from "../components/LoadingSkeleton";
 import ArtistSong from "../components/ArtistSong";
 import ArtistCardAlt from "../components/ArtistCardAlt";
 import Footer from "../components/Footer";
@@ -86,15 +73,14 @@ const SearchPage = () => {
     setSearchQuery(query);
     console.log("Search Query: ", query);
     setIsLoading(true);
-    if (query != "" && query != null && query != " ") {
+    if (query !== "" && query !== null && query !== " ") {
       navigate("/search/" + query);
       await searchBarAutoComplete(query).then((res) => {
-        //console.log("Search result: ", res)
         if (
-          res[0].length == 0 &&
-          res[1].length == 0 &&
-          res[2].length == 0 &&
-          res[3].length == 0
+          res[0].length === 0 &&
+          res[1].length === 0 &&
+          res[2].length === 0 &&
+          res[3].length === 0
         ) {
           setIsNoResults(true);
         } else {
@@ -114,40 +100,25 @@ const SearchPage = () => {
       if (inputQuery) {
         setIsTopCharts(false);
       }
-      // setIsTopCharts(true);
     }
   };
 
   return (
-    <Box bg="#000" minH="100vh" p={4}>
-      <Search
-        handleQuery={handleQuery}
-        isSearchPage={true}
-        inputQuery={inputQuery}
-      />
-      <Flex direction="column" minH="25rem" justify="center">
-        <Heading p={2} align="center">
-          Search Your Jam!
-        </Heading>
+    <div className="bg-black min-h-screen p-4">
+      <Search handleQuery={handleQuery} isSearchPage={true} inputQuery={inputQuery} />
+      <div className="flex flex-col min-h-[25rem] justify-center">
+        <h1 className="p-2 text-center text-2xl font-bold text-white">Search Your Jam!</h1>
         {isLoading ? (
           <LoadingSkeleton />
         ) : isTopCharts ? (
           <></>
         ) : isNoResults ? (
-          <Text color="zinc.300">No Results</Text>
+          <p className="text-gray-300">No Results</p>
         ) : (
           <>
-            <Box mt={12}>
-              <Heading
-                as="h3"
-                pb={5}
-                fontSize={{ base: "lg", md: "xl" }}
-                fontWeight={500}
-              >
-                Songs
-              </Heading>
-
-              <SimpleGrid columns={3} gap={4}>
+            <div className="mt-12">
+              <h3 className="pb-5 text-lg md:text-xl font-medium text-white">Songs</h3>
+              <div className="grid grid-cols-3 gap-4">
                 {trackSearchResults.map((track) => (
                   <ArtistSong
                     key={track._id}
@@ -168,43 +139,23 @@ const SearchPage = () => {
                     }}
                   />
                 ))}
-              </SimpleGrid>
-            </Box>
+              </div>
+            </div>
 
-            <Box mt={12}>
-              <Heading
-                as="h3"
-                pb={5}
-                fontSize={{ base: "lg", md: "xl" }}
-                fontWeight={500}
-              >
-                Artists
-              </Heading>
+            <div className="mt-12">
+              <h3 className="pb-5 text-lg md:text-xl font-medium text-white">Artists</h3>
+              <div className="flex flex-col">
+                <div className="grid grid-cols-2 gap-1">
+                  {artistSearchResults.slice(0, 6).map((artist) => (
+                    <ArtistCardAlt key={artist._id} artist={artist} />
+                  ))}
+                </div>
+              </div>
+            </div>
 
-              {
-                <Flex direction="column">
-                  <SimpleGrid columns={2} gap={1}>
-                    {artistSearchResults.slice(0, 6).map((artist) => (
-                      <>
-                        <ArtistCardAlt key={artist._id} artist={artist} />
-                      </>
-                    ))}
-                  </SimpleGrid>
-                </Flex>
-              }
-            </Box>
-
-            <Box mt={12}>
-              <Heading
-                as="h3"
-                pb={5}
-                fontSize={{ base: "lg", md: "xl" }}
-                fontWeight={500}
-              >
-                Songs by {inputQuery}
-              </Heading>
-
-              <SimpleGrid columns={3} gap={4}>
+            <div className="mt-12">
+              <h3 className="pb-5 text-lg md:text-xl font-medium text-white">Songs by {inputQuery}</h3>
+              <div className="grid grid-cols-3 gap-4">
                 {setTrackofArtistResult.map((track) => (
                   <ArtistSong
                     key={track._id}
@@ -225,54 +176,15 @@ const SearchPage = () => {
                     }}
                   />
                 ))}
-              </SimpleGrid>
-            </Box>
-
-            {/* <Box mt={12}>
-              <Heading
-                as="h3"
-                pb={5}
-                fontSize={{ base: "lg", md: "xl" }}
-                fontWeight={500}
-              >
-                Artists
-              </Heading>
-
-              <SimpleGrid columns={3} gap={4}>
-                {artistSearchResults.map((artist) => (
-                  <ArtistSong
-                    key={artist._id}
-                  />
-                ))}
-              </SimpleGrid>
-            </Box> */}
-
-            {/* <Box mt={12}>
-              <Heading
-                as="h3"
-                pb={5}
-                fontSize={{ base: "lg", md: "xl" }}
-                fontWeight={500}
-              >
-                Artists
-              </Heading>
-              {
-                <Flex direction="column">
-                  {setArtistofTrackResult.slice(0, 5).map((artist) => (
-                    <>
-                      <ArtistCardAlt key={artist._id} artist={artist} />
-                    </>
-                  ))}
-                </Flex>
-              }
-            </Box> */}
+              </div>
+            </div>
           </>
         )}
-      </Flex>
-      <GridItem>
+      </div>
+      <div className="mt-8">
         <Footer />
-      </GridItem>
-    </Box>
+      </div>
+    </div>
   );
 };
 

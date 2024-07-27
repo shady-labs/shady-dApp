@@ -1,15 +1,3 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  InputGroup,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { MdError } from "react-icons/md";
 import { StoreContent } from "../utils/StoreContent";
@@ -23,86 +11,19 @@ import { deployFractionalContract } from "../contract/fractionalise";
 const UploadPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [songName, setSongName] = useState([]);
-  const [audio, setAudio] = useState([]);
-  const [artistName, setArtistName] = useState([]);
-  const [banner, setBanner] = useState([]);
-  const [bannerUrl, setBannerUrl] = useState([]);
-  const [artist, setArtist] = useState([]);
+  const [songName, setSongName] = useState("");
+  const [audio, setAudio] = useState(null);
+  const [artistName, setArtistName] = useState("");
+  const [banner, setBanner] = useState(null);
+  const [bannerUrl, setBannerUrl] = useState("");
+  const [artist, setArtist] = useState(null);
   const [audioDuration, setAudioDuration] = useState(0);
-  const [trackUrl, setTrackUrl] = useState([]);
-  // search query test
+  const [trackUrl, setTrackUrl] = useState("");
   const [artistNotFound, setArtistNotFound] = useState(false);
-
-  /* const validateFields = () => {
-		if (audio == "" || songName == "" || artistName == "" || banner == "") {
-			setError("All fields are required!");
-			return false;
-		} else {
-			setError(null);
-			return true;
-		}
-	}; */
-
-
-  /// uploads the audio to the ipfs
-  const uploadAudio = async () => {
-    try {
-      const cid = await StoreContent(audio);
-      /* const audioCID = `https://w3s.link/ipfs/${cid}/`;
-		console.log(audioCID); */
-      /* notify("Music file uploaded to IPFS"); */
-      /* setMusicCID(audioCID);
-		await uploadMetadata(banner, name, audioCID, description).then(
-			() => {
-			uploadToFireStore();
-		}); */
-      return cid;
-    } catch (err) {
-      console.log(err);
-      /* notify(err); */
-    }
-  };
-
-  const useDeploy = async () => {
-    try {
-      const tx = await deployContract(songName, artistName, bannerUrl);
-
-      return tx;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const mintNFT = async (tx) => {
-    try {
-      const txx = await mint(tx,{
-        name: songName,
-        description: artistName,
-        image: bannerUrl,
-        animation_url: trackUrl,
-      });
-      return txx;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const useDeployFractional = async (tx) => {
-    try {
-      const txxx = await deployFractionalContract(songName, "DEF", tx);
-
-      return txxx;
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log("delay function running");
       handleQuery(artistName);
-      handleQuery();
     }, 400);
 
     return () => clearTimeout(delayDebounceFn);
@@ -110,57 +31,32 @@ const UploadPage = () => {
 
   const handleQuery = async (query) => {
     try {
-      getArtistsByName(query).then((data) => {
-        if (data == null || data == undefined || data == "") {
-          setArtistNotFound(true);
-        } else {
-          setArtist(data);
-          setArtistNotFound(false);
-        }
+      const data = await getArtistsByName(query);
+      if (!data) {
+        setArtistNotFound(true);
+      } else {
+        setArtist(data);
+        setArtistNotFound(false);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleFileChange = (e, setter) => {
+    const file = e.target.files[0];
+    setter(file);
+    if (setter === setAudio) {
+      computeLength(file).then((res) => {
+        setAudioDuration(Math.round(res.duration));
       });
-    } catch (err) {
-      console.log(err);
     }
   };
 
-  const uploadBanner = async () => {
-    try {
-      console.log("banner: ", banner);
-      const cid = await StoreContent(banner);
-      /* const audioCID = `https://w3s.link/ipfs/${cid}/`;
-		console.log(audioCID); */
-      /* notify("Music file uploaded to IPFS"); */
-      /* setMusicCID(audioCID);
-		await uploadMetadata(banner, name, audioCID, description).then(
-			() => {
-			uploadToFireStore();
-		}); */
-      setBannerUrl(cid);
-      return cid;
-    } catch (err) {
-      console.log(err);
-      /* notify(err); */
-    }
-  };
-
-  ///restrict access logic (WIP)
-
-  /* if (!user) {
-		return (
-			<Flex align="center" justify="center" h="100vh">
-				<Flex direction="column" align="center" gap={4}>
-					<Text textAlign="center" color="zinc.500">
-						please connect your wallet to upload tracks :)
-					</Text>
-					<ConnectWallet />
-				</Flex>
-			</Flex>
-		);
-	} */
-  function computeLength(file) {
+  const computeLength = (file) => {
     return new Promise((resolve) => {
-      var objectURL = URL.createObjectURL(file);
-      var mySound = new Audio([objectURL]);
+      const objectURL = URL.createObjectURL(file);
+      const mySound = new Audio(objectURL);
       mySound.addEventListener(
         "canplaythrough",
         () => {
@@ -173,244 +69,124 @@ const UploadPage = () => {
         false
       );
     });
-  }
+  };
 
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      if (
-        artist["_id"] != "" &&
-        audioDuration != "" &&
-        songName != "" &&
-        artistName != ""
-      ) {
-        await uploadAudio().then(async (cid) => {
-          await uploadBanner().then((banner) => {
-            if (artistNotFound) {
-              //
-              addArtist(
-                "temp description",
-                "temp genre",
-                artistName,
-                banner
-              ).then((res) => {
-                uploadTrack(
-                  cid,
-                  res["addArtist"]["_id"],
-                  audioDuration,
-                  "pop",
-                  songName,
-                  banner
-                ).then((res) => {
-                  console.log(res);
-                  const uploadJson = {
-                    image: banner,
-                    name: songName,
-                    animation_url: cid,
-                  };
-                  setTrackUrl(cid);
-                  console.log(uploadJson);
-                  StoreContent(uploadJson).then((res) => {
-                    console.log(res);
-                  });
-                });
-              });
-            } else {
-              uploadTrack(
-                cid,
-                artist["_id"],
-                audioDuration,
-                "pop",
-                songName,
-                banner
-              ).then((res) => {
-                console.log(res);
-                setTrackUrl(cid);
-                StoreContent(res).then((res) => {
-                  console.log(res);
-                });
-              });
-            }
-          });
-        });
-      } else {
-        //
+      if (artist?._id && audioDuration && songName && artistName) {
+        const cid = await uploadAudio();
+        const bannerCid = await uploadBanner();
+        if (artistNotFound) {
+          const newArtist = await addArtist("temp description", "temp genre", artistName, bannerCid);
+          await uploadTrack(cid, newArtist.addArtist._id, audioDuration, "pop", songName, bannerCid);
+        } else {
+          await uploadTrack(cid, artist._id, audioDuration, "pop", songName, bannerCid);
+        }
+        setTrackUrl(cid);
+        await StoreContent({ image: bannerCid, name: songName, animation_url: cid });
       }
-      // await setTimeout(uploadMetadata(), 5000);
-      // await mintNFT();
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   const handleDeploy = async () => {
     try {
       setLoading(true);
-      {
-        await useDeploy().then(async (res) => {
-          // res = tx
-          mintNFT(res).then(
-            useDeployFractional(res)
-          );
-          
-        });
-      setLoading(false);
+      const tx = await useDeploy();
+      if (tx) {
+        await mintNFT(tx);
+        await useDeployFractional(tx);
       }
+      setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   return (
-    <Box minH="calc(100vh - 5rem)" maxW="2xl" mx="auto" p={6}>
-      <Box
-        bg={{ base: "#000", md: "#040d11" }}
-        rounded="base"
-        p={{ base: 2, md: 10 }}
-      >
-        <Box mb={8}>
-          <Heading fontSize="2xl" color="#8E05C2">
-            Upload
-          </Heading>
-          <Text fontSize="sm">Add your mix to the jam!</Text>
-        </Box>
-        <Flex direction="column" gap={4}>
-          <FormControl>
-            <FormLabel fontSize="xs" color="zinc.400"></FormLabel>
-            <InputGroup border="1px" borderColor="zinc.600" rounded="base">
-              <Input
+    <div className="min-h-screen max-w-2xl mx-auto p-6">
+      <div className="bg-black rounded p-6">
+        <div className="mb-8">
+          <h2 className="text-2xl text-purple-500">Upload</h2>
+          <p className="text-sm">Add your mix to the jam!</p>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div className="form-control">
+            <label className="text-xs text-gray-400">Track Name</label>
+            <div className="border border-gray-600 rounded">
+              <input
                 type="text"
-                color="zinc.300"
-                fontSize="sm"
+                className="w-full p-2 bg-transparent text-gray-300 text-sm"
                 value={songName}
                 onChange={(e) => setSongName(e.target.value)}
                 placeholder="Enter the Track Name"
               />
-            </InputGroup>
-          </FormControl>
-          <FormControl>
-            <InputGroup border="1px" borderColor="zinc.600" rounded="base">
-              <Input
-                color="zinc.300"
-                fontSize="sm"
+            </div>
+          </div>
+          <div className="form-control">
+            <label className="text-xs text-gray-400">Artist Name</label>
+            <div className="border border-gray-600 rounded">
+              <input
+                type="text"
+                className="w-full p-2 bg-transparent text-gray-300 text-sm"
                 value={artistName}
-                onChange={(e) => {
-                  setArtistName(e.target.value);
-                }}
+                onChange={(e) => setArtistName(e.target.value)}
                 placeholder="Enter the Artist and Feature Name"
               />
-            </InputGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel fontSize="md" color="#fff">
-              Upload Track Cover
-            </FormLabel>
-            <InputGroup border="1px" borderColor="#040d11" rounded="base">
-              <Input
+            </div>
+          </div>
+          <div className="form-control">
+            <label className="text-md text-white">Upload Track Cover</label>
+            <div className="border border-gray-800 rounded">
+              <input
                 type="file"
                 accept="image/*"
-                style={{ display: "none" }}
-                /* onChange={(e) => setAudio(e.target.files[0])} */
-                width="1.5rem"
-                color="zinc.300"
-                fontSize="md"
-                // value={banner}
-                onChange={(e) => {
-                  setBanner(e.target.files[0]);
-                }}
-                placeholder="Upload Track Cover Image"
+                className="w-full p-2 bg-transparent text-white text-md"
+                onChange={(e) => handleFileChange(e, setBanner)}
               />
-            </InputGroup>
-          </FormControl>
-
-          <FormControl>
-            <FormLabel fontSize="md" color="#fff">
-              Select the Song File
-            </FormLabel>
-            <InputGroup border="1px" borderColor="#040d11" rounded="base">
-              <Input
+            </div>
+          </div>
+          <div className="form-control">
+            <label className="text-md text-white">Select the Song File</label>
+            <div className="border border-gray-800 rounded">
+              <input
                 type="file"
-                style={{ display: "none" }}
                 accept=".mp3,audio/*"
-                onChange={(e) => {
-                  setAudio(e.target.files[0]);
-                  computeLength(e.target.files[0]).then((res) => {
-                    setAudioDuration(Math.round(res.duration));
-                  });
-                }}
-                placeholder="Upload Track File"
-                color="#fff"
-                fontSize="md"
+                className="w-full p-2 bg-transparent text-white text-md"
+                onChange={(e) => handleFileChange(e, setAudio)}
               />
-            </InputGroup>
-          </FormControl>
+            </div>
+          </div>
           {error && (
-            <Flex align="center" color="red.500" gap={4}>
-              <MdError color="inherit" />
-              <Text color="inherit" fontSize="xs">
-                {error}
-              </Text>
-            </Flex>
+            <div className="flex items-center text-red-500 gap-2">
+              <MdError />
+              <span className="text-xs">{error}</span>
+            </div>
           )}
-          <Box mt={6}>
-            <Button
-              onClick={() => {
-                if (loading == false) {
-                  handleSubmit();
-                }
-              }}
-              bg="accent.main"
-              py={5}
-              w="full"
-              _hover={{ opacity: 0.8 }}
+          <div className="mt-6">
+            <button
+              onClick={handleSubmit}
+              className={`w-full py-3 bg-purple-600 rounded hover:opacity-80 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+              disabled={loading}
             >
-              {loading ? <Spinner color="white" /> : "upload"}
-            </Button>
-            {/* <Text my={2} fontSize="sm" textAlign="center">
-							OR
-						</Text> */}
-            {/* <Link to="/home">
-							<Text color="zinc.400" fontSize="sm" textAlign="center">
-								Continue without logging in
-							</Text>
-						</Link> */}
-          </Box>
-          <Box mt={6}>
-            <Button
-              onClick={() => {
-                if (loading == false) {
-                  handleDeploy();
-                }
-              }}
-              bg="accent.main"
-              py={5}
-              w="full"
-              _hover={{ opacity: 0.8 }}
+              {loading ? <div className="spinner-border animate-spin" role="status"><span className="sr-only">Loading...</span></div> : "Upload"}
+            </button>
+          </div>
+          <div className="mt-6">
+            <button
+              onClick={handleDeploy}
+              className={`w-full py-3 bg-purple-600 rounded hover:opacity-80 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+              disabled={loading}
             >
-              {loading ? <Spinner color="white" /> : "deploy & mint"}
-            </Button>
-            {/* <Text my={2} fontSize="sm" textAlign="center">
-							OR
-						</Text> */}
-            {/* <Link to="/home">
-							<Text color="zinc.400" fontSize="sm" textAlign="center">
-								Continue without logging in
-							</Text>
-						</Link> */}
-          </Box>
-          {/* <Text fontSize="sm" color="zinc.400">
-						{"Don't have an account yet?"}{" "}
-						<Link to="/auth/register">
-							{" "}
-							<Text as="span" color="accent.main">
-								Register
-							</Text>
-						</Link>
-					</Text> */}
-        </Flex>
-      </Box>
-    </Box>
+              {loading ? <div className="spinner-border animate-spin" role="status"><span className="sr-only">Loading...</span></div> : "Deploy & Mint"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
