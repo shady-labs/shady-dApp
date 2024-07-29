@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SongCard from "../components/SongCard";
+import BrowseSongCard from "../components/BrowseSongCard";
 import { getAllTracks } from "../graphql/query/getAllTracks";
 
 const BrowsePage = () => {
@@ -37,9 +37,9 @@ const BrowsePage = () => {
         </h1>
         <p className="text-sm text-zinc-400">Discover interesting songs</p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-1 gap-3 md:gap-5">
         {allTracks.map((track) => (
-          <SongCard
+          <BrowseSongCard
             key={track._id}
             song={{
               _id: track._id,
